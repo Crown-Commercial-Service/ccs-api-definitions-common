@@ -103,18 +103,8 @@ components:
           description: The minimum estimated value of the procurement.  A negative value indicates that the contracting process may involve payments from the supplier to the buyer (commonly used in concession contracts).
           $ref: '#/components/schemas/Value'
         procurementMethod:
-          title: Procurement method
-          description: 'The procurement method, from the closed [method](https://standard.open-contracting.org/latest/en/schema/codelists/#method) codelist.'
-          type: string
-          nullable: true
-          #codelist: method.csv
-          #openCodelist: false
-          enum:
-            - open
-            - selective
-            - limited
-            - direct
-            - null
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ProcurementCategory'
         procurementMethodDetails:
           title: Procurement method details
           description: Additional detail on the procurement method used. This field can be used to provide the local name of the particular procurement method used.
@@ -126,33 +116,14 @@ components:
           type: string
           nullable: true
         mainProcurementCategory:
-          title: Main procurement category
-          description: 'The primary category describing the main object of this contracting process, from the closed [procurementCategory](https://standard.open-contracting.org/latest/en/schema/codelists/#procurement-category) codelist.'
-          type: string
-          nullable: true
-          #codelist: procurementCategory.csv
-          #openCodelist: false
-          enum:
-            - goods
-            - works
-            - services
-            - null
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ProcurementCategory'
         additionalProcurementCategories:
-          title: Additional procurement categories
-          description: 'Any additional categories describing the objects of this contracting process, using the open [extendedProcurementCategory](https://standard.open-contracting.org/latest/en/schema/codelists/#extended-procurement-category) codelist.'
-          type: array
-          nullable: true
-          items:
-            type: string
-          #codelist: extendedProcurementCategory.csv
-          #openCodelist: true
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/AdditionalProcurementCategories'
         awardCriteria:
-          title: Award criteria
-          description: 'The award criteria for the procurement, using the open [awardCriteria](https://standard.open-contracting.org/latest/en/schema/codelists/#award-criteria) codelist.'
-          type: string
-          nullable: true
-          #codelist: awardCriteria.csv
-          #openCodelist: true
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/AwardCriteria'
         awardCriteriaDetails:
           title: Award criteria details
           description: Any detailed or further information on the award or selection criteria.

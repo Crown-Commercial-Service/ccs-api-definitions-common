@@ -40,6 +40,53 @@ components:
         - limited
         - direct
         
+    ProcurementCategory:
+      title: Main procurement category
+      description: >-
+        The primary category describing the main object of this contracting process, from the closed 
+        [procurementCategory](https://standard.open-contracting.org/latest/en/schema/codelists/#procurement-category) codelist.'
+      type: string
+      nullable: true
+      enum:
+        - goods
+        - works
+        - services
+        
+    AdditionalProcurementCategories: 
+      title: Additional procurement categories
+      description: >-
+        Any additional categories describing the objects of this contracting process, using the open 
+        [extendedProcurementCategory](https://standard.open-contracting.org/latest/en/schema/codelists/#extended-procurement-category) codelist.'
+      type: array
+      nullable: true
+      items:
+        type: string
+        enum:
+        - goods
+        - works
+        - services
+        - consultingServices
+        
+    AwardCriteria:    
+      title: Award criteria
+      description: >-
+        The award criteria for the procurement, using the open 
+        [awardCriteria](https://standard.open-contracting.org/latest/en/schema/codelists/#award-criteria) codelist.'
+          type: string
+          nullable: true
+          #codelist: awardCriteria.csv
+          #openCodelist: true
+      type: string
+        enum:
+        - costOnly
+        - qualityOnly
+        - ratedCriteria
+        - lowestCost
+        - bestProposal
+        - bestValueToGovernment
+        - singleBidOnly
+    
+    
     SubmissionMethod:
       title: Submission Methods
       description: >-
