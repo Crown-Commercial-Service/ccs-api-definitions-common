@@ -85,19 +85,127 @@ components:
         - bestProposal
         - bestValueToGovernment
         - singleBidOnly
+        
+    AwardStatus:
+      title: Award status
+      description: 'The current status of the award, from the closed [awardStatus](https://standard.open-contracting.org/latest/en/schema/codelists/#award-status) codelist.'
+      type: string
+      nullable: true
+      enum:
+        - pending
+        - active
+        - cancelled
+        - unsuccessful
+        #  codelist: awardStatus.csv
+        #  openCodelist: false
+        
+    ContractStatus:
+      title: Contract status
+      description: 'The current status of the contract, from the closed [contractStatus](https://standard.open-contracting.org/latest/en/schema/codelists/#contract-status) codelist.'
+      type: string
+      nullable: true
+      enum:
+        - pending
+        - active
+        - cancelled
+        - terminated
+        #  codelist: contractStatus.csv
+        #  openCodelist: false
+        
+    DocumentType:
+      title: Document type
+      description: 'A classification of the document described, using the open [documentType](https://standard.open-contracting.org/latest/en/schema/codelists/#document-type) codelist.'
+      type: string
+      nullable: true
+      enum:
+        - plannedProcurementNotice
+        - tenderNotice
+        - awardNotice
+        - contractNotice
+        - completionCertificate
+        - procurementPlan
+        - biddingDocuments
+        - techninalSpecifications
+        - evalutionCriteria
+        - evaluationReports
+        - contractDraft
+        - contractSigned
+        - contractArrangements
+        - contractSchedule
+        - physicalProgressReport
+        - financialProgressReport
+        - finalAudit
+        - hearingNotice
+        - marketStudies
+        - eligibilityCriteria
+        - clarifications
+        - shortlistedFirms
+        - environmentalImpact
+        - assetAndLiability
+        - riskProvisions
+        - winningBid
+        - complaints
+        - contractAnnexe
+        - contractGuarantees
+        - subContract
+        - needsAssessment
+        - FeasibilityStudy
+        - projectPlan
+        - billOfQuantity
+        - bidders
+        - conflictOfInterest
+        - debarments
+        - illustration
+        - submissionDocuments
+        - contractSummary
+        - cancellationDetails
+          codelist: documentType.csv
+          openCodelist: true
+        
+    MilestoneType:
+      title: Milestone type
+      description: 'The nature of the milestone, using the open [milestoneType](https://standard.open-contracting.org/latest/en/schema/codelists/#milestone-type) codelist.'
+      type: string
+      nullable: true
+      enum:
+        - preProcurement
+        - approval
+        - engagement
+        - assessment
+        - delivery
+        - reporting
+        - financing
+        - payment
+        #  codelist: milestoneType.csv
+        #  openCodelist: true
     
+    MilestoneStatus:
+      title: Status
+      description: 'The status that was realized on the date provided in `dateModified`, from the closed [milestoneStatus](https://standard.open-contracting.org/latest/en/schema/codelists/#milestone-status) codelist.'
+      type: string
+      nullable: true
+      enum:
+        - scheduled
+        - met
+        - notMet
+        - partiallyMet
+        #  codelist: milestoneStatus.csv
+        # openCodelist: false
     
     SubmissionMethod:
       title: Submission Methods
       description: >-
-        The submission method codelist is used to identify the mechanism through which a submission can be made.
-      type: string
-      enum:
-        - electronicSubmission
-        - electronicAuction
-        - written
-        - inPerson
-          
+        The methods by which bids are submitted, using the open [
+        submissionMethod](https://standard.open-contracting.org/latest/en/schema/codelists/#submission-method) codelist.'
+      type: array
+      nullable: true
+      items:
+        type: string
+        enum:
+          - electronicSubmission
+          - electronicAuction
+          - written
+          - inPerson    
 
     
     ProcessStage:
@@ -140,7 +248,114 @@ components:
             - complete
             - withdrawn
             
+    PartyRoles:
+      title: Party roles
+      description: 'The party''s role(s) in the contracting process, using the open [partyRole](https://standard.open-contracting.org/latest/en/schema/codelists/#party-role) codelist.'
+      nullable: true
+      type: array
+        items:
+            type: string
+            enum:
+              - buyer
+              - procuringEntity
+              - supplier
+              - tenderer
+              - funder
+              - enquirer
+              - payer
+              - payee
+              - reviewBody
+              - interestedParty
+          # codelist: partyRole.csv
+          # openCodelist: true
+          
+    UnitClassificationScheme:
+      title: Scheme
+      description: 'The list from which identifiers for units of measure are taken, using the open [unitClassificationScheme](https://standard.open-contracting.org/latest/en/schema/codelists/#unit-classification-scheme) codelist. ''UNCEFACT'' is recommended.'
+      nullable: true
+      type: string
+      enum:
+        - UNCEFACT
+        - QUDT
+        #   codelist: unitClassificationScheme.csv
+        #   openCodelist: true
+        
+    UnitID:
+      title: ID
+      description: 'The identifier from the codelist referenced in the `scheme` field. Check the [unitClassificationScheme](https://standard.open-contracting.org/latest/en/schema/codelists/#unit-classification-scheme) codelist for details of how to find and use identifiers from the scheme in use.'
+      nullable: true
+      oneOf:
+        - $ref: '#/components/schemas/UNCEFACT_ID'
+        - $ref: '#/components/schemas/QUDT_ID'
+      versionId: true
+        
+    UNEFACT_ID:
+      type: string
+        enum:
+          - UnefactID1
+          - UnefactID2
+          
+    QUDT_ID:
+      type: string
+        enum:
+          - UnefactID1
+          - UnefactID2
+          
+    OrganizationScheme:
+      title: Scheme
+      description: 'Organization identifiers should be taken from an existing organization identifier list. The scheme field is used to indicate the list or register from which the identifier is taken. This value should be taken from the [Organization Identifier Scheme](https://standard.open-contracting.org/latest/en/schema/codelists/#organization-identifier-scheme) codelist.'
+      type: string
+      nullable: true
+    
+    ItemClassification:
+      title: Scheme
+      description: 'The scheme or codelist from which the classification code is taken. For line item classifications, this uses the open [itemClassificationScheme](https://standard.open-contracting.org/latest/en/schema/codelists/#item-classification-scheme) codelist.'
+      type: string
+      nullable: true
+      enum:
+        - CPV
+        - CPVS
+        - GSIN
+        - UNSPSC
+        - CPC
+        - OKDP
+        - OKPD
+        - CUCOP
+        - NAICS
+        - PSC
+        - HS
+          #codelist: itemClassificationScheme.csv
+          #openCodelist: true
+          
+    RelatedProcess:
+      title: Relationship
+      description: 'The type of relationship, using the open [relatedProcess](https://standard.open-contracting.org/latest/en/schema/codelists/#related-process) codelist.'
+      type: array
+      items:
+        type: string
+        enum:
+          - framework
+          - planning
+          - parent
+          - prior
+          - unsuccessfullProcess
+          - subContract
+          - replacementProcess
+          - renewalProcess
+          #codelist: relatedProcess.csv
+          #openCodelist: true
             
+    RelatedProcessScheme:       
+      title: Scheme
+        description: 'The identification scheme used by this cross-reference, using the open [relatedProcessScheme](https://standard.open-contracting.org/latest/en/schema/codelists/#related-process-scheme) codelist.'
+      type: string
+      nullable: true
+      enum:
+        - ocid
+          #codelist: relatedProcessScheme.csv
+          #openCodelist: true
+          
+          
     Language:
       title: Language
       description: >-
@@ -152,6 +367,7 @@ components:
               [ISO639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) is
               recommended unless there is a clear user need for distinguishing the
               language subtype.
+      nullable: true
       type: string
       enum:
               - ab

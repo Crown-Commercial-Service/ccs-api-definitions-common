@@ -130,14 +130,8 @@ components:
           type: string
           nullable: true
         submissionMethod:
-          title: Submission method
-          description: 'The methods by which bids are submitted, using the open [submissionMethod](https://standard.open-contracting.org/latest/en/schema/codelists/#submission-method) codelist.'
-          type: array
-          nullable: true
-          items:
-            type: string
-          #codelist: submissionMethod.csv
-          #openCodelist: true
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/SubmissionMethod'
         submissionMethodDetails:
           title: Submission method details
           description: 'Any detailed or further information on the submission method. This can include the address, e-mail address or online service to which bids are submitted, and any special requirements to be followed for submissions.'
@@ -155,7 +149,7 @@ components:
           title: Has enquiries?
           description: 'A true/false field to indicate whether any enquiries were received during the tender process. Structured information on enquiries that were received, and responses to them, can be provided using the enquiries extension.'
           type: boolean
-           nullable: true
+          nullable: true
         eligibilityCriteria:
           title: Eligibility criteria
           description: A description of any eligibility criteria for potential suppliers.
@@ -243,30 +237,20 @@ components:
           title: Title
           description: Award title
           type: string
-            nullable: true
+          nullable: true
         description:
           title: Description
           description: Award description
           type: string
-            nullable: true
+          nullable: true
         status:
-          title: Award status
-          description: 'The current status of the award, from the closed [awardStatus](https://standard.open-contracting.org/latest/en/schema/codelists/#award-status) codelist.'
-          type: string
-            nullable: true
-          enum:
-            - pending
-            - active
-            - cancelled
-            - unsuccessful
-            - null
-          codelist: awardStatus.csv
-          openCodelist: false
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/AwardCriteria'
         date:
           title: Award date
           description: The date of the contract award. This is usually the date on which a decision to award was made.
           type: string
-            nullable: true
+          nullable: true
           format: date-time
         value:
           title: Value
@@ -344,25 +328,15 @@ components:
           title: Contract title
           description: Contract title
           type: string
-            nullable: true
+          nullable: true
         description:
           title: Contract description
           description: Contract description
           type: string
-            nullable: true
+          nullable: true
         status:
-          title: Contract status
-          description: 'The current status of the contract, from the closed [contractStatus](https://standard.open-contracting.org/latest/en/schema/codelists/#contract-status) codelist.'
-          type: string
-            nullable: true
-          enum:
-            - pending
-            - active
-            - cancelled
-            - terminated
-            - null
-          codelist: contractStatus.csv
-          openCodelist: false
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ContractStatus'
         period:
           title: Period
           description: The start and end date for the contract.
@@ -383,7 +357,7 @@ components:
           title: Date signed
           description: 'The date the contract was signed. In the case of multiple signatures, the date of the last signature.'
           type: string
-            nullable: true
+          nullable: true
           format: date-time
         documents:
           title: Documents
@@ -473,55 +447,45 @@ components:
           title: Title
           description: Milestone title
           type: string
-            nullable: true
+          nullable: true
         type:
           title: Milestone type
           description: 'The nature of the milestone, using the open [milestoneType](https://standard.open-contracting.org/latest/en/schema/codelists/#milestone-type) codelist.'
           type: string
-            nullable: true
+          nullable: true
           codelist: milestoneType.csv
           openCodelist: true
         description:
           title: Description
           description: A description of the milestone.
           type: string
-            nullable: true
+          nullable: true
         code:
           title: Milestone code
           description: 'Milestone codes can be used to track specific events that take place for a particular kind of contracting process. For example, a code of ''approvalLetter'' can be used to allow applications to understand this milestone represents the date an approvalLetter is due or signed.'
           type: string
-            nullable: true
+          nullable: true
         dueDate:
           title: Due date
           description: The date the milestone is due.
           type: string
-            nullable: true
+          nullable: true
           format: date-time
         dateMet:
           format: date-time
           title: Date met
           description: The date on which the milestone was met.
           type: string
-            nullable: true
+          nullable: true
         dateModified:
           title: Date modified
           description: The date the milestone was last reviewed or modified and the status was altered or confirmed to still be correct.
           type: string
-            nullable: true
+          nullable: true
           format: date-time
         status:
-          title: Status
-          description: 'The status that was realized on the date provided in `dateModified`, from the closed [milestoneStatus](https://standard.open-contracting.org/latest/en/schema/codelists/#milestone-status) codelist.'
-          type: string
-            nullable: true
-          enum:
-            - scheduled
-            - met
-            - notMet
-            - partiallyMet
-            - null
-          codelist: milestoneStatus.csv
-          openCodelist: false
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/MilestoneStatus'
         documents:
           title: Documents
           description: List of documents associated with this milestone (Deprecated in 1.1).
@@ -554,50 +518,42 @@ components:
             - integer
           minLength: 1
         documentType:
-          title: Document type
-          description: 'A classification of the document described, using the open [documentType](https://standard.open-contracting.org/latest/en/schema/codelists/#document-type) codelist.'
-          type: string
-            nullable: true
-          codelist: documentType.csv
-          openCodelist: true
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/MilestoneStatus'
         title:
           title: Title
           description: The document title.
           type: string
-            nullable: true
+          nullable: true
         description:
           title: Description
           description: 'A short description of the document. Descriptions are recommended to not exceed 250 words. In the event the document is not accessible online, the description field can be used to describe arrangements for obtaining a copy of the document.'
           type: string
-            nullable: true
+          nullable: true
         url:
           title: URL
           description: A direct link to the document or attachment. The server providing access to this document ought to be configured to correctly report the document mime type.
           type: string
-            nullable: true
+          nullable: true
           format: uri
         datePublished:
           title: Date published
           description: The date on which the document was first published. This is particularly important for legally important documents such as notices of a tender.
           type: string
-            nullable: true
+          nullable: true
           format: date-time
         dateModified:
           title: Date modified
           description: Date that the document was last modified
           type: string
-            nullable: true
+          nullable: true
           format: date-time
         format:
-          title: Format
-          description: 'The format of the document, using the open [IANA Media Types](http://www.iana.org/assignments/media-types/) codelist (see the values in the ''Template'' column), or using the ''offline/print'' code if the described document is published offline. For example, web pages have a format of ''text/html''.'
-          type: string
-            nullable: true
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/FileFormat'
         language:
-          title: Language
-          description: 'The language of the linked document using either two-letter [ISO639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), or extended [BCP47 language tags](http://www.w3.org/International/articles/language-tags/). The use of lowercase two-letter codes from [ISO639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) is recommended unless there is a clear user need for distinguishing the language subtype.'
-          type: string
-            nullable: true
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/Language'
       #patternProperties:
       #  '^(title_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
       #    type: string
@@ -613,15 +569,15 @@ components:
         id:
           title: ID
           description: An identifier for the budget line item which provides funds for this contracting process. This identifier should be possible to cross-reference against the provided data source.
+          nullable: true
           type:
             - string
             - integer
-            - 'null'
         description:
           title: Budget Source
           description: 'A short free text description of the budget source. May be used to provide the title of the budget line, or the programme used to fund this project.'
           type: string
-            nullable: true
+          nullable: true
         amount:
           title: Amount
           description: 'The value reserved in the budget for this contracting process. A negative value indicates anticipated income to the budget as a result of this contracting process, rather than expenditure. Where the budget is drawn from multiple sources, the budget breakdown extension can be used.'
@@ -630,25 +586,25 @@ components:
           title: Project title
           description: 'The name of the project through which this contracting process is funded (if applicable). Some organizations maintain a registry of projects, and the data should use the name by which the project is known in that registry. No translation option is offered for this string, as translated values can be provided in third-party data, linked from the data source above.'
           type: string
-            nullable: true
+          nullable: true
         projectID:
           title: Project identifier
           description: 'An external identifier for the project that this contracting process forms part of, or is funded via (if applicable). Some organizations maintain a registry of projects, and the data should use the identifier from the relevant registry of projects.'
+          nullable: true
           type:
             - string
             - integer
-            - 'null'
         uri:
           title: Linked budget information
           description: 'A URI pointing directly to a machine-readable record about the budget line-item or line-items that fund this contracting process. Information can be provided in a range of formats, including using IATI, the Open Fiscal Data Standard or any other standard which provides structured data on budget sources. Human readable documents can be included using the planning.documents block.'
           type: string
-            nullable: true
+          nullable: true
           format: uri
         source:
           title: Data Source
           description: '(Deprecated in 1.1) Used to point either to a corresponding Budget Data Package, or to a machine or human-readable source where users can find further information on the budget line item identifiers, or project identifiers, provided here.'
           type: string
-            nullable: true
+          nullable: true
           deprecated:
             deprecatedVersion: '1.1'
             description: 'The budget data source field was intended to link to machine-readable data about the budget for a contracting process, but has been widely mis-used to provide free-text descriptions of budget providers. As a result, it has been removed from version 1.1. budget/uri can be used to provide a link to machine-readable budget information, and budget/description can be used to provide human-readable information on the budget source.'
@@ -681,13 +637,13 @@ components:
           title: Data source
           description: 'Used to point either to a corresponding Fiscal Data Package, IATI file, or machine or human-readable source where users can find further information on the budget line item identifiers, or project identifiers, provided here.'
           type: string
-            nullable: true
+          nullable: true
           format: uri
         date:
           title: Date
           description: The date of the transaction
           type: string
-            nullable: true
+          nullable: true
           format: date-time
         value:
           $ref: '#/components/schemas/Value'
@@ -705,7 +661,7 @@ components:
           title: Linked spending information
           description: A URI pointing directly to a machine-readable record about this spending transaction.
           type: string
-            nullable: true
+          nullable: true
           format: uri
         amount:
           title: Amount
@@ -732,7 +688,7 @@ components:
       properties:
         name:
           type: string
-            nullable: true
+          nullable: true
           description: The name of the party being referenced. This must match the name of an entry in the parties section.
           title: Organization name
           minLength: 1
@@ -786,7 +742,7 @@ components:
           title: Common name
           description: 'A common name for this organization or other participant in the contracting process. The identifier object provides a space for the formal legal name, and so this may either repeat that value, or may provide the common name by which this organization or entity is known. This field may also include details of the department or sub-unit involved in this contracting process.'
           type: string
-            nullable: true
+          nullable: true
         id:
           type: string
           description: 'The ID used for cross-referencing to this party from other sections of the release. This field may be built with the following structure {identifier.scheme}-{identifier.id}(-{department-identifier}).'
@@ -812,15 +768,8 @@ components:
           description: Contact details that can be used for this party.
           $ref: '#/components/schemas/ContactPoint'
         roles:
-          title: Party roles
-          description: 'The party''s role(s) in the contracting process, using the open [partyRole](https://standard.open-contracting.org/latest/en/schema/codelists/#party-role) codelist.'
-          type:
-            - array
-            - 'null'
-          items:
-            type: string
-          codelist: partyRole.csv
-          openCodelist: true
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/PartyRoles'
         details:
           type:
             - object
@@ -849,7 +798,7 @@ components:
           title: Description
           description: 'A description of the goods, services to be provided.'
           type: string
-            nullable: true
+          nullable: true
         classification:
           title: Classification
           description: The primary classification for the item.
@@ -865,35 +814,24 @@ components:
         quantity:
           title: Quantity
           description: The number of units to be provided.
-          type:
-            - number
-            - 'null'
+          nullable: true
+          type: number
         unit:
           title: Unit
           description: 'A description of the unit in which the supplies, services or works are provided (e.g. hours, kilograms) and the unit-price.'
           type: object
           properties:
             scheme:
-              title: Scheme
-              description: 'The list from which identifiers for units of measure are taken, using the open [unitClassificationScheme](https://standard.open-contracting.org/latest/en/schema/codelists/#unit-classification-scheme) codelist. ''UNCEFACT'' is recommended.'
-              type:
-                - string
-                - 'null'
-              codelist: unitClassificationScheme.csv
-              openCodelist: true
+              allOf: 
+                - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/UnitClassificationScheme'
             id:
-              title: ID
-              description: 'The identifier from the codelist referenced in the `scheme` field. Check the [unitClassificationScheme](https://standard.open-contracting.org/latest/en/schema/codelists/#unit-classification-scheme) codelist for details of how to find and use identifiers from the scheme in use.'
-              type:
-                - string
-                - 'null'
-              versionId: true
+              allOf: 
+                - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/UnitID'
             name:
               title: Name
               description: Name of the unit.
-              type:
-                - string
-                - 'null'
+              nullable: true
+              type: string
             value:
               title: Value
               description: The monetary value of a single unit.
@@ -902,9 +840,8 @@ components:
               title: URI
               description: 'The machine-readable URI for the unit of measure, provided by the scheme.'
               format: uri
-              type:
-                - string
-                - 'null'
+              type: string
+                
           #patternProperties:
           #  '^(name_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
           #    type:
@@ -923,32 +860,32 @@ components:
           title: Amendment date
           description: The date of this amendment.
           type: string
-            nullable: true
+          nullable: true
           format: date-time
         rationale:
           title: Rationale
           description: An explanation for the amendment.
           type: string
-            nullable: true
+          nullable: true
         id:
+          title: ID
           description: 'An identifier for this amendment: often the amendment number'
           type: string
-            nullable: true
-          title: ID
+          nullable: true
         description:
           description: 'A free text, or semi-structured, description of the changes made in this amendment.'
           type: string
-            nullable: true
+          nullable: true
           title: Description
         amendsReleaseID:
           description: Provide the identifier (release.id) of the OCDS release (from this contracting process) that provides the values for this contracting process **before** the amendment was made.
           type: string
-            nullable: true
+          nullable: true
           title: Amended release (identifier)
         releaseID:
           description: Provide the identifier (release.id) of the OCDS release (from this contracting process) that provides the values for this contracting process **after** the amendment was made.
           type: string
-            nullable: true
+          nullable: true
           title: Amending release (identifier)
         changes:
           title: Amended fields
@@ -964,13 +901,13 @@ components:
               former_value:
                 title: Former Value
                 description: 'The previous value of the changed property, in whatever type the property is. (Deprecated in 1.1)'
+                nullable: true
                 type:
                   - string
                   - number
                   - integer
                   - array
                   - object
-                  - 'null'
           deprecated:
             description: 'A free-text or semi-structured string describing the changes made in each amendment can be provided in the amendment.description field. To provide structured information on the fields that have changed, publishers should provide releases indicating the state of the contracting process before and after the amendment.'
             deprecatedVersion: '1.1'
@@ -978,36 +915,33 @@ components:
       #  '^(rationale_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
       #    type: string
       #      nullable: true
+      
     Classification:
       title: Classification
       description: 'A classification consists of at least two parts: an identifier for the list (scheme) from which the classification is taken, and an identifier for the category from that list being applied. It is useful to also publish a text label and/or URI that users can draw on to interpret the classification.'
       type: object
       properties:
         scheme:
-          title: Scheme
-          description: 'The scheme or codelist from which the classification code is taken. For line item classifications, this uses the open [itemClassificationScheme](https://standard.open-contracting.org/latest/en/schema/codelists/#item-classification-scheme) codelist.'
-          type: string
-            nullable: true
-          codelist: itemClassificationScheme.csv
-          openCodelist: true
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ItemClassification'
         id:
           title: ID
           description: The classification code taken from the scheme.
+          nullable: true
           type:
             - string
             - integer
-            - 'null'
           versionId: true
         description:
           title: Description
           description: A textual description or title for the classification code.
           type: string
-            nullable: true
+          nullable: true
         uri:
           title: URI
           description: A URI to uniquely identify the classification code.
           type: string
-            nullable: true
+          nullable: true
           format: uri
       #patternProperties:
       #  '^(description_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
@@ -1019,17 +953,8 @@ components:
       type: object
       properties:
         scheme:
-          title: Scheme
-          description: 'Organization identifiers should be taken from an existing organization identifier list. The scheme field is used to indicate the list or register from which the identifier is taken. This value should be taken from the [Organization Identifier Scheme](https://standard.open-contracting.org/latest/en/schema/codelists/#organization-identifier-scheme) codelist.'
-          type: string
-            nullable: true
-        id:
-          title: ID
-          description: The identifier of the organization in the selected scheme.
-          type:
-            - string
-            - integer
-            - 'null'
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/OrganizationScheme'
           versionId: true
         legalName:
           title: Legal Name
@@ -1040,7 +965,7 @@ components:
           title: URI
           description: 'A URI to identify the organization, such as those provided by [Open Corporates](http://www.opencorporates.com) or some other relevant URI provider. This is not for listing the website of the organization: that can be done through the URL field of the Organization contact point.'
           type: string
-            nullable: true
+          nullable: true
           format: uri
       #patternProperties:
       #  '^(legalName_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
@@ -1054,27 +979,27 @@ components:
         streetAddress:
           title: Street address
           type: string
-            nullable: true
+          nullable: true
           description: 'The street address. For example, 1600 Amphitheatre Pkwy.'
         locality:
           title: Locality
           type: string
-            nullable: true
+          nullable: true
           description: 'The locality. For example, Mountain View.'
         region:
           title: Region
           type: string
-            nullable: true
+          nullable: true
           description: 'The region. For example, CA.'
         postalCode:
           title: Postal code
           type: string
-            nullable: true
+          nullable: true
           description: 'The postal code. For example, 94043.'
         countryName:
           title: Country name
           type: string
-            nullable: true
+          nullable: true
           description: 'The country name. For example, United States.'
       #patternProperties:
       #  '^(countryName_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
@@ -1088,27 +1013,27 @@ components:
         name:
           title: Name
           type: string
-            nullable: true
+          nullable: true
           description: 'The name of the contact person, department, or contact point, for correspondence relating to this contracting process.'
         email:
           title: Email
           type: string
-            nullable: true
+          nullable: true
           description: The e-mail address of the contact point/person.
         telephone:
           title: Telephone
           type: string
-            nullable: true
+          nullable: true
           description: The telephone number of the contact point/person. This should include the international dialing code.
         faxNumber:
           title: Fax number
           type: string
-            nullable: true
+          nullable: true
           description: The fax number of the contact point/person. This should include the international dialing code.
         url:
           title: URL
           type: string
-            nullable: true
+          nullable: true
           description: A web address for the contact point/person.
           format: uri
       #patternProperties:
@@ -1123,320 +1048,11 @@ components:
         amount:
           title: Amount
           description: Amount as a number.
-          type:
-            - number
-            - 'null'
+          nullable: true
+          type: number
         currency:
-          title: Currency
-          description: 'The currency of the amount, from the closed [currency](https://standard.open-contracting.org/latest/en/schema/codelists/#currency) codelist.'
-          type: string
-            nullable: true
-          codelist: currency.csv
-          openCodelist: false
-          enum:
-            - ADP
-            - AED
-            - AFA
-            - AFN
-            - ALK
-            - ALL
-            - AMD
-            - ANG
-            - AOA
-            - AOK
-            - AON
-            - AOR
-            - ARA
-            - ARP
-            - ARS
-            - ARY
-            - ATS
-            - AUD
-            - AWG
-            - AYM
-            - AZM
-            - AZN
-            - BAD
-            - BAM
-            - BBD
-            - BDT
-            - BEC
-            - BEF
-            - BEL
-            - BGJ
-            - BGK
-            - BGL
-            - BGN
-            - BHD
-            - BIF
-            - BMD
-            - BND
-            - BOB
-            - BOP
-            - BOV
-            - BRB
-            - BRC
-            - BRE
-            - BRL
-            - BRN
-            - BRR
-            - BSD
-            - BTN
-            - BUK
-            - BWP
-            - BYB
-            - BYN
-            - BYR
-            - BZD
-            - CAD
-            - CDF
-            - CHC
-            - CHE
-            - CHF
-            - CHW
-            - CLF
-            - CLP
-            - CNY
-            - COP
-            - COU
-            - CRC
-            - CSD
-            - CSJ
-            - CSK
-            - CUC
-            - CUP
-            - CVE
-            - CYP
-            - CZK
-            - DDM
-            - DEM
-            - DJF
-            - DKK
-            - DOP
-            - DZD
-            - ECS
-            - ECV
-            - EEK
-            - EGP
-            - ERN
-            - ESA
-            - ESB
-            - ESP
-            - ETB
-            - EUR
-            - FIM
-            - FJD
-            - FKP
-            - FRF
-            - GBP
-            - GEK
-            - GEL
-            - GHC
-            - GHP
-            - GHS
-            - GIP
-            - GMD
-            - GNE
-            - GNF
-            - GNS
-            - GQE
-            - GRD
-            - GTQ
-            - GWE
-            - GWP
-            - GYD
-            - HKD
-            - HNL
-            - HRD
-            - HRK
-            - HTG
-            - HUF
-            - IDR
-            - IEP
-            - ILP
-            - ILR
-            - ILS
-            - INR
-            - IQD
-            - IRR
-            - ISJ
-            - ISK
-            - ITL
-            - JMD
-            - JOD
-            - JPY
-            - KES
-            - KGS
-            - KHR
-            - KMF
-            - KPW
-            - KRW
-            - KWD
-            - KYD
-            - KZT
-            - LAJ
-            - LAK
-            - LBP
-            - LKR
-            - LRD
-            - LSL
-            - LSM
-            - LTL
-            - LTT
-            - LUC
-            - LUF
-            - LUL
-            - LVL
-            - LVR
-            - LYD
-            - MAD
-            - MDL
-            - MGA
-            - MGF
-            - MKD
-            - MLF
-            - MMK
-            - MNT
-            - MOP
-            - MRO
-            - MRU
-            - MTL
-            - MTP
-            - MUR
-            - MVQ
-            - MVR
-            - MWK
-            - MXN
-            - MXP
-            - MXV
-            - MYR
-            - MZE
-            - MZM
-            - MZN
-            - NAD
-            - NGN
-            - NIC
-            - NIO
-            - NLG
-            - NOK
-            - NPR
-            - NZD
-            - OMR
-            - PAB
-            - PEH
-            - PEI
-            - PEN
-            - PES
-            - PGK
-            - PHP
-            - PKR
-            - PLN
-            - PLZ
-            - PTE
-            - PYG
-            - QAR
-            - RHD
-            - ROK
-            - ROL
-            - RON
-            - RSD
-            - RUB
-            - RUR
-            - RWF
-            - SAR
-            - SBD
-            - SCR
-            - SDD
-            - SDG
-            - SDP
-            - SEK
-            - SGD
-            - SHP
-            - SIT
-            - SKK
-            - SLL
-            - SOS
-            - SRD
-            - SRG
-            - SSP
-            - STD
-            - STN
-            - SUR
-            - SVC
-            - SYP
-            - SZL
-            - THB
-            - TJR
-            - TJS
-            - TMM
-            - TMT
-            - TND
-            - TOP
-            - TPE
-            - TRL
-            - TRY
-            - TTD
-            - TWD
-            - TZS
-            - UAH
-            - UAK
-            - UGS
-            - UGW
-            - UGX
-            - USD
-            - USN
-            - USS
-            - UYI
-            - UYN
-            - UYP
-            - UYU
-            - UYW
-            - UZS
-            - VEB
-            - VEF
-            - VES
-            - VNC
-            - VND
-            - VUV
-            - WST
-            - XAF
-            - XAG
-            - XAU
-            - XBA
-            - XBB
-            - XBC
-            - XBD
-            - XCD
-            - XDR
-            - XEU
-            - XFO
-            - XFU
-            - XOF
-            - XPD
-            - XPF
-            - XPT
-            - XRE
-            - XSU
-            - XTS
-            - XUA
-            - XXX
-            - YDD
-            - YER
-            - YUD
-            - YUM
-            - YUN
-            - ZAL
-            - ZAR
-            - ZMK
-            - ZMW
-            - ZRN
-            - ZRZ
-            - ZWC
-            - ZWD
-            - ZWL
-            - ZWN
-            - ZWR
-            - null
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/OrganizationScheme'
     Period:
       title: Period
       description: 'Key events during a contracting process may have a known start date, end date, duration, or maximum extent (the latest date the period can extend to). In some cases, not all of these fields will have known or relevant values.'
@@ -1446,26 +1062,26 @@ components:
           title: Start date
           description: 'The start date for the period. When known, a precise start date must be provided.'
           type: string
-            nullable: true
+          nullable: true
           format: date-time
         endDate:
           title: End date
           description: 'The end date for the period. When known, a precise end date must be provided.'
           type: string
-            nullable: true
+          nullable: true
           format: date-time
         maxExtentDate:
           description: The period cannot be extended beyond this date. This field can be used to express the maximum available date for extension or renewal of this period.
           format: date-time
           title: Maximum extent
           type: string
-            nullable: true
+          nullable: true
         durationInDays:
           description: 'The maximum duration of this period in days. A user interface can collect or display this data in months or years as appropriate, and then convert it into days when storing this field. This field can be used when exact dates are not known. If a startDate and endDate are set, this field, if used, should be equal to the difference between startDate and endDate. Otherwise, if a startDate and maxExtentDate are set, this field, if used, should be equal to the difference between startDate and maxExtentDate.'
           title: Duration (days)
-          type:
-            - integer
-            - 'null'
+          nullable: true
+          type: integer
+
     RelatedProcess:
       description: 'A reference to a related contracting process: generally one preceding or following on from the current process.'
       type: object
@@ -1476,38 +1092,27 @@ components:
           description: 'A local identifier for this relationship, unique within this array.'
           type: string
         relationship:
-          items:
-            type: string
-          description: 'The type of relationship, using the open [relatedProcess](https://standard.open-contracting.org/latest/en/schema/codelists/#related-process) codelist.'
-          title: Relationship
-          type:
-            - array
-            - 'null'
-          codelist: relatedProcess.csv
-          openCodelist: true
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/RelatedProcess'
         title:
           description: 'The title of the related process, where referencing an open contracting process, this field should match the tender/title field in the related process.'
           title: Related process title
           type: string
-            nullable: true
+          nullable: true
         scheme:
-          title: Scheme
-          description: 'The identification scheme used by this cross-reference, using the open [relatedProcessScheme](https://standard.open-contracting.org/latest/en/schema/codelists/#related-process-scheme) codelist.'
-          type: string
-            nullable: true
-          codelist: relatedProcessScheme.csv
-          openCodelist: true
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/RelatedProcess'
         identifier:
           description: 'The identifier of the related process. If the scheme is ''ocid'', this must be an Open Contracting ID (ocid).'
           title: Identifier
           type: string
-            nullable: true
+          nullable: true
         uri:
           format: uri
           description: 'A URI pointing to a machine-readable document, release or record package containing the identified related process.'
           title: Related process URI
           type: string
-            nullable: true
+          nullable: true
           
               
     
