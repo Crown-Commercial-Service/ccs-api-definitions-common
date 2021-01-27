@@ -161,6 +161,35 @@ components:
         - cancellationDetails
           codelist: documentType.csv
           openCodelist: true
+          
+    ReleaseTag:
+      title: Release Tag
+      description: 'One or more values from the closed [releaseTag](https://standard.open-contracting.org/latest/en/schema/codelists/#release-tag) codelist. Tags can be used to filter releases and to understand the kind of information that releases might contain.'
+      type: array
+      items:
+        type: string
+        enum:
+          - planning
+          - planningUpdate
+          - tender
+          - tenderAmendment
+          - tenderUpdate
+          - tenderCancellation
+          - award
+          - awardUpdate
+          - awardCancellation
+          - contract
+          - contractUpdate
+          - contractAmendment
+          - implementation
+          - implementationUpdate
+          - contractTermination
+          - compiled
+      #codelist: releaseTag.csv
+      #openCodelist: false
+      minItems: 1
+      omitWhenMerged: true
+    
         
     MilestoneType:
       title: Milestone type
@@ -231,22 +260,22 @@ components:
       
           
     TenderStatus:
-          title: Tender status
-          description: |-
+      title: Tender status
+      description: |-
             The current status of the tender, from the closed
             [tenderStatus](https://standard.open-contracting.org/1.1/en/schema/codelists/#tender-status)
             codelist.
-          type: string
+      type: string
           #codelist: tenderStatus.csv
           #openCodelist: false
-          enum:
-            - planning
-            - planned
-            - active
-            - cancelled
-            - unsuccessful
-            - complete
-            - withdrawn
+      enum:
+        - planning
+        - planned
+        - active
+        - cancelled
+        - unsuccessful
+        - complete
+        - withdrawn
             
     PartyRoles:
       title: Party roles

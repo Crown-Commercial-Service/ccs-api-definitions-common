@@ -9,9 +9,131 @@ servers:
     description: Optional server description, e.g. Main (production) server
   - url: http://staging-api.example.com
     description: Optional server description, e.g. Internal staging server for testing
+    
+    
+    
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
+#$schema: 'http://json-schema.org/draft-04/schema#'
+
+paths:
+  /ocds/Release:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      
+      operationId: OCDS.Release   
+      parameters:
+      - in: query
+        name: "OCIDn"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Release'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
+
 
 components:
   schemas:
+    Release:
+      title: Schema for an Open Contracting Release
+      description: 'Each release provides data about a single contracting process at a particular point in time. Releases can be used to notify users of new tenders, awards, contracts and other updates. Releases may repeat or update information provided previously in this contracting process. One contracting process may have many releases. A ''record'' of a contracting process follows the same structure as a release, but combines information from multiple points in time into a single summary.'
+      type: object
+      required:
+        - ocid
+        - id
+        - date
+        - tag
+        - initiationType
+      properties:
+        ocid:
+          title: Open Contracting ID
+          description: 'A globally unique identifier for this Open Contracting Process. Composed of an ocid prefix and an identifier for the contracting process. For more information see the [Open Contracting Identifier guidance](https://standard.open-contracting.org/latest/en/schema/identifiers/)'
+          type: string
+          minLength: 1
+        id:
+          title: Release ID
+          description: 'An identifier for this particular release of information. A release identifier must be unique within the scope of its related contracting process (defined by a common ocid). A release identifier must not contain the # character.'
+          type: string
+          minLength: 1
+          #omitWhenMerged: true
+        date:
+          title: Release Date
+          description: 'The date on which the information contained in the release was first recorded in, or published by, any system.'
+          type: string
+          format: date-time
+          #omitWhenMerged: true
+        tag:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definition-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ReleaseTag'
+        initiationType:
+          title: Initiation type
+          description: 'The type of initiation process used for this contract, from the closed [initiationType](https://standard.open-contracting.org/latest/en/schema/codelists/#initiation-type) codelist.'
+          type: string
+          enum:
+            - tender
+          #codelist: initiationType.csv
+          #openCodelist: false
+        parties:
+          title: Parties
+          description: 'Information on the parties (organizations, economic operators and other participants) who are involved in the contracting process and their roles, e.g. buyer, procuring entity, supplier etc. Organization references elsewhere in the schema are used to refer back to this entries in this list.'
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization'
+          uniqueItems: true
+        buyer:
+          title: Buyer
+          description: 'A buyer is an entity whose budget will be used to pay for goods, works or services related to a contract. This may be different from the procuring entity who may be specified in the tender data.'
+          allOf:
+            - $ref: '#/components/schemas/OrganizationReference'
+        planning:
+          title: Planning
+          description: 'Information from the planning phase of the contracting process. This includes information related to the process of deciding what to contract, when and how.'
+          allOf:
+            - $ref: '#/components/schemas/Planning'
+        tender:
+          title: Tender
+          description: The activities undertaken in order to enter into a contract.
+          $ref: '#/components/schemas/Tender'
+        awards:
+          title: Awards
+          description: 'Information from the award phase of the contracting process. There can be more than one award per contracting process e.g. because the contract is split among different providers, or because it is a standing offer.'
+          type: array
+          items:
+            $ref: '#/components/schemas/Award'
+          uniqueItems: true
+        contracts:
+          title: Contracts
+          description: Information from the contract creation phase of the procurement process.
+          type: array
+          items:
+            $ref: '#/components/schemas/Contract'
+          uniqueItems: true
+        language:
+          title: Release language
+          description: 'The default language of the data using either two-letter [ISO639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), or extended [BCP47 language tags](http://www.w3.org/International/articles/language-tags/). The use of lowercase two-letter codes from [ISO639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) is recommended.'
+          nullable: true
+          type: string
+          default: en
+        relatedProcesses:
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/RelatedProcess'
+          description: 'The details of related processes: for example, if this process follows on from one or more other processes, represented under a separate open contracting identifier (ocid). This is commonly used to relate mini-competitions to their parent frameworks or individual tenders to a broader planning process.'
+          title: Related processes
+          type: array
+
     Planning:
       title: Planning
       description: >-
@@ -63,10 +185,10 @@ components:
           title: Tender ID
           description: 'An identifier for this tender process. This may be the same as the ocid, or may be an internal identifier for this tender.'
           oneOf:
-            - string
-            - integer
+            - type: string
+            - type: integer
           minLength: 1
-          versionId: true
+          #versionID: true
         title:
           title: Tender title
           description: >-
@@ -82,7 +204,7 @@ components:
           nullable: true
         status:
           allOf: 
-            - $ref: '#/components/schemas/TenderStatus'
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definition-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/TenderStatus'
         procuringEntity:
           title: Procuring entity
           description: 'The entity managing the procurement. This may be different from the buyer who pays for, or uses, the items being procured.'
@@ -197,9 +319,9 @@ components:
           title: Amendment
           description: The use of individual amendment objects has been deprecated. From OCDS 1.1 information should be provided in the amendments array.
           $ref: '#/components/schemas/Amendment'
-          deprecated:
-            description: The single amendment object has been deprecated in favour of including amendments in an amendments (plural) array.
-            deprecatedVersion: '1.1'
+          deprecated: true
+            #description: The single amendment object has been deprecated in favour of including amendments in an amendments (plural) array.
+            #deprecatedVersion: '1.1'
       #patternProperties:
       #  '^(title_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
       #    type: string
@@ -230,8 +352,8 @@ components:
           title: Award ID
           description: 'The identifier for this award. It must be unique and must not change within the Open Contracting Process it is part of (defined by a single ocid). See the [identifier guidance](https://standard.open-contracting.org/latest/en/schema/identifiers/) for further details.'
           oneOf:
-            - string
-            - integer
+            - type: string
+            - type: integer
           minLength: 1
         title:
           title: Title
@@ -292,9 +414,9 @@ components:
           title: Amendment
           description: The use of individual amendment objects has been deprecated. From OCDS 1.1 information should be provided in the amendments array.
           $ref: '#/components/schemas/Amendment'
-          deprecated:
-            description: The single amendment object has been deprecated in favour of including amendments in an amendments (plural) array.
-            deprecatedVersion: '1.1'
+          deprecated: true
+            #description: The single amendment object has been deprecated in favour of including amendments in an amendments (plural) array.
+            #deprecatedVersion: '1.1'
       #patternProperties:
       #  '^(title_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
       #    type: string
@@ -313,16 +435,16 @@ components:
         id:
           title: Contract ID
           description: 'The identifier for this contract. It must be unique and must not change within the Open Contracting Process it is part of (defined by a single ocid). See the [identifier guidance](https://standard.open-contracting.org/latest/en/schema/identifiers/) for further details.'
-          type:
-            - string
-            - integer
+          oneOf:
+            - type: string
+            - type: integer
           minLength: 1
         awardID:
           title: Award ID
           description: The award.id against which this contract is being issued.
-          type:
-            - string
-            - integer
+          oneOf:
+            - type: string
+            - type: integer
           minLength: 1
         title:
           title: Contract title
@@ -393,9 +515,9 @@ components:
           title: Amendment
           description: The use of individual amendment objects has been deprecated. From OCDS 1.1 information should be provided in the amendments array.
           $ref: '#/components/schemas/Amendment'
-          deprecated:
-            description: The single amendment object has been deprecated in favour of including amendments in an amendments (plural) array.
-            deprecatedVersion: '1.1'
+          deprecated: true
+            #description: The single amendment object has been deprecated in favour of including amendments in an amendments (plural) array.
+            #deprecatedVersion: '1.1'
       #patternProperties:
       #  '^(title_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
       #    type: string
@@ -439,9 +561,9 @@ components:
         id:
           title: ID
           description: 'A local identifier for this milestone, unique within this block. This field is used to keep track of multiple revisions of a milestone through the compilation from release to record mechanism.'
-          type:
-            - string
-            - integer
+          oneOf:
+            - type: string
+            - type: integer
           minLength: 1
         title:
           title: Title
@@ -449,12 +571,8 @@ components:
           type: string
           nullable: true
         type:
-          title: Milestone type
-          description: 'The nature of the milestone, using the open [milestoneType](https://standard.open-contracting.org/latest/en/schema/codelists/#milestone-type) codelist.'
-          type: string
-          nullable: true
-          codelist: milestoneType.csv
-          openCodelist: true
+          allOf: 
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definition-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/MilestoneType'
         description:
           title: Description
           description: A description of the milestone.
@@ -490,9 +608,9 @@ components:
           title: Documents
           description: List of documents associated with this milestone (Deprecated in 1.1).
           type: array
-          deprecated:
-            deprecatedVersion: '1.1'
-            description: 'Inclusion of documents at the milestone level is now deprecated. Documentation should be attached in the tender, award, contract or implementation sections, and titles and descriptions used to highlight the related milestone. Publishers who wish to continue to provide documents at the milestone level should explicitly declare this by using the milestone documents extension.'
+          deprecated: true
+            #deprecatedVersion: '1.1'
+            #description: 'Inclusion of documents at the milestone level is now deprecated. Documentation should be attached in the tender, award, contract or implementation sections, and titles and descriptions used to highlight the related milestone. Publishers who wish to continue to provide documents at the milestone level should explicitly declare this by using the milestone documents extension.'
           items:
             $ref: '#/components/schemas/Document'
           uniqueItems: true
@@ -513,9 +631,9 @@ components:
         id:
           title: ID
           description: 'A local, unique identifier for this document. This field is used to keep track of multiple revisions of a document through the compilation from release to record mechanism.'
-          type:
-            - string
-            - integer
+          oneOf:
+            - type: string
+            - type: integer
           minLength: 1
         documentType:
           allOf: 
@@ -570,9 +688,9 @@ components:
           title: ID
           description: An identifier for the budget line item which provides funds for this contracting process. This identifier should be possible to cross-reference against the provided data source.
           nullable: true
-          type:
-            - string
-            - integer
+          oneOf:
+            - type: string
+            - type: integer
         description:
           title: Budget Source
           description: 'A short free text description of the budget source. May be used to provide the title of the budget line, or the programme used to fund this project.'
@@ -591,9 +709,9 @@ components:
           title: Project identifier
           description: 'An external identifier for the project that this contracting process forms part of, or is funded via (if applicable). Some organizations maintain a registry of projects, and the data should use the identifier from the relevant registry of projects.'
           nullable: true
-          type:
-            - string
-            - integer
+          oneOf:
+            - type: string
+            - type: integer
         uri:
           title: Linked budget information
           description: 'A URI pointing directly to a machine-readable record about the budget line-item or line-items that fund this contracting process. Information can be provided in a range of formats, including using IATI, the Open Fiscal Data Standard or any other standard which provides structured data on budget sources. Human readable documents can be included using the planning.documents block.'
@@ -605,9 +723,9 @@ components:
           description: '(Deprecated in 1.1) Used to point either to a corresponding Budget Data Package, or to a machine or human-readable source where users can find further information on the budget line item identifiers, or project identifiers, provided here.'
           type: string
           nullable: true
-          deprecated:
-            deprecatedVersion: '1.1'
-            description: 'The budget data source field was intended to link to machine-readable data about the budget for a contracting process, but has been widely mis-used to provide free-text descriptions of budget providers. As a result, it has been removed from version 1.1. budget/uri can be used to provide a link to machine-readable budget information, and budget/description can be used to provide human-readable information on the budget source.'
+          deprecated: true
+            #deprecatedVersion: '1.1'
+            #description: 'The budget data source field was intended to link to machine-readable data about the budget for a contracting process, but has been widely mis-used to provide free-text descriptions of budget providers. As a result, it has been removed from version 1.1. budget/uri can be used to provide a link to machine-readable budget information, and budget/description can be used to provide human-readable information on the budget source.'
           format: uri
       #patternProperties:
       #  '^(source_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
@@ -629,9 +747,9 @@ components:
         id:
           title: ID
           description: A unique identifier for this transaction. This identifier should be possible to cross-reference against the provided data source. For IATI this is the transaction reference.
-          type:
-            - string
-            - integer
+          oneOf:
+            - type: string
+            - type: integer
           minLength: 1
         source:
           title: Data source
@@ -667,23 +785,23 @@ components:
           title: Amount
           description: (Deprecated in 1.1. Use transaction.value instead) The value of the transaction. A negative value indicates a refund or correction.
           $ref: '#/components/schemas/Value'
-          deprecated:
-            description: This field has been replaced by the `transaction.value` field for consistency with the use of value and amount elsewhere in the standard.
-            deprecatedVersion: '1.1'
+          deprecated: true
+            #description: This field has been replaced by the `transaction.value` field for consistency with the use of value and amount elsewhere in the standard.
+            #deprecatedVersion: '1.1'
         providerOrganization:
           title: Provider organization
           description: (Deprecated in 1.1. Use transaction.payer instead.) The Organization Identifier for the organization from which the funds in this transaction originate. Expressed following the Organizational Identifier standard - consult the documentation and the codelist.
           $ref: '#/components/schemas/Identifier'
-          deprecated:
-            description: This field has been replaced by the `transaction.payer` field to resolve ambiguity arising from 'provider' being interpreted as relating to the goods or services procured rather than the flow of funds between the parties.
-            deprecatedVersion: '1.1'
+          deprecated: true
+            #description: This field has been replaced by the `transaction.payer` field to resolve ambiguity arising from 'provider' being interpreted as relating to the goods or services procured rather than the flow of funds between the parties.
+            #deprecatedVersion: '1.1'
         receiverOrganization:
           title: Receiver organization
           description: (Deprecated in 1.1. Use transaction.payee instead). The Organization Identifier for the organization which receives the funds in this transaction. Expressed following the Organizational Identifier standard - consult the documentation and the codelist.
           $ref: '#/components/schemas/Identifier'
-          deprecated:
-            description: This field has been replaced by the `transaction.payee` field to resolve ambiguity arising from 'receiver' being interpreted as relating to the goods or services procured rather than the flow of funds between the parties.
-            deprecatedVersion: '1.1'
+          deprecated: true
+            #description: This field has been replaced by the `transaction.payee` field to resolve ambiguity arising from 'receiver' being interpreted as relating to the goods or services procured rather than the flow of funds between the parties.
+            #deprecatedVersion: '1.1'
     OrganizationReference:
       properties:
         name:
@@ -693,40 +811,40 @@ components:
           title: Organization name
           minLength: 1
         id:
-          type:
-            - string
-            - integer
+          oneOf:
+            - type: string
+            - type: integer
           description: The id of the party being referenced. This must match the id of an entry in the parties section.
           title: Organization ID
         identifier:
           title: Primary identifier
           description: 'The primary identifier for this organization. Identifiers that uniquely pick out a legal entity should be preferred. Consult the [organization identifier guidance](https://standard.open-contracting.org/latest/en/schema/identifiers/) for the preferred scheme and identifier to use.'
-          deprecated:
-            deprecatedVersion: '1.1'
-            description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and detailed legal identifier information should only be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
+          deprecated: true
+            #deprecatedVersion: '1.1'
+            #description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and detailed legal identifier information should only be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
           $ref: '#/components/schemas/Identifier'
         address:
-          deprecated:
-            deprecatedVersion: '1.1'
-            description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and address information should only be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
+          deprecated: true
+            #deprecatedVersion: '1.1'
+            #description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and address information should only be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
           $ref: '#/components/schemas/Address'
           description: (Deprecated outside the parties section)
           title: Address
         additionalIdentifiers:
           type: array
-          deprecated:
-            deprecatedVersion: '1.1'
-            description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and additional identifiers for an organization should be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
+          deprecated: true
+            #deprecatedVersion: '1.1'
+            #description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and additional identifiers for an organization should be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
           items:
             $ref: '#/components/schemas/Identifier'
           title: Additional identifiers
           uniqueItems: true
-          wholeListMerge: true
+          #wholeListMerge: true
           description: '(Deprecated outside the parties section) A list of additional / supplemental identifiers for the organization, using the [organization identifier guidance](https://standard.open-contracting.org/latest/en/schema/identifiers/). This can be used to provide an internally used identifier for this organization in addition to the primary legal entity identifier.'
         contactPoint:
-          deprecated:
-            deprecatedVersion: '1.1'
-            description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and contact point information for an organization should be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
+          deprecated: true
+            #deprecatedVersion: '1.1'
+            #description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and contact point information for an organization should be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
           $ref: '#/components/schemas/ContactPoint'
           description: (Deprecated outside the parties section)
           title: Contact point
@@ -758,7 +876,7 @@ components:
           items:
             $ref: '#/components/schemas/Identifier'
           uniqueItems: true
-          wholeListMerge: true
+          #wholeListMerge: true
         address:
           title: Address
           description: 'An address. This may be the legally registered address of the organization, or may be a correspondence address for this particular contracting process.'
@@ -771,9 +889,8 @@ components:
           allOf: 
             - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/PartyRoles'
         details:
-          type:
-            - object
-            - 'null'
+          nullable: true
+          type: object
           description: Additional classification information about parties can be provided using partyDetail extensions that define particular fields and classification schemes.
           title: Details
       #patternProperties:
@@ -790,9 +907,9 @@ components:
         id:
           title: ID
           description: A local identifier to reference and merge the items by. Must be unique within a given array of items.
-          type:
-            - string
-            - integer
+          oneOf:
+            - type: string
+            - type: integer
           minLength: 1
         description:
           title: Description
@@ -810,7 +927,7 @@ components:
           items:
             $ref: '#/components/schemas/Classification'
           uniqueItems: true
-          wholeListMerge: true
+          #wholeListMerge: true
         quantity:
           title: Quantity
           description: The number of units to be provided.
@@ -845,7 +962,7 @@ components:
           #patternProperties:
           #  '^(name_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
           #    type:
-          #      - string
+          #      - type: string
           #      - 'null'
       #patternProperties:
       #  '^(description_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
@@ -902,15 +1019,15 @@ components:
                 title: Former Value
                 description: 'The previous value of the changed property, in whatever type the property is. (Deprecated in 1.1)'
                 nullable: true
-                type:
-                  - string
-                  - number
-                  - integer
-                  - array
-                  - object
-          deprecated:
-            description: 'A free-text or semi-structured string describing the changes made in each amendment can be provided in the amendment.description field. To provide structured information on the fields that have changed, publishers should provide releases indicating the state of the contracting process before and after the amendment.'
-            deprecatedVersion: '1.1'
+                oneOf:
+                  - type: string
+                  - type: number
+                  - type: integer
+                  - type: array
+                  - type: object
+          deprecated: true
+            #description: 'A free-text or semi-structured string describing the changes made in each amendment can be provided in the amendment.description field. To provide structured information on the fields that have changed, publishers should provide releases indicating the state of the contracting process before and after the amendment.'
+            #deprecatedVersion: '1.1'
       #patternProperties:
       #  '^(rationale_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
       #    type: string
@@ -928,10 +1045,10 @@ components:
           title: ID
           description: The classification code taken from the scheme.
           nullable: true
-          type:
-            - string
-            - integer
-          versionId: true
+          oneOf:
+            - type: string
+            - type: integer
+          #versionID: true
         description:
           title: Description
           description: A textual description or title for the classification code.
@@ -955,12 +1072,12 @@ components:
         scheme:
           allOf: 
             - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/OrganizationScheme'
-          versionId: true
+          #versionID: true
         legalName:
           title: Legal Name
           description: The legally registered name of the organization.
           type: string
-            nullable: true
+          nullable: true
         uri:
           title: URI
           description: 'A URI to identify the organization, such as those provided by [Open Corporates](http://www.opencorporates.com) or some other relevant URI provider. This is not for listing the website of the organization: that can be done through the URL field of the Organization contact point.'
@@ -1129,115 +1246,3 @@ components:
     
     
     
-    id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
-$schema: 'http://json-schema.org/draft-04/schema#'
-title: Schema for an Open Contracting Release
-description: 'Each release provides data about a single contracting process at a particular point in time. Releases can be used to notify users of new tenders, awards, contracts and other updates. Releases may repeat or update information provided previously in this contracting process. One contracting process may have many releases. A ''record'' of a contracting process follows the same structure as a release, but combines information from multiple points in time into a single summary.'
-type: object
-properties:
-  ocid:
-    title: Open Contracting ID
-    description: 'A globally unique identifier for this Open Contracting Process. Composed of an ocid prefix and an identifier for the contracting process. For more information see the [Open Contracting Identifier guidance](https://standard.open-contracting.org/latest/en/schema/identifiers/)'
-    type: string
-    minLength: 1
-  id:
-    title: Release ID
-    description: 'An identifier for this particular release of information. A release identifier must be unique within the scope of its related contracting process (defined by a common ocid). A release identifier must not contain the # character.'
-    type: string
-    minLength: 1
-    omitWhenMerged: true
-  date:
-    title: Release Date
-    description: 'The date on which the information contained in the release was first recorded in, or published by, any system.'
-    type: string
-    format: date-time
-    omitWhenMerged: true
-  tag:
-    title: Release Tag
-    description: 'One or more values from the closed [releaseTag](https://standard.open-contracting.org/latest/en/schema/codelists/#release-tag) codelist. Tags can be used to filter releases and to understand the kind of information that releases might contain.'
-    type: array
-    items:
-      type: string
-      enum:
-        - planning
-        - planningUpdate
-        - tender
-        - tenderAmendment
-        - tenderUpdate
-        - tenderCancellation
-        - award
-        - awardUpdate
-        - awardCancellation
-        - contract
-        - contractUpdate
-        - contractAmendment
-        - implementation
-        - implementationUpdate
-        - contractTermination
-        - compiled
-    codelist: releaseTag.csv
-    openCodelist: false
-    minItems: 1
-    omitWhenMerged: true
-  initiationType:
-    title: Initiation type
-    description: 'The type of initiation process used for this contract, from the closed [initiationType](https://standard.open-contracting.org/latest/en/schema/codelists/#initiation-type) codelist.'
-    type: string
-    enum:
-      - tender
-    codelist: initiationType.csv
-    openCodelist: false
-  parties:
-    title: Parties
-    description: 'Information on the parties (organizations, economic operators and other participants) who are involved in the contracting process and their roles, e.g. buyer, procuring entity, supplier etc. Organization references elsewhere in the schema are used to refer back to this entries in this list.'
-    type: array
-    items:
-      $ref: '#/components/schemas/Organization'
-    uniqueItems: true
-  buyer:
-    title: Buyer
-    description: 'A buyer is an entity whose budget will be used to pay for goods, works or services related to a contract. This may be different from the procuring entity who may be specified in the tender data.'
-    $ref: '#/components/schemas/OrganizationReference'
-  planning:
-    title: Planning
-    description: 'Information from the planning phase of the contracting process. This includes information related to the process of deciding what to contract, when and how.'
-    $ref: '#/components/schemas/Planning'
-  tender:
-    title: Tender
-    description: The activities undertaken in order to enter into a contract.
-    $ref: '#/components/schemas/Tender'
-  awards:
-    title: Awards
-    description: 'Information from the award phase of the contracting process. There can be more than one award per contracting process e.g. because the contract is split among different providers, or because it is a standing offer.'
-    type: array
-    items:
-      $ref: '#/components/schemas/Award'
-    uniqueItems: true
-  contracts:
-    title: Contracts
-    description: Information from the contract creation phase of the procurement process.
-    type: array
-    items:
-      $ref: '#/components/schemas/Contract'
-    uniqueItems: true
-  language:
-    title: Release language
-    description: 'The default language of the data using either two-letter [ISO639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), or extended [BCP47 language tags](http://www.w3.org/International/articles/language-tags/). The use of lowercase two-letter codes from [ISO639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) is recommended.'
-    type:
-      - string
-      - 'null'
-    default: en
-  relatedProcesses:
-    uniqueItems: true
-    items:
-      $ref: '#/components/schemas/RelatedProcess'
-    description: 'The details of related processes: for example, if this process follows on from one or more other processes, represented under a separate open contracting identifier (ocid). This is commonly used to relate mini-competitions to their parent frameworks or individual tenders to a broader planning process.'
-    title: Related processes
-    type: array
-required:
-  - ocid
-  - id
-  - date
-  - tag
-  - initiationType
-definitions:
