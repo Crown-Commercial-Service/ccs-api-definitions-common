@@ -1,0 +1,385 @@
+openapi: 3.0.0
+
+info:
+  title: Sample API
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 0.1.9
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+
+paths:
+
+#id: 'https://standard.open-contracting.org/schema/1__1__5/record-package-schema.json'
+#$schema: 'http://json-schema.org/draft-04/schema#'
+
+  /ocds/Tender:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.Tender   
+      parameters:
+      - in: query
+        name: "OCIDn"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Tender'
+                  - $ref: '#/components/schemas/Tender'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
+
+
+
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-package-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+
+  /ocds/Document:
+    get:
+      summary: "Returns a package of releases"
+      operationId: OCDS.Document   
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Document'
+                  - $ref: '#/components/schemas/Document'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'  
+ 
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+         
+  /ocds/Item:
+    get:
+      summary: "Returns the requested record with supplied OCID"
+      operationId: OCDS.Item
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Item'
+                  - $ref: '#/components/schemas/Item'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'
+          
+  /ocds/Milestone:
+    get:
+      summary: "Returns the requested record with supplied OCID"
+      operationId: OCDS.Milestone
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Milestone'
+                  - $ref: '#/components/schemas/Milestone'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'  
+
+  /ocds/Award:
+    get:
+      summary: "Returns the requested record with supplied OCID"
+      operationId: OCDS.Award
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Award'
+                  - $ref: '#/components/schemas/Award'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'  
+          
+  /ocds/Bid:
+    get:
+      summary: "Returns the requested record with supplied OCID"
+      operationId: OCDS.Bid
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Bid'
+                  - $ref: '#/components/schemas/Bid'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'  
+          
+  /ocds/Finance:
+    get:
+      summary: "Returns the requested record with supplied OCID"
+      operationId: OCDS.Finance
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Finance'
+                  - $ref: '#/components/schemas/Finance'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'  
+          
+
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+  
+
+components:
+  schemas:
+    Tender:
+      properties:
+        lots:
+          title: Lots
+          description: 'A tender process may be divided into lots, where bidders can bid on one or more lots. Details of each lot can be provided here. Items, documents and other features can then reference the lot they are related to using relatedLot. Where no relatedLots identifier is given, the values should be interpreted as applicable to the whole tender. Properties of tender can be overridden for a given Lot through their inclusion in the Lot object.'
+          type: array
+          items:
+            $ref: '#/components/schemas/Lot'
+        lotDetails:
+          title: Lot Details
+          description: 'If this tender is divided into lots, details can be provided here of any criteria that apply to bidding on these lots. This extended property is currently focused on fields required by the EU TED data standard'
+          type: object
+          properties:
+            maximumLotsBidPerSupplier:
+              title: Maximum lots per supplier
+              description: The maximum number of lots that one supplier may bid for as part of this contracting process.
+              nullable: true
+              type: integer
+            maximumLotsAwardedPerSupplier:
+              title: Maximum lots per supplier
+              description: The maximum number of lots that may be awarded to one supplier as part of this contracting process.
+              nullable: true
+              type: integer
+            awardCriteriaDetails:
+              title: Award criteria details
+              description: Any detailed or further information on the award or selection criteria.
+              nullable: true
+              type: string
+        lotGroups:
+          title: Lot groups
+          description: 'Where the buyer reserves the right to combine lots, or wishes to specify the total value for a group of lots, a lot group is used to capture this information.'
+          type: array
+          items:
+            $ref: '#/components/schemas/LotGroup'
+            
+    Document:
+      properties:
+        relatedLots:
+          title: Related lot(s)
+          description: 'If this document relates to a particular lot, provide the identifier(s) of the related lot(s) here.'
+          nullable: true
+          type: array
+          items:
+            type: string
+    Item:
+      properties:
+        relatedLot:
+          title: Related lot
+          description: 'If this item belongs to a lot, provide the identifier of the related lot here.'
+          nullable: true
+          type: string
+          
+    Milestone:
+      properties:
+        relatedLots:
+          title: Related lot(s)
+          description: 'If this milestone relates to a particular lot, provide the identifier(s) of the related lot(s) here.'
+          nullable: true
+          type: array
+          items:
+            type: string
+            
+    Award:
+      properties:
+        relatedLots:
+          title: Related lot(s)
+          description: 'If this award relates to one or more specific lots, provide the identifier(s) of the related lot(s) here.'
+          nullable: true
+          type: array
+          items:
+            type: string
+            
+    Bid:
+      properties:
+        relatedLots:
+          title: Related lot(s)
+          description: 'If this bid relates to one or more specific lots, provide the identifier(s) of the related lot(s) here.'
+          nullable: true
+          type:  array
+          items:
+            type: string
+            
+    Finance:
+      properties:
+        relatedLots:
+          title: Related lot(s)
+          description: 'If this source of finance relates to one or more specific lots, provide the identifier(s) of the related lot(s) here.'
+          nullable: true
+          type: array
+          items:
+            type: string
+            
+    Lot:
+      title: Lots
+      description: A lot is a grouping of items within a tender that can be bid on or awarded together.
+      type: object
+      properties:
+        id:
+          title: Lot ID
+          type: string
+          description: 'A local identifier for this lot, such as a lot number. This is used in relatedLots references at the item, document and award level.'
+        title:
+          title: Title
+          nullable: true
+          type: string
+          description: A title for this lot.
+        description:
+          title: Description
+          description: A description of this lot.
+          nullable: true
+          type: string
+        status:
+          title: Lot Status
+          description: The current status of the process related to this lot.
+          nullable: true
+          type: string
+          #codelist: tenderStatus.csv
+          #openCodelist: false
+          enum:
+            - planning
+            - planned
+            - active
+            - cancelled
+            - unsuccessful
+            - complete
+            - withdrawn
+            - null
+        value:
+          title: Lot value
+          description: The maximum estimated value of this lot.
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Value'
+        contractPeriod:
+          title: Contract period
+          description: 'The period over which the contract is estimated or required to be active. If the lot does not specify explicit dates, the duration field may be used.'
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Period'
+          
+    LotGroup:
+      title: Lot group
+      description: 'Where the buyer reserves the right to combine lots, or wishes to specify the total value for a group of lots, a lot group is used to capture this information.'
+      type: object
+      properties:
+        id:
+          title: Lot group identifier
+          type: string
+          description: A local identifier for this group of lots.
+        relatedLots:
+          title: Related lot(s)
+          description: A list of the identifiers of the lots that form this group. Lots may appear in more than one group.
+          nullable: true
+          type: array
+          items:
+            type:  string
+        optionToCombine:
+          title: Option to combine
+          description: The buyer reserves the right to combine the lots in this group when awarding a contract.
+          nullable: true
+          type: boolean
+        maximumValue:
+          title: Maximum value
+          description: The maximum estimated value of the lots in this group. This may be lower than the sum total of lot values
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Value'
+
