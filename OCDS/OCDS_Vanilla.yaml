@@ -419,13 +419,8 @@ components:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ReleaseTag'
         initiationType:
-          title: Initiation type
-          description: 'The type of initiation process used for this contract, from the closed [initiationType](https://standard.open-contracting.org/latest/en/schema/codelists/#initiation-type) codelist.'
-          type: string
-          enum:
-            - tender
-          #codelist: initiationType.csv
-          #openCodelist: false
+          allOf:
+              - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/InitiationType'
         parties:
           title: Parties
           description: 'Information on the parties (organizations, economic operators and other participants) who are involved in the contracting process and their roles, e.g. buyer, procuring entity, supplier etc. Organization references elsewhere in the schema are used to refer back to this entries in this list.'

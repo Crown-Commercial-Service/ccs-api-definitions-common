@@ -68,6 +68,15 @@ components:
         - services
         - consultingServices
         
+    InitiationType:
+      title: Initiation type
+      description: 'The type of initiation process used for this contract, from the closed [initiationType](https://standard.open-contracting.org/latest/en/schema/codelists/#initiation-type) codelist.'   
+      type: string
+      enum:
+        - tender
+    #codelist: initiationType.csv
+    #openCodelist: false
+        
     AwardCriteria:    
       title: Award criteria
       description: >-

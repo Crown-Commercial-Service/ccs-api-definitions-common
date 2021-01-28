@@ -46,6 +46,25 @@ paths:
 
 components:
   schemas:
+  
+    VersionFields:
+      type: array
+      items:
+        type: object
+        properties:
+          releaseDate:
+            format: date-time
+            type: string
+          releaseID:
+            type: string
+          value:
+            type: object
+            description: The value in the Release Schema
+          releaseTag:
+            type: array
+            items:
+              type: string  
+  
     VersionedRelease:
       #id: 'https://standard.open-contracting.org/schema/1__1__5/versioned-release-validation-schema.json'
       #$schema: 'http://json-schema.org/draft-04/schema#'
@@ -56,23 +75,13 @@ components:
         initiationType:
           type: array
           items:
+            allOf: 
+              - $ref: '#/components/schemas/VersionFields'
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
-                type: string
-                enum:
-                  - tender
-                  #codelist: initiationType.csv
-                  #openCodelist: false
-              releaseTag:
-                type: array
-                items:
-                  type: string
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/InitiationType'
         parties:
           type: array
           items:
@@ -139,16 +148,14 @@ components:
         - id
       properties:
         id:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 oneOf:
                   - type: string
                   - type: integer
@@ -162,16 +169,14 @@ components:
         description:
           $ref: '#/components/schemas/StringNullVersioned'
         status:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: string
                 #codelist: tenderStatus.csv
@@ -201,16 +206,14 @@ components:
         minValue:
           $ref: '#/components/schemas/Value'
         procurementMethod:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: string
                 #codelist: method.csv
@@ -230,16 +233,14 @@ components:
         procurementMethodRationale:
           $ref: '#/components/schemas/StringNullVersioned'
         mainProcurementCategory:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: string
                 #codelist: procurementCategory.csv
@@ -254,16 +255,14 @@ components:
                 items:
                   type: string
         additionalProcurementCategories:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: array
                 items:
@@ -275,16 +274,14 @@ components:
                 items:
                   type: string
         awardCriteria:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: string
                 #codelist: awardCriteria.csv
@@ -296,16 +293,14 @@ components:
         awardCriteriaDetails:
           $ref: '#/components/schemas/StringNullVersioned'
         submissionMethod:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: array
                 items:
@@ -323,16 +318,14 @@ components:
         enquiryPeriod:
           $ref: '#/components/schemas/Period'
         hasEnquiries:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: boolean
               releaseTag:
@@ -346,16 +339,14 @@ components:
         contractPeriod:
           $ref: '#/components/schemas/Period'
         numberOfTenderers:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: integer
               releaseTag:
@@ -425,16 +416,14 @@ components:
         description:
           $ref: '#/components/schemas/StringNullVersioned'
         status:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 type: string
                 nullable: true
                 enum:
@@ -502,16 +491,14 @@ components:
             - type: integer
           minLength: 1
         awardID:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 oneOf:
                   - type: string
                   - type: integer
@@ -525,16 +512,14 @@ components:
         description:
           $ref: '#/components/schemas/StringNullVersioned'
         status:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 type: string
                 nullable: true
                 enum:
@@ -626,16 +611,14 @@ components:
         title:
           $ref: '#/components/schemas/StringNullVersioned'
         type:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: string
                 #codelist: milestoneType.csv
@@ -655,16 +638,14 @@ components:
         dateModified:
           $ref: '#/components/schemas/StringNullDateTimeVersioned'
         status:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 type: string
                 nullable: true
                 enum:
@@ -707,16 +688,14 @@ components:
             - type: integer
           minLength: 1
         documentType:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: string
                 #codelist: documentType.csv
@@ -753,16 +732,14 @@ components:
       type: object
       properties:
         id:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 oneOf:
                   - type: string
@@ -799,15 +776,12 @@ components:
         uri:
           $ref: '#/components/schemas/StringNullUriVersioned'
         source:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
                 nullable: true
                 type: string
@@ -874,16 +848,14 @@ components:
     OrganizationReference:
       properties:
         name:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: string
                 minLength: 1
@@ -906,15 +878,12 @@ components:
           description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and address information should only be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
           $ref: '#/components/schemas/Address'
         additionalIdentifiers:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
                 type: array
                 deprecated: true
@@ -943,16 +912,14 @@ components:
         identifier:
           $ref: '#/components/schemas/Identifier'
         additionalIdentifiers:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 type: array
                 items:
                   $ref: '#/components/schemas/IdentifierUnversioned'
@@ -966,16 +933,14 @@ components:
         contactPoint:
           $ref: '#/components/schemas/ContactPoint'
         roles:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: array
                 items:
@@ -987,16 +952,14 @@ components:
                 items:
                   type: string
         details:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: object
               releaseTag:
@@ -1023,16 +986,14 @@ components:
         classification:
           $ref: '#/components/schemas/Classification'
         additionalClassifications:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 type: array
                 items:
                   $ref: '#/components/schemas/ClassificationUnversioned'
@@ -1042,16 +1003,14 @@ components:
                 items:
                   type: string
         quantity:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: number
               releaseTag:
@@ -1143,16 +1102,14 @@ components:
       type: object
       properties:
         scheme:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: string
                 #codelist: itemClassificationScheme.csv
@@ -1162,16 +1119,14 @@ components:
                 items:
                   type: string
         id:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 oneOf:
                   - type: string
@@ -1195,16 +1150,14 @@ components:
         scheme:
           $ref: '#/components/schemas/StringNullVersioned'
         id:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 oneOf:
                   - type: string
@@ -1265,16 +1218,14 @@ components:
       type: object
       properties:
         amount:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: number
               releaseTag:
@@ -1282,16 +1233,14 @@ components:
                 items:
                   type: string
         currency:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: string
                 #codelist: currency.csv
@@ -1614,16 +1563,14 @@ components:
         maxExtentDate:
           $ref: '#/components/schemas/StringNullDateTimeVersioned'
         durationInDays:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: integer
               releaseTag:
@@ -1636,16 +1583,14 @@ components:
         id:
           type: string
         relationship:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: array
                 items:
@@ -1659,16 +1604,14 @@ components:
         title:
           $ref: '#/components/schemas/StringNullVersioned'
         scheme:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: string
                 #codelist: relatedProcessScheme.csv
@@ -1766,16 +1709,14 @@ components:
     OrganizationReferenceVersionedId:
       properties:
         name:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 nullable: true
                 type: string
                 minLength: 1
@@ -1784,16 +1725,14 @@ components:
                 items:
                   type: string
         id:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
+                description: ''
                 oneOf:
                   - type: string
                   - type: integer
@@ -1812,15 +1751,12 @@ components:
           description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and address information should only be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
           $ref: '#/components/schemas/Address'
         additionalIdentifiers:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID:
-                type: string
               value:
                 type: array
                 deprecated: true
