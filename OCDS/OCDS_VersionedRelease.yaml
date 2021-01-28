@@ -160,10 +160,6 @@ components:
                   - type: string
                   - type: integer
                 minLength: 1
-              releaseTag:
-                type: array
-                items:
-                  type: string
         title:
           $ref: '#/components/schemas/StringNullVersioned'
         description:
@@ -176,24 +172,12 @@ components:
             type: object
             properties:
               value:
-                description: ''
                 nullable: true
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/TenderStatus'
                 type: string
                 #codelist: tenderStatus.csv
                 #openCodelist: false
-                enum:
-                  - planning
-                  - planned
-                  - active
-                  - cancelled
-                  - unsuccessful
-                  - complete
-                  - withdrawn
-                  - null
-              releaseTag:
-                type: array
-                items:
-                  type: string
         procuringEntity:
           $ref: '#/components/schemas/OrganizationReferenceVersionedId'
         items:
@@ -214,20 +198,9 @@ components:
             properties:
               value:
                 description: ''
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ProcurementMethod'
                 nullable: true
-                type: string
-                #codelist: method.csv
-                #openCodelist: false
-                enum:
-                  - open
-                  - selective
-                  - limited
-                  - direct
-                  - null
-              releaseTag:
-                type: array
-                items:
-                  type: string
         procurementMethodDetails:
           $ref: '#/components/schemas/StringNullVersioned'
         procurementMethodRationale:
@@ -242,18 +215,8 @@ components:
               value:
                 description: ''
                 nullable: true
-                type: string
-                #codelist: procurementCategory.csv
-                #openCodelist: false
-                enum:
-                  - goods
-                  - works
-                  - services
-                  - null
-              releaseTag:
-                type: array
-                items:
-                  type: string
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ProcurementCategory'
         additionalProcurementCategories:
           allOf:
             - $ref: '#/components/schemas/VersionFields'
@@ -264,15 +227,10 @@ components:
               value:
                 description: ''
                 nullable: true
-                type: array
-                items:
-                  type: string
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/AdditionalProcurementCategories'
                 #codelist: extendedProcurementCategory.csv
                 #openCodelist: true
-              releaseTag:
-                type: array
-                items:
-                  type: string
         awardCriteria:
           allOf:
             - $ref: '#/components/schemas/VersionFields'
@@ -283,13 +241,10 @@ components:
               value:
                 description: ''
                 nullable: true
-                type: string
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/AwardCriteria'
                 #codelist: awardCriteria.csv
                 #openCodelist: true
-              releaseTag:
-                type: array
-                items:
-                  type: string
         awardCriteriaDetails:
           $ref: '#/components/schemas/StringNullVersioned'
         submissionMethod:
@@ -302,15 +257,10 @@ components:
               value:
                 description: ''
                 nullable: true
-                type: array
-                items:
-                  type: string
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/SubmissionMethod'
                 #codelist: submissionMethod.csv
                 #openCodelist: true
-              releaseTag:
-                type: array
-                items:
-                  type: string
         submissionMethodDetails:
           $ref: '#/components/schemas/StringNullVersioned'
         tenderPeriod:
@@ -328,10 +278,6 @@ components:
                 description: ''
                 nullable: true
                 type: boolean
-              releaseTag:
-                type: array
-                items:
-                  type: string
         eligibilityCriteria:
           $ref: '#/components/schemas/StringNullVersioned'
         awardPeriod:
@@ -349,10 +295,6 @@ components:
                 description: ''
                 nullable: true
                 type: integer
-              releaseTag:
-                type: array
-                items:
-                  type: string
         tenderers:
           type: array
           items:
@@ -426,17 +368,10 @@ components:
                 description: ''
                 type: string
                 nullable: true
-                enum:
-                  - pending
-                  - active
-                  - cancelled
-                  - unsuccessful
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/AwardStatus'
                 #codelist: awardStatus.csv
                 #openCodelist: false
-              releaseTag:
-                type: array
-                items:
-                  type: string
         date:
           $ref: '#/components/schemas/StringNullDateTimeVersioned'
         value:
@@ -503,10 +438,7 @@ components:
                   - type: string
                   - type: integer
                 minLength: 1
-              releaseTag:
-                type: array
-                items:
-                  type: string
+
         title:
           $ref: '#/components/schemas/StringNullVersioned'
         description:
@@ -520,19 +452,12 @@ components:
             properties:
               value:
                 description: ''
-                type: string
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ContractStatus'
                 nullable: true
-                enum:
-                  - pending
-                  - active
-                  - cancelled
-                  - terminated
                 #codelist: contractStatus.csv
                 #openCodelist: false
-              releaseTag:
-                type: array
-                items:
-                  type: string
+              
         period:
           $ref: '#/components/schemas/Period'
         value:
@@ -620,13 +545,10 @@ components:
               value:
                 description: ''
                 nullable: true
-                type: string
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/MilestoneType'
                 #codelist: milestoneType.csv
                 #openCodelist: true
-              releaseTag:
-                type: array
-                items:
-                  type: string
         description:
           $ref: '#/components/schemas/StringNullVersioned'
         code:
@@ -646,19 +568,11 @@ components:
             properties:
               value:
                 description: ''
-                type: string
                 nullable: true
-                enum:
-                  - scheduled
-                  - met
-                  - notMet
-                  - partiallyMet
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/MilestoneStatus'
                 #codelist: milestoneStatus.csv
                 #openCodelist: false
-              releaseTag:
-                type: array
-                items:
-                  type: string
         documents:
           type: array
           deprecated: true
@@ -697,13 +611,10 @@ components:
               value:
                 description: ''
                 nullable: true
-                type: string
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/DocumentType'
                 #codelist: documentType.csv
                 #openCodelist: true
-              releaseTag:
-                type: array
-                items:
-                  type: string
         title:
           $ref: '#/components/schemas/StringNullVersioned'
         description:
@@ -744,10 +655,6 @@ components:
                 oneOf:
                   - type: string
                   - type: integer
-              releaseTag:
-                type: array
-                items:
-                  type: string
         description:
           $ref: '#/components/schemas/StringNullVersioned'
         amount:
@@ -755,24 +662,17 @@ components:
         project:
           $ref: '#/components/schemas/StringNullVersioned'
         projectID:
+          allOf:
+            - $ref: '#/components/schemas/VersionFields'
           type: array
           items:
             type: object
             properties:
-              releaseDate:
-                format: date-time
-                type: string
-              releaseID: 
-                type: string
               value:
                 nullable: true
                 oneOf:
                   - type: string
                   - type: integer
-              releaseTag:
-                type: array
-                items:
-                  type: string
         uri:
           $ref: '#/components/schemas/StringNullUriVersioned'
         source:
@@ -789,10 +689,7 @@ components:
                   #deprecatedVersion: '1.1'
                 description: 'The budget data source field was intended to link to machine-readable data about the budget for a contracting process, but has been widely mis-used to provide free-text descriptions of budget providers. As a result, it has been removed from version 1.1. budget/uri can be used to provide a link to machine-readable budget information, and budget/description can be used to provide human-readable information on the budget source.'
                 format: uri
-              releaseTag:
-                type: array
-                items:
-                  type: string
+
       #patternProperties:
       #  '^(source_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
       #    type:
@@ -859,10 +756,6 @@ components:
                 nullable: true
                 type: string
                 minLength: 1
-              releaseTag:
-                type: array
-                items:
-                  type: string
         id:
           oneOf:
             - type: string
@@ -942,15 +835,11 @@ components:
               value:
                 description: ''
                 nullable: true
-                type: array
-                items:
-                  type: string
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/PartyRoles'
                 #codelist: partyRole.csv
                 #openCodelist: true
-              releaseTag:
-                type: array
-                items:
-                  type: string
+
         details:
           allOf:
             - $ref: '#/components/schemas/VersionFields'
@@ -962,10 +851,6 @@ components:
                 description: ''
                 nullable: true
                 type: object
-              releaseTag:
-                type: array
-                items:
-                  type: string
       #patternProperties:
       #  '^(name_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
       #    type:
@@ -1013,10 +898,7 @@ components:
                 description: ''
                 nullable: true
                 type: number
-              releaseTag:
-                type: array
-                items:
-                  type: string
+
         unit:
           type: object
           properties:
@@ -1111,13 +993,10 @@ components:
               value:
                 description: ''
                 nullable: true
-                type: string
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ItemClassification'
                 #codelist: itemClassificationScheme.csv
                 #openCodelist: true
-              releaseTag:
-                type: array
-                items:
-                  type: string
         id:
           allOf:
             - $ref: '#/components/schemas/VersionFields'
@@ -1131,10 +1010,6 @@ components:
                 oneOf:
                   - type: string
                   - type: integer
-              releaseTag:
-                type: array
-                items:
-                  type: string
         description:
           $ref: '#/components/schemas/StringNullVersioned'
         uri:
@@ -1162,10 +1037,6 @@ components:
                 oneOf:
                   - type: string
                   - type: integer
-              releaseTag:
-                type: array
-                items:
-                  type: string
         legalName:
           $ref: '#/components/schemas/StringNullVersioned'
         uri:
@@ -1228,10 +1099,7 @@ components:
                 description: ''
                 nullable: true
                 type: number
-              releaseTag:
-                type: array
-                items:
-                  type: string
+
         currency:
           allOf:
             - $ref: '#/components/schemas/VersionFields'
@@ -1242,317 +1110,10 @@ components:
               value:
                 description: ''
                 nullable: true
-                type: string
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/Currency'
                 #codelist: currency.csv
                 #openCodelist: false
-                enum:
-                  - ADP
-                  - AED
-                  - AFA
-                  - AFN
-                  - ALK
-                  - ALL
-                  - AMD
-                  - ANG
-                  - AOA
-                  - AOK
-                  - AON
-                  - AOR
-                  - ARA
-                  - ARP
-                  - ARS
-                  - ARY
-                  - ATS
-                  - AUD
-                  - AWG
-                  - AYM
-                  - AZM
-                  - AZN
-                  - BAD
-                  - BAM
-                  - BBD
-                  - BDT
-                  - BEC
-                  - BEF
-                  - BEL
-                  - BGJ
-                  - BGK
-                  - BGL
-                  - BGN
-                  - BHD
-                  - BIF
-                  - BMD
-                  - BND
-                  - BOB
-                  - BOP
-                  - BOV
-                  - BRB
-                  - BRC
-                  - BRE
-                  - BRL
-                  - BRN
-                  - BRR
-                  - BSD
-                  - BTN
-                  - BUK
-                  - BWP
-                  - BYB
-                  - BYN
-                  - BYR
-                  - BZD
-                  - CAD
-                  - CDF
-                  - CHC
-                  - CHE
-                  - CHF
-                  - CHW
-                  - CLF
-                  - CLP
-                  - CNY
-                  - COP
-                  - COU
-                  - CRC
-                  - CSD
-                  - CSJ
-                  - CSK
-                  - CUC
-                  - CUP
-                  - CVE
-                  - CYP
-                  - CZK
-                  - DDM
-                  - DEM
-                  - DJF
-                  - DKK
-                  - DOP
-                  - DZD
-                  - ECS
-                  - ECV
-                  - EEK
-                  - EGP
-                  - ERN
-                  - ESA
-                  - ESB
-                  - ESP
-                  - ETB
-                  - EUR
-                  - FIM
-                  - FJD
-                  - FKP
-                  - FRF
-                  - GBP
-                  - GEK
-                  - GEL
-                  - GHC
-                  - GHP
-                  - GHS
-                  - GIP
-                  - GMD
-                  - GNE
-                  - GNF
-                  - GNS
-                  - GQE
-                  - GRD
-                  - GTQ
-                  - GWE
-                  - GWP
-                  - GYD
-                  - HKD
-                  - HNL
-                  - HRD
-                  - HRK
-                  - HTG
-                  - HUF
-                  - IDR
-                  - IEP
-                  - ILP
-                  - ILR
-                  - ILS
-                  - INR
-                  - IQD
-                  - IRR
-                  - ISJ
-                  - ISK
-                  - ITL
-                  - JMD
-                  - JOD
-                  - JPY
-                  - KES
-                  - KGS
-                  - KHR
-                  - KMF
-                  - KPW
-                  - KRW
-                  - KWD
-                  - KYD
-                  - KZT
-                  - LAJ
-                  - LAK
-                  - LBP
-                  - LKR
-                  - LRD
-                  - LSL
-                  - LSM
-                  - LTL
-                  - LTT
-                  - LUC
-                  - LUF
-                  - LUL
-                  - LVL
-                  - LVR
-                  - LYD
-                  - MAD
-                  - MDL
-                  - MGA
-                  - MGF
-                  - MKD
-                  - MLF
-                  - MMK
-                  - MNT
-                  - MOP
-                  - MRO
-                  - MRU
-                  - MTL
-                  - MTP
-                  - MUR
-                  - MVQ
-                  - MVR
-                  - MWK
-                  - MXN
-                  - MXP
-                  - MXV
-                  - MYR
-                  - MZE
-                  - MZM
-                  - MZN
-                  - NAD
-                  - NGN
-                  - NIC
-                  - NIO
-                  - NLG
-                  - NOK
-                  - NPR
-                  - NZD
-                  - OMR
-                  - PAB
-                  - PEH
-                  - PEI
-                  - PEN
-                  - PES
-                  - PGK
-                  - PHP
-                  - PKR
-                  - PLN
-                  - PLZ
-                  - PTE
-                  - PYG
-                  - QAR
-                  - RHD
-                  - ROK
-                  - ROL
-                  - RON
-                  - RSD
-                  - RUB
-                  - RUR
-                  - RWF
-                  - SAR
-                  - SBD
-                  - SCR
-                  - SDD
-                  - SDG
-                  - SDP
-                  - SEK
-                  - SGD
-                  - SHP
-                  - SIT
-                  - SKK
-                  - SLL
-                  - SOS
-                  - SRD
-                  - SRG
-                  - SSP
-                  - STD
-                  - STN
-                  - SUR
-                  - SVC
-                  - SYP
-                  - SZL
-                  - THB
-                  - TJR
-                  - TJS
-                  - TMM
-                  - TMT
-                  - TND
-                  - TOP
-                  - TPE
-                  - TRL
-                  - TRY
-                  - TTD
-                  - TWD
-                  - TZS
-                  - UAH
-                  - UAK
-                  - UGS
-                  - UGW
-                  - UGX
-                  - USD
-                  - USN
-                  - USS
-                  - UYI
-                  - UYN
-                  - UYP
-                  - UYU
-                  - UYW
-                  - UZS
-                  - VEB
-                  - VEF
-                  - VES
-                  - VNC
-                  - VND
-                  - VUV
-                  - WST
-                  - XAF
-                  - XAG
-                  - XAU
-                  - XBA
-                  - XBB
-                  - XBC
-                  - XBD
-                  - XCD
-                  - XDR
-                  - XEU
-                  - XFO
-                  - XFU
-                  - XOF
-                  - XPD
-                  - XPF
-                  - XPT
-                  - XRE
-                  - XSU
-                  - XTS
-                  - XUA
-                  - XXX
-                  - YDD
-                  - YER
-                  - YUD
-                  - YUM
-                  - YUN
-                  - ZAL
-                  - ZAR
-                  - ZMK
-                  - ZMW
-                  - ZRN
-                  - ZRZ
-                  - ZWC
-                  - ZWD
-                  - ZWL
-                  - ZWN
-                  - ZWR
-                  - null
-              releaseTag:
-                type: array
-                items:
-                  type: string
     Period:
       type: object
       properties:
@@ -1573,10 +1134,7 @@ components:
                 description: ''
                 nullable: true
                 type: integer
-              releaseTag:
-                type: array
-                items:
-                  type: string
+
     RelatedProcess:
       type: object
       properties:
@@ -1592,15 +1150,11 @@ components:
               value:
                 description: ''
                 nullable: true
-                type: array
-                items:
-                  type: string
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/RelatedProcess'
                 #codelist: relatedProcess.csv
                 #openCodelist: true
-              releaseTag:
-                type: array
-                items:
-                  type: string
+
         title:
           $ref: '#/components/schemas/StringNullVersioned'
         scheme:
@@ -1613,13 +1167,11 @@ components:
               value:
                 description: ''
                 nullable: true
-                type: string
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/RelatedProcessScheme'
                 #codelist: relatedProcessScheme.csv
                 #openCodelist: true
-              releaseTag:
-                type: array
-                items:
-                  type: string
+
         identifier:
           $ref: '#/components/schemas/StringNullVersioned'
         uri:
@@ -1720,10 +1272,7 @@ components:
                 nullable: true
                 type: string
                 minLength: 1
-              releaseTag:
-                type: array
-                items:
-                  type: string
+
         id:
           allOf:
             - $ref: '#/components/schemas/VersionFields'
@@ -1736,10 +1285,7 @@ components:
                 oneOf:
                   - type: string
                   - type: integer
-              releaseTag:
-                type: array
-                items:
-                  type: string
+
         identifier:
           deprecated: true
             #deprecatedVersion: '1.1'
@@ -1765,10 +1311,7 @@ components:
                 items:
                   $ref: '#/components/schemas/IdentifierUnversioned'
                 uniqueItems: true
-              releaseTag:
-                type: array
-                items:
-                  type: string
+              
         contactPoint:
           deprecated: true
             #deprecatedVersion: '1.1'
