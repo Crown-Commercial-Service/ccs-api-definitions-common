@@ -27,20 +27,6 @@ paths:
           
 components:
   schemas:
-    TerminationType:
-      title: RFx Termination Types
-      description: >-
-        Subset of the codes in [tenderStatus](https://standard.open-contracting.org/1.1/en/schema/codelists/#tender-status) codelist.
-        This subset are those used to terminate an RFx.
-      type: object
-      properties:
-        terminationType:
-          type: string
-          enum:
-            - cancelled
-            - unsuccessful
-            - complete
-            - withdrawn.
             
     ProcurementMethod:
       title: Procurement Methods
@@ -224,7 +210,7 @@ components:
         #  openCodelist: true
     
     MilestoneStatus:
-      title: Status
+      title: Milestone Status
       description: 'The status that was realized on the date provided in `dateModified`, from the closed [milestoneStatus](https://standard.open-contracting.org/latest/en/schema/codelists/#milestone-status) codelist.'
       type: string
       nullable: true
@@ -314,7 +300,7 @@ components:
           # openCodelist: true
           
     UnitClassificationScheme:
-      title: Scheme
+      title: Unit Classification Scheme
       description: 'The list from which identifiers for units of measure are taken, using the open [unitClassificationScheme](https://standard.open-contracting.org/latest/en/schema/codelists/#unit-classification-scheme) codelist. ''UNCEFACT'' is recommended.'
       nullable: true
       type: string
@@ -325,7 +311,7 @@ components:
         #   openCodelist: true
         
     UnitID:
-      title: ID
+      title: Unit Classification
       description: 'The identifier from the codelist referenced in the `scheme` field. Check the [unitClassificationScheme](https://standard.open-contracting.org/latest/en/schema/codelists/#unit-classification-scheme) codelist for details of how to find and use identifiers from the scheme in use.'
       nullable: true
       oneOf:
@@ -350,13 +336,13 @@ components:
         - UnefactID2
           
     OrganizationScheme:
-      title: Scheme
+      title: Organisation Scheme
       description: 'Organization identifiers should be taken from an existing organization identifier list. The scheme field is used to indicate the list or register from which the identifier is taken. This value should be taken from the [Organization Identifier Scheme](https://standard.open-contracting.org/latest/en/schema/codelists/#organization-identifier-scheme) codelist.'
       type: string
       nullable: true
     
     ItemClassification:
-      title: Scheme
+      title: Item Classification Scheme
       description: 'The scheme or codelist from which the classification code is taken. For line item classifications, this uses the open [itemClassificationScheme](https://standard.open-contracting.org/latest/en/schema/codelists/#item-classification-scheme) codelist.'
       type: string
       nullable: true
@@ -394,7 +380,7 @@ components:
           #openCodelist: true
             
     RelatedProcessScheme:       
-      title: Scheme
+      title: Related Process Scheme
       description: 'The identification scheme used by this cross-reference, using the open [relatedProcessScheme](https://standard.open-contracting.org/latest/en/schema/codelists/#related-process-scheme) codelist.'
       type: string
       nullable: true
@@ -914,7 +900,7 @@ components:
               - ZWR
               
     FileFormat:
-            title: Format
+            title: File Format
             description: >-
               The format of the document, using the open [IANA Media
               Types](http://www.iana.org/assignments/media-types/) codelist (see the values in the 'Template' column), or using the 'offline/print' code if the described document is published offline. For example, web pages have a format of 'text/html'.
