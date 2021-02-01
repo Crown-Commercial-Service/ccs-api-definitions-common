@@ -1,0 +1,56 @@
+openapi: 3.0.0
+
+info:
+  title: Sample API
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 0.1.9
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+
+paths:
+
+#id: 'https://standard.open-contracting.org/schema/1__1__5/record-package-schema.json'
+#$schema: 'http://json-schema.org/draft-04/schema#'
+
+  /ocds/Tender:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.Tender   
+      parameters:
+      - in: query
+        name: "OCIDn"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Tender'
+                  - $ref: '#/components/schemas/Tender'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
+
+
+ 
+components:
+  schemas:
+    Tender:
+      properties:
+        competitive:
+          title: Is the framework agreement call-off competitive?
+          description: A true/false field to indicate whether this call-off is competitive or not.
+          nullable: true
+          type: boolean
