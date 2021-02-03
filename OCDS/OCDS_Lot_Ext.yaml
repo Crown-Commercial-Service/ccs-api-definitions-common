@@ -21,7 +21,7 @@ paths:
       operationId: OCDS.Tender   
       parameters:
       - in: query
-        name: "OCIDn"
+        name: "OCID"
         schema:
           type: string
         example: "dd/mm/yy:hh:mm:ss"

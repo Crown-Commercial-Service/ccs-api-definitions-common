@@ -123,6 +123,7 @@ components:
                 type: string
                 example: Gateway Error
                 default: Gateway Error
+                
   503ServiceUnavailable:
       description: Bad Gateway. The server received an invalid response or backend is not ready to handle requests. Repeat request for repeatable operations or check object data with interval 1-5 min.
       content:
