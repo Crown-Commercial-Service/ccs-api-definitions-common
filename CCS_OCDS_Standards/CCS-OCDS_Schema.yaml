@@ -273,8 +273,6 @@ components:
         compiledRelease:
           allOf:
             - $ref: '#/components/schemas/Release'
-        #versionesRelease:
-        #  $ref: '#/components/schemas/VersionedRelease'
             
   
           
@@ -409,9 +407,9 @@ components:
       allOf:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Tender'
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Tender'
-        #-  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Enquiries_Ext.yaml#/components/schemas/Tender'
-        #-  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Tender'
-        #-  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_SelectionCriteria_Ext.yaml#/components/schemas/Tender'
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Enquiries_Ext.yaml#/components/schemas/Tender'
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Tender'
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_SelectionCriteria_Ext.yaml#/components/schemas/Tender'
       title: Tender
       type: object
       properties:  
