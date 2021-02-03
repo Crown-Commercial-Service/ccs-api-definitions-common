@@ -1,0 +1,147 @@
+openapi: 3.0.0
+
+info:
+  title: Sample API
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 0.1.9
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+
+paths:
+
+#id: 'https://standard.open-contracting.org/schema/1__1__5/record-package-schema.json'
+#$schema: 'http://json-schema.org/draft-04/schema#'
+
+  /ocds/Tender:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.Tender   
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Tender'
+                  - $ref: '#/components/schemas/Tender'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
+
+
+
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-package-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+
+  /ocds/Enquiry:
+    get:
+      summary: "Returns a package of releases"
+      operationId: OCDS.Document   
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Enquiry'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'  
+ 
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+         
+
+
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+  
+
+components:
+  schemas:
+    Tender:
+      properties:
+        enquiries:
+          title: Enquiries
+          nullable: true
+          type: array
+          description: 'Questions sent to the procuring entity, and the answers given'
+          items:
+            $ref: '#/components/schemas/Enquiry'
+          uniqueItems: true
+          
+    Enquiry:
+      type: object
+      title: Enquiry
+      description: 'A question related to this contracting process, generally sent during the enquiry period.'
+      properties:
+        id:
+          title: Identifier
+          description: A unique identifier for the enquiry.
+          nullable: true
+          type: string
+        date:
+          nullable: true
+          type: string
+          title: Date
+          description: The date the enquiry was received or processed.
+          format: date-time
+        author:
+          title: Question author
+          description: 'The party asking this question. The corresponding entry in the `parties` array should have ''enquirer'' in its `roles` array. Procurement policies vary on whether or not the identity of those asking questions is disclosed, or at which stage this information is disclosed.'
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/OrganizationReference'
+        title:
+          title: Question title
+          description: The subject line of the question.
+          nullable: true
+          type: string
+        description:
+          title: Description
+          description: The body of the question.
+          nullable: true
+          type: string
+        answer:
+          title: Answer
+          description: 'The answer to this question, when available.'
+          nullable: true
+          type: string
+        dateAnswered:
+          title: Date answered
+          description: The date the answer to the question was provided.
+          nullable: true
+          type: string
+          format: date-time
+        relatedItem:
+          title: Related item
+          description: 'If this question relates to a specific line-item, this field contains the line-item identifier.'
+          nullable: true
+          type: string
+        relatedLot:
+          title: Related lot
+          description: 'Where lots are used, if this question relates to a specific lot, this field contains the lot identifier.'
+          nullable: true
+          type: string
+        threadID:
+          title: Thread identifier
+          description: If this question and answer forms part of a discussion thread (e.g. the question is a follow-up to a previous answer) a thread identifier can be used to associate multiple enquiries.
+          nullable: true
+          type: string

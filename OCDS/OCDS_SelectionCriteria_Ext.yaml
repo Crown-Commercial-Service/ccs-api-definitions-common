@@ -1,0 +1,204 @@
+openapi: 3.0.0
+
+info:
+  title: Sample API
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 0.1.9
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+
+paths:
+
+#id: 'https://standard.open-contracting.org/schema/1__1__5/record-package-schema.json'
+#$schema: 'http://json-schema.org/draft-04/schema#'
+
+  /ocds/Tender:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.Tender   
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Tender'
+                  - $ref: '#/components/schemas/Tender'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
+
+
+
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-package-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+
+  /ocds/Lot:
+    get:
+      summary: "Returns a package of releases"
+      operationId: OCDS.Lot   
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Lot'
+                  - $ref: '#/components/schemas/Lot'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'  
+ 
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+         
+  /ocds/SelectionCriteria:
+    get:
+      summary: "Returns the requested record with supplied OCID"
+      operationId: OCDS.SelectionCriteria
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/SelectionCriteria'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'
+          
+  /ocds/SelectionCriterion:
+    get:
+      summary: "Returns the requested record with supplied OCID"
+      operationId: OCDS.SelectionCriterion
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/SelectionCriterion'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'  
+          
+
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+  
+
+components:
+  schemas:
+    Tender:
+      properties:
+        selectionCriteria:
+          title: Selection criteria
+          description: Information about the conditions for participation in a procedure.
+          allOf:
+            - $ref: '#/components/schemas/SelectionCriteria'
+          
+    Lot:
+      properties:
+        selectionCriteria:
+          title: Selection criteria
+          description: Information about the conditions for participation in a lot.
+          allOf:
+            - $ref: '#/components/schemas/SelectionCriteria'
+          
+          
+    SelectionCriteria:
+      title: Selection criteria
+      description: Information about conditions for participation.
+      type: object
+      properties:
+        criteria:
+          title: Selection criteria
+          description: The selection criteria.
+          type: array
+          items:
+            $ref: '#/components/schemas/SelectionCriterion'
+          #wholeListMerge: true
+          uniqueItems: true
+          minItems: 1
+        description:
+          title: Description
+          description: The description of the criteria used to select the economic operators who will be allowed to bid.
+          nullable: true
+          type: string
+      minProperties: 1
+      
+      
+    SelectionCriterion:
+      title: Selection criterion
+      description: Information about the selection criterion.
+      type: object
+      properties:
+        type:
+          title: Type
+          description: The type of the criterion.
+          nullable: true
+          type: string
+          enum:
+            - technical
+            - economic
+            - suitability
+            - other
+            - null
+          #codelist: selectionCriterionType.csv
+          #openCodelist: false
+        description:
+          title: Description
+          description: The description of the criterion.
+          nullable: true
+          type: string
+          minLength: 1
+        minimum:
+          title: Minimum value or level
+          description: The minimum value or level of compliance a candidate needs to meet in order to participate.
+          nullable: true
+          type: string
+          minLength: 1
+      minProperties: 1
