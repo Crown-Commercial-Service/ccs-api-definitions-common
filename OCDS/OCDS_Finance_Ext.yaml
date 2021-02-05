@@ -1,0 +1,249 @@
+openapi: 3.0.0
+
+info:
+  title: Sample API
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 0.1.9
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+
+paths:
+
+#id: 'https://standard.open-contracting.org/schema/1__1__5/record-package-schema.json'
+#$schema: 'http://json-schema.org/draft-04/schema#'
+
+  /ocds/Contract:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.Tender   
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Contract'
+                  - $ref: '#/components/schemas/Contract'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
+
+
+
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-package-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+
+  /ocds/Budget:
+    get:
+      summary: "Returns a package of releases"
+      operationId: OCDS.Budget   
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Budget'
+                  - $ref: '#/components/schemas/Budget'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'  
+ 
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+         
+  
+          
+  
+          
+  /ocds/Finance:
+    get:
+      summary: "Returns the requested record with supplied OCID"
+      operationId: OCDS.Finance
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Finance'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'  
+          
+
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+  
+
+components:
+  schemas:
+    Contract:
+      properties:
+        finance:
+          title: Finance
+          description: An array with details of each source of finance arranged for this contract.
+          type: array
+          items:
+            $ref: '#/components/schemas/Finance'
+          uniqueItems: true
+          minItems: 1
+          
+    Budget:
+      properties:
+        finance:
+          title: Finance
+          description: An array with details of each source of finance planned for this procedure.
+          type: array
+          items:
+            $ref: '#/components/schemas/Finance'
+          uniqueItems: true
+          minItems: 1
+          
+          
+    Finance:
+      title: Financing arrangements
+      description: 'This block can be used to model details of each of the parties financing a contract or project. Note: If the finance is syndicated, and all the parties to the syndication are known, this section may be further extended with an array of syndicate partners. No schema for this is currently provided.'
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          title: ID
+          description: An identifier for this financing arrangement.
+          type: string
+          minLength: 1
+        title:
+          title: Title
+          description: A short title for this financing arrangement.
+          nullable: true
+          type: string
+          minLength: 1
+        description:
+          title: Description
+          description: 'A short description of this financing arrangement. This may include details of lender rights, step in arrangements, exchange rate guarantees, and for syndicated loans, details of syndication and any banks who are known parties to the loan.'
+          type: string
+          minLength: 1
+        financingParty:
+          title: Financing party
+          description: The party providing this financing arrangement.
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/OrganizationReference'
+        financeType:
+          title: Finance type
+          description: The type of finance arranged.
+          nullable: true
+          type: string
+          #codelist: financeType.csv
+          #openCodelist: false
+          enum:
+            - institutional
+            - commercial
+            - bilateral
+            - multilateral
+            - publicBondIssue
+            - supplierCredit
+            - other
+            - null
+        financeCategory:
+          title: Finance category
+          description: The nature of the finance. This information can be used when determining the order of preference for investors to get their money back in cases of liquidation.
+          nullable: true
+          type: string
+          #codelist: financeCategory.csv
+          #openCodelist: false
+          enum:
+            - equity
+            - seniorDebt
+            - mezzanineDebt
+            - grant
+            - guarantee
+            - other
+            - null
+        value:
+          title: Value
+          description: The total value of this finance.
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Value'
+        period:
+          title: Finance period
+          description: What period is covered by this finance.
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Period'
+        interestRate:
+          type: object
+          title: Interest rate
+          description: The interest rate associated with this finance.
+          properties:
+            base:
+              title: Base
+              description: 'The variable to which an additional margin amount is added to get the Interest amount. This can be specified as a fixed number, as a known variable (e.g. LIBOR or LIBOR+1%), or can be omitted if margin specifies the entire interest rate.'
+              nullable: true
+              oneOf:
+                - type: string
+                - type: number
+              minLength: 1
+            margin:
+              title: Margin
+              description: The variable added to the base to give the Interest amount expressed as a decimal fraction (e.g. 12.5% = 0.125).
+              nullable: true
+              type: number
+            fixed:
+              title: Fixed rate
+              description: 'A boolean field. If this interest rate of fixed, set to true. Otherwise, set to false.'
+              nullable: true
+              type: boolean
+            notes:
+              title: Notes
+              description: Any explanatory notes concerning the interest rate.
+              nullable: true
+              type: string
+              minLength: 1
+          minProperties: 1
+        repaymentFrequency:
+          type: number
+          title: Repayment frequency (days)
+          description: 'What is the average repayment frequency (in days) for this source of finance. For example, for yearly, use 365; for monthly repayment use 30.4; for daily use 1. User interfaces may wish to translate this into a more user-friendly presentation, such as ''daily'',''monthly'' or ''yearly''.'
+          minimum: 0
+        stepInRights:
+          title: Step in rights
+          description: 'Does provision of this finance confer any step in rights on the financing party? Step in rights are the lender''s option to assume certain contractual responsibilities of a project party through managing their contract in cases when that party is not meeting its obligations under such a contract. This is a true/false field to indicate when step in rights exist. If there are step in rights, details should be provided in the description field, and in additional contract documents.'
+          nullable: true
+          type: boolean
+        exchangeRateGuarantee:
+          title: Exchange rate guarantees
+          description: 'Is there an associated exchange rate guarantee with this source of finance. This is a true/false field to indicate when exchange rate guarantees exist. Details of any guarantees can be provided in the finance description, or in associated documents.'
+          nullable: true
+          type: boolean
+      minProperties: 1
