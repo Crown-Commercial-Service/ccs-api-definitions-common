@@ -77,6 +77,8 @@ components:
           description: 'Information about the use of techniques, such as framework agreements, dynamic purchasing systems and electronic auctions.'
           allOf:
             - $ref: '#/components/schemas/Techniques'
+            
+            
     Lot:
       properties:
         techniques:
@@ -84,6 +86,8 @@ components:
           description: 'Information about the use of techniques, such as framework agreements, dynamic purchasing systems and electronic auctions.'
           allOf:
             - $ref: '#/components/schemas/Techniques'
+            
+            
     Techniques:
       title: Techniques
       description: 'Information about the use of techniques, such as framework agreements, dynamic purchasing systems and electronic auctions.'
@@ -120,6 +124,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/ElectronicAuction'
       minProperties: 1
+      
+      
     FrameworkAgreement:
       title: Framework agreement
       description: Information about the framework agreement.
@@ -175,6 +181,8 @@ components:
           type: string
           minLength: 1
       minProperties: 1
+      
+      
     DynamicPurchasingSystem:
       title: Dynamic purchasing system
       description: Information about the dynamic purchasing system.
@@ -205,6 +213,8 @@ components:
             - terminated
             - null
       minProperties: 1
+      
+      
     ElectronicAuction:
       title: Electronic auction
       description: Information about the electronic auction.
