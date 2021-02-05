@@ -1016,11 +1016,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/Value'
             
+            
+                    
+# ----------------------- End Of Lot Extension -------------- 
+
+# ----------------------- Start Of Finance Selection Crieria --------------     
+            
+            
     Finance:
       allOf:
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Finance_Ext.yaml#/components/schemas/Finance'
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Finance'
         
-# ----------------------- End Of Lot Extension -------------- 
+# ----------------------- End OfFinance Extension -------------- 
 
 # ----------------------- Start Of Lot Selection Crieria --------------     
   
@@ -1079,6 +1087,8 @@ components:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/DynamicPurchasingSystem'      
 
 # ----------------------- End Of Techniques  Extension -------------- 
+
+
       
     Timestamp:
       type: string
