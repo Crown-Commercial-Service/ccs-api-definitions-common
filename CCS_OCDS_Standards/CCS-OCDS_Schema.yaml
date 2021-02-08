@@ -365,7 +365,7 @@ components:
           #codelist: method.csv
           #openCodelist: false
           allOf:
-            - $ref: '#/components/schemas/ProcurementMethods'
+            - $ref: '#/components/schemas/ProcurementMethod'
         procurementMethodDetails:
           title: Procurement method details
           description: >-
@@ -1100,7 +1100,7 @@ components:
 
     ProcurementMethod:
       allOf:
-        - ref$: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ProcurementMethod'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ProcurementMethod'
       description: >-
         Different options for procurement. There are several types-
 
@@ -1113,22 +1113,22 @@ components:
     
     ProcessStage:
       allOf:
-        - ref$: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ProcessStage'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ProcessStage'
 
           
     TenderStatus:
        allOf:
-        - ref$: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ProcessStage'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ProcessStage'
         
             
     Language:
       allOf:
-        - ref$: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/Language'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/Language'
               
     Currency:
       allOf:
-        - ref$: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/Currency'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/Currency'
               
     FileFormat:
       allOf:
-        - ref$: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/FileFormat'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/FileFormat'
