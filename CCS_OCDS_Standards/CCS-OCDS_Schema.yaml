@@ -652,7 +652,166 @@ components:
        #   '^(description_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
       #      type: string
       #      default: null
-      #    '^(project_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
+      #    '^(project_(((([A-Za-z]{2,3}(-([A-Zaopenapi: 3.0.0
+
+info:
+  title: Sample API
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 0.1.9
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+
+paths:
+
+#id: 'https://standard.open-contracting.org/schema/1__1__5/record-package-schema.json'
+#$schema: 'http://json-schema.org/draft-04/schema#'
+
+  /ocds/Item:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.Item  
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Item'
+                  - $ref: '#/components/schemas/Item'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
+          
+          
+          
+  /ocds/Location:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.Location  
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Location'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
+
+
+
+
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+  
+
+components:
+  schemas:
+    Item:
+      properties:
+        deliveryLocation:
+          title: Delivery Location
+          description: 'The location where activity related to this tender, contract or license will be delivered, or will take place.'
+          allOf:
+            - $ref: '#/components/schemas/Location'
+        deliveryAddress:
+          title: Delivery Address
+          description: 'The address to which, or where, goods or services related to this tender, contract or license will be delivered.'
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Address'
+          
+    Location:
+      type: object
+      title: Delivery Location
+      description: 'The location where activity related to this tender, contract or license will be delivered, or will take place. A location can be described by either a geometry (point location, line or polygon), or a gazetteer entry, or both.'
+      properties:
+        description:
+          title: Description
+          description: 'A name or description of this location. This might include the name(s) of the location(s), or might provide a human-readable description of the location to be covered.'
+          nullable: true
+          type: string
+        geometry:
+          type: object
+          title: Geometry
+          description: 'We follow the [GeoJSON standard](http://geojson.org/) to express basic location information, using longitude, latitude, and optional elevation values in the [WGS84](https://en.wikipedia.org/wiki/World_Geodetic_System) (EPSG:4326) projection. A point location can be identified by geocoding a delivery address. For concession licenses, or other contracts covering a polygon location which is not contained in a known gazetteer, polygon and multi-polygon can be used.'
+          properties:
+            type:
+              title: Type
+              description: 'The type of [GeoJSON Geometry Objects](http://geojson.org/geojson-spec.html#geometry-objects) being provided. To provide longitude, latitude, and optional elevation, use ''Point'', and enter an array of [longitude, latitude] or [longitude, latitude, elevation] as the value of the coordinates field: e.g. [-122.085, 37.42].'
+              nullable: true
+              type: string
+              enum:
+                - Point
+                - MultiPoint
+                - LineString
+                - MultiLineString
+                - Polygon
+                - MultiPolygon
+                - null
+              #codelist: geometryType.csv
+              #openCodelist: false
+            coordinates:
+              title: Coordinates
+              description: 'The relevant array of points, e.g. [longitude, latitude] or [longitude, latitude, elevation], or a nested array of points, for the GeoJSON geometry being described. The longitude and latitude must be expressed in decimal degrees in the WGS84 (EPSG:4326) projection.'
+              nullable: true
+              type: array
+              items:
+                oneOf:
+                  - type: number
+                  - type: array
+        gazetteer:
+          type: object
+          title: Gazetteer
+          description: Identifiers from a gazetteer (a geographical index or directory) for the location.
+          properties:
+            scheme:
+              title: Gazetteer scheme
+              description: 'The identifier of the gazetteer. The `locationGazetteers.csv` codelist provides details of services, where available, that can resolve a gazetteer entry to provide location names.'
+              nullable: true
+              type: string
+              #codelist: locationGazetteers.csv
+              #openCodelist: true
+            identifiers:
+              title: Identifiers
+              description: An array of one or more codes drawn from the gazetteer indicated by the `scheme` field.
+              nullable: true
+              type: array
+              items:
+                type: string
+        uri:
+          nullable: true
+          type: string
+          title: URI
+          description: 'A URI to a further description of the activity location. This might be a human-readable document with information on the location, or a machine-readable description of the location.'
+-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
        #     type: string
        #     default: null
        
@@ -785,6 +944,7 @@ components:
       allOf:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Item'
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Item'
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Location_Ext.yaml#/components/schemas/Item'
       type: object
       properties:
         classification:
