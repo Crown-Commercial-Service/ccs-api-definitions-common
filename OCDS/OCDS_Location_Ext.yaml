@@ -132,7 +132,7 @@ components:
               items:
                 oneOf:
                   - type: number
-                  - type: array
+                  #- type: array (Need to understand how this array is meant to fit in)
         gazetteer:
           type: object
           title: Gazetteer
