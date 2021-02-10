@@ -707,6 +707,7 @@ components:
     Organization:
       allOf:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Organization'
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Scale_Ext.yaml#/components/schemas/Organization'
       type: object
       properties:
         identifier:
