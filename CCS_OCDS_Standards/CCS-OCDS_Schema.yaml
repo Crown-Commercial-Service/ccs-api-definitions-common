@@ -408,6 +408,7 @@ components:
     Tender:
       allOf:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Tender'
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Competitive_Ext.yaml#/components/schemas/Tender'
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Tender'
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Enquiries_Ext.yaml#/components/schemas/Tender'
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Tender'
@@ -541,6 +542,7 @@ components:
     Contract:
       allOf:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Contract'
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Finance.yaml#/components/schemas/Contract'
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Contract'
        # patternProperties:
        #   '^(title_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
@@ -642,6 +644,7 @@ components:
     Budget:
       allOf:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Budget'
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Finance_Ext.yaml#/components/schemas/Document' 
       type: object
       properties:   
         amount:
@@ -915,7 +918,8 @@ components:
 
     Criterion:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Criterion'          
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Criterion'
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Selection_Ext.yaml#/components/schemas/Criterion' 
       properties:
         relatesTo:
           title: Related schema element
@@ -990,7 +994,7 @@ components:
       
     Enquiry:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Bid'
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Enquiries_Ext.yaml#/components/schemas/Enquiry'
       properties:
         author:
           allOf:
@@ -998,12 +1002,25 @@ components:
               
 # ----------------------- End Of Enquiries Extension -------------- 
 
+# ----------------------- Start Of Location Extension -------------- 
+
+          
+      
+      
+    Location:
+      allOf:
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Location_Ext.yaml#/components/schemas/Location'
+
+              
+# ----------------------- End Of Location Extension -------------- 
+
 # ----------------------- Start Of Lot Extension -------------- 
  
             
     Lot:
       allOf:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Lot'
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Selection_Ext.yaml#/components/schemas/Lot'
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/Lot'
       properties:
         value:
