@@ -598,7 +598,7 @@ components:
               - zu
               
     Currency:
-      title: Currency x
+      title: Currency
       description: >-
         CCS currency code is always GBP representing the UK from the Currency code [currency](https://standard.open-contracting.org/1.1/en/schema/codelists/#currency)
               codelist.

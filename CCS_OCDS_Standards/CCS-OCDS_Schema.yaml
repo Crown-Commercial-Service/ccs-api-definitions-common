@@ -902,7 +902,6 @@ components:
         currency:
           allOf: 
             - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OCDS_Standards/CCS-OCDS_CodeLists.yaml#/components/schemas/Currency'
-       
 
     Period:
       allOf:
