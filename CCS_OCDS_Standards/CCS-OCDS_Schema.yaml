@@ -897,11 +897,9 @@ components:
     Value:
       allOf:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Value'
-      type: object
       properties:
         currency:
-          allOf: 
-            - $ref: '#/components/schemas/Currency'
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OCDS_Standards/CCS-OCDS_Schema.yaml#/components/schemas/Currency'
 
     Period:
       allOf:
@@ -1151,14 +1149,6 @@ components:
       allOf:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/Language'
               
-    Currency:
-      title: Currency
-      description: >-
-        CCS currency code is always GBP representing the UK from the Currency code [currency](https://standard.open-contracting.org/1.1/en/schema/codelists/#currency)
-              codelist.
-      type: string
-      enum:
-        - GBP
               
     FileFormat:
       allOf:
