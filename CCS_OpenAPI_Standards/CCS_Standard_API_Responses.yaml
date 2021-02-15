@@ -31,7 +31,9 @@ components:
       content:
         application/vnd.api+json:
           schema:
-            $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/Errors'
+            type: array
+            items:
+              $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/Error'
            
   
     401Unauthorized:
@@ -39,19 +41,23 @@ components:
       content:
         application/vnd.api+json:
           schema:
+            $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/master/common/CCS_Standard_API_Schema.yaml#/components/schemas/Errors'
              properties:
               error:
                 type: string
                 example: The resource you were looking for requires L2 authentication.
                 default: No authorization. A valid API key was not provided with the request, so the API could not associate a user with the request.
-            
+           
                 
+
     403Forbidden:
       description: The API key and request syntax was valid but the server is refusing to complete the request. This can happen if you are trying to read or write to objects or properties that you do not have access to.
       content:
         application/vnd.api+json:
           schema:
             properties:
+                        schema:
+            $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/Errors'
               error:
                 type: string
                 example: You are not authorized to access this page.
@@ -144,6 +150,12 @@ components:
                 type: string
                 example: Gateway Error
                 default: Gateway Error
+                
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
                 
     503ServiceUnavailable:
       description: Bad Gateway. The server received an invalid response or backend is not ready to handle requests. Repeat request for repeatable operations or check object data with interval 1-5 min.
