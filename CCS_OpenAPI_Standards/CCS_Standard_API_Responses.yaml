@@ -89,7 +89,28 @@ components:
                 type: string
                 example: The resource you were looking has been archived
                 default: The resource you were looking has been archived
-
+                
+  422ValidationErrors:
+      description: Validation errors
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                type: string
+                example: The resource could not validate your request
+                default: The resource could not validate your request
+                
+  429TooManyRequests:
+      description: Too Many Requests
+          content:
+            application/json:
+          schema:
+            properties:
+              error:
+                type: string
+                example: The resource has recieved to many requests
+                default: The resource has recieved to many requests
                 
   500InternalServerError:
       description: An unknown server error has occurred.
