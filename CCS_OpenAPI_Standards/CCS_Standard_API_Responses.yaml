@@ -28,7 +28,7 @@ components:
             
     400InvalidRequest:
       description: Invalid request. This usually occurs because of a missing or malformed parameter. Check the documentation and the syntax of your request and try again.
-            content:
+        content:
         application/vnd.api+json:
           schema:
             allOf:
