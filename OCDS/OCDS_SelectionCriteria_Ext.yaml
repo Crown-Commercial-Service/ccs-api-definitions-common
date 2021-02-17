@@ -177,16 +177,8 @@ components:
       type: object
       properties:
         type:
-          title: Type
-          description: The type of the criterion.
-          nullable: true
-          type: string
-          enum:
-            - technical
-            - economic
-            - suitability
-            - other
-            - null
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists_Ext.yaml#/components/schemas/SelectionCriteriaType'
           #codelist: selectionCriterionType.csv
           #openCodelist: false
         description:

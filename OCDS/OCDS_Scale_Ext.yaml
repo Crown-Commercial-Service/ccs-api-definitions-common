@@ -60,17 +60,7 @@ components:
         details: 
           properties:
             scale: 
-              title: "Scale"
-              description: "The size or scale of the organization."
-              nullable: true
-              type: string
-              enum: 
-                - micro
-                - sme
-                - small
-                - medium
-                - large",
-                - selfEmployed
-   
+              allOf:
+                - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists_Ext.yaml#/components/schemas/PartyScale'
               #"codelist": "partyScale.csv",
               #"openCodelist": false

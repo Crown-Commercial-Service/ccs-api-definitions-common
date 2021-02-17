@@ -1022,7 +1022,7 @@ components:
     Lot:
       allOf:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Lot'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Selection_Ext.yaml#/components/schemas/Lot'
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_SelectionCriteria_Ext.yaml#/components/schemas/Lot'
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/Lot'
       properties:
         value:

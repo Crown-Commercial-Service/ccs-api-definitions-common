@@ -1,0 +1,461 @@
+openapi: 3.0.0
+
+info:
+  title: Sample API
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 0.1.9
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+    
+paths:
+  /ocds/Release:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.Release   
+      responses:
+        '200':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/200Success'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-scale-api-definitions/BAT_initial/common/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'  
+          
+components:
+  schemas:
+  
+    SelectionCriteriaType:        
+      title: Type
+      description: The type of the criterion.
+      nullable: true
+      type: string
+      enum:
+        - technical
+        - economic
+        - suitability
+        - other
+        #codelist: selectionCriterionType.csv
+        #openCodelist: false
+          
+    PartyScale:
+      title: "Scale"
+      description: "The size or scale of the organization."
+      nullable: true
+      type: string
+      enum: 
+        - micro
+        - sme
+        - small
+        - medium
+        - large",
+        - selfEmployed
+        - null
+        #"codelist": "partyScale.csv",
+        #"openCodelist": false
+        
+    DataType:
+      title: Requirement datatype
+      description: The data type in which the requirement response must be provided.
+      type: string
+      #codelist: dataType.csv
+      #openCodelist: false
+      enum:
+        - string
+        - date-time
+        - number
+        - integer
+        - boolean
+        - null
+        
+    ResponseSource:
+      title: Source
+      description: 'Source of response to the requirements specified in the criterion, for example responses may be submitted by tenderers or by an assessment committee at the procuringEntity.'
+      nullable: true
+      type: string
+      #codelist: responseSource.csv
+      #openCodelist: false
+      enum:
+        - tenderer
+        - buyer
+        - procuringEntity
+        - null
+        
+    RelatesTo:
+      title: Related schema element
+      description: 'The schema element that the criterion judges, evaluates or assesses. For example criterion may be defined against items or against bidders.'
+      nullable: true
+      type: string
+      #codelist: relatesTo.csv
+      #openCodelist: false
+      enum:
+        - tenderer
+        - item
+        - null
+        
+    GeometryType:
+      title: Type
+      description: 'The type of [GeoJSON Geometry Objects](http://geojson.org/geojson-spec.html#geometry-objects) being provided. To provide longitude, latitude, and optional elevation, use ''Point'', and enter an array of [longitude, latitude] or [longitude, latitude, elevation] as the value of the coordinates field: e.g. [-122.085, 37.42].'
+      nullable: true
+      type: string
+      enum:
+        - Point
+        - MultiPoint
+        - LineString
+        - MultiLineString
+        - Polygon
+        - MultiPolygon
+        - null
+        #codelist: geometryType.csv
+        #openCodelist: false
+        
+    LocationGazetteers:    
+      title: Gazetteer scheme
+      description: 'The identifier of the gazetteer. The `locationGazetteers.csv` codelist provides details of services, where available, that can resolve a gazetteer entry to provide location names.'
+      nullable: true
+      type: string
+      enum
+        - NUTS
+        - ISO2
+        - GEONAMES
+        - OSMA
+        - OSMR
+        - OSMW
+      #codelist: locationGazetteers.csv
+      #openCodelist: true
+        
+    CountryCode:
+      title: Country code
+      description: 'The country where the address is located. If you need to use a user-assigned code from ISO 3166-1 alpha-2, [create an issue](https://github.com/open-contracting/standard/issues) to discuss its addition to the `country.csv` codelist.'
+      #codelist: country.csv
+      #openCodelist: false
+      enum:
+            - AD
+            - AE
+            - AF
+            - AG
+            - AI
+            - AL
+            - AM
+            - AO
+            - AQ
+            - AR
+            - AS
+            - AT
+            - AU
+            - AW
+            - AX
+            - AZ
+            - BA
+            - BB
+            - BD
+            - BE
+            - BF
+            - BG
+            - BH
+            - BI
+            - BJ
+            - BL
+            - BM
+            - BN
+            - BO
+            - BQ
+            - BR
+            - BS
+            - BT
+            - BV
+            - BW
+            - BY
+            - BZ
+            - CA
+            - CC
+            - CD
+            - CF
+            - CG
+            - CH
+            - CI
+            - CK
+            - CL
+            - CM
+            - CN
+            - CO
+            - CR
+            - CU
+            - CV
+            - CW
+            - CX
+            - CY
+            - CZ
+            - DE
+            - DJ
+            - DK
+            - DM
+            - DO
+            - DZ
+            - EC
+            - EE
+            - EG
+            - EH
+            - ER
+            - ES
+            - ET
+            - FI
+            - FJ
+            - FK
+            - FM
+            - FO
+            - FR
+            - GA
+            - GB
+            - GD
+            - GE
+            - GF
+            - GG
+            - GH
+            - GI
+            - GL
+            - GM
+            - GN
+            - GP
+            - GQ
+            - GR
+            - GS
+            - GT
+            - GU
+            - GW
+            - GY
+            - HK
+            - HM
+            - HN
+            - HR
+            - HT
+            - HU
+            - ID
+            - IE
+            - IL
+            - IM
+            - IN
+            - IO
+            - IQ
+            - IR
+            - IS
+            - IT
+            - JE
+            - JM
+            - JO
+            - JP
+            - KE
+            - KG
+            - KH
+            - KI
+            - KM
+            - KN
+            - KP
+            - KR
+            - KW
+            - KY
+            - KZ
+            - LA
+            - LB
+            - LC
+            - LI
+            - LK
+            - LR
+            - LS
+            - LT
+            - LU
+            - LV
+            - LY
+            - MA
+            - MC
+            - MD
+            - ME
+            - MF
+            - MG
+            - MH
+            - MK
+            - ML
+            - MM
+            - MN
+            - MO
+            - MP
+            - MQ
+            - MR
+            - MS
+            - MT
+            - MU
+            - MV
+            - MW
+            - MX
+            - MY
+            - MZ
+            - NA
+            - NC
+            - NE
+            - NF
+            - NG
+            - NI
+            - NL
+            - 'NO'
+            - NP
+            - NR
+            - NU
+            - NZ
+            - OM
+            - PA
+            - PE
+            - PF
+            - PG
+            - PH
+            - PK
+            - PL
+            - PM
+            - PN
+            - PR
+            - PS
+            - PT
+            - PW
+            - PY
+            - QA
+            - RE
+            - RO
+            - RS
+            - RU
+            - RW
+            - SA
+            - SB
+            - SC
+            - SD
+            - SE
+            - SG
+            - SH
+            - SI
+            - SJ
+            - SK
+            - SL
+            - SM
+            - SN
+            - SO
+            - SR
+            - SS
+            - ST
+            - SV
+            - SX
+            - SY
+            - SZ
+            - TC
+            - TD
+            - TF
+            - TG
+            - TH
+            - TJ
+            - TK
+            - TL
+            - TM
+            - TN
+            - TO
+            - TR
+            - TT
+            - TV
+            - TW
+            - TZ
+            - UA
+            - UG
+            - UM
+            - US
+            - UY
+            - UZ
+            - VA
+            - VC
+            - VE
+            - VG
+            - VI
+            - VN
+            - VU
+            - WF
+            - WS
+            - XK
+            - YE
+            - YT
+            - ZA
+            - ZM
+            - ZW
+            
+            
+    FinanceType:
+      title: Finance type
+      description: The type of finance arranged.
+      nullable: true
+      type: string
+      #codelist: financeType.csv
+      #openCodelist: false
+      enum:
+        - institutional
+        - commercial
+        - bilateral
+        - multilateral
+        - publicBondIssue
+        - supplierCredit
+        - other
+        - null
+        
+    FinanceCategory:    
+      title: Finance category
+      description: The nature of the finance. This information can be used when determining the order of preference for investors to get their money back in cases of liquidation.
+      nullable: true
+      type: string
+      #codelist: financeCategory.csv
+      #openCodelist: false
+      enum:
+        - equity
+        - seniorDebt
+        - mezzanineDebt
+        - grant
+        - guarantee
+        - other
+        - null
+    
+    FrameworkAgreementMethod:    
+      title: Method
+      description: 'Whether contracts are awarded with, without, or both with and without the reopening of competition.'
+      nullable: true
+      type: string
+      #openCodelist: false
+      #codelist: frameworkAgreementMethod.csv
+      enum:
+        - withReopeningCompetition
+        - withoutReopeningCompetition
+        - withAndWithoutReopeningCompetition
+        - null
+        
+        
+    DynamicPurchasingSystemType:
+      title: Type
+      description: 'In the case of central purchasing bodies, whether the dynamic purchasing system can be used by buyers not listed in the contracting process.'
+      nullable: true
+      type: string
+      #openCodelist: false
+      #codelist: dynamicPurchasingSystemType.csv
+      enum:
+        - open
+        - closed
+        - null
+        
+    DynamicPurchasingSystemStatus:   
+      title: Status
+      description: The status of the dynamic purchasing system.
+      nullable: true
+      type: string
+      #openCodelist: false
+      #codelist: dynamicPurchasingSystemStatus.csv
+      enum:
+        - pending
+        - active
+        - cancelled
+        - terminated
+        - null
+
+            

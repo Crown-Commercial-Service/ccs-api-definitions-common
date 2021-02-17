@@ -330,21 +330,9 @@ components:
           nullable: true
           type: string
         status:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists_Ext.yaml#/components/schemas/PartyScale'
           title: Lot Status
-          description: The current status of the process related to this lot.
-          nullable: true
-          type: string
-          #codelist: tenderStatus.csv
-          #openCodelist: false
-          enum:
-            - planning
-            - planned
-            - active
-            - cancelled
-            - unsuccessful
-            - complete
-            - withdrawn
-            - null
         value:
           title: Lot value
           description: The maximum estimated value of this lot.

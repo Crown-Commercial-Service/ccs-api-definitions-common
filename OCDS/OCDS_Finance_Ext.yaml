@@ -161,36 +161,16 @@ components:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/OrganizationReference'
         financeType:
-          title: Finance type
-          description: The type of finance arranged.
-          nullable: true
-          type: string
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists_Ext.yaml#/components/schemas/FinanceType'
           #codelist: financeType.csv
           #openCodelist: false
-          enum:
-            - institutional
-            - commercial
-            - bilateral
-            - multilateral
-            - publicBondIssue
-            - supplierCredit
-            - other
-            - null
         financeCategory:
-          title: Finance category
-          description: The nature of the finance. This information can be used when determining the order of preference for investors to get their money back in cases of liquidation.
-          nullable: true
-          type: string
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists_Ext.yaml#/components/schemas/FinanceType'
           #codelist: financeCategory.csv
           #openCodelist: false
-          enum:
-            - equity
-            - seniorDebt
-            - mezzanineDebt
-            - grant
-            - guarantee
-            - other
-            - null
+
         value:
           title: Value
           description: The total value of this finance.

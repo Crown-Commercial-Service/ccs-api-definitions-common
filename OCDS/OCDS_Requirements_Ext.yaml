@@ -259,28 +259,12 @@ components:
           type: string
           minLength: 1
         source:
-          title: Source
-          description: 'Source of response to the requirements specified in the criterion, for example responses may be submitted by tenderers or by an assessment committee at the procuringEntity.'
-          nullable: true
-          type: string
-          #codelist: responseSource.csv
-          #openCodelist: false
-          enum:
-            - tenderer
-            - buyer
-            - procuringEntity
-            - null
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists
+            _Ext.yaml#/components/schemas/ResponseSource'
         relatesTo:
-          title: Related schema element
-          description: 'The schema element that the criterion judges, evaluates or assesses. For example criterion may be defined against items or against bidders.'
-          nullable: true
-          type: string
-          #codelist: relatesTo.csv
-          #openCodelist: false
-          enum:
-            - tenderer
-            - item
-            - null
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists_Ext.yaml#/components/schemas/ReelatesTo'
         relatedItem:
           title: Related item
           description: Where relatesTo = "item" this field must be populated with the id of the item in this tender section which the criterion relates to. Where relatesTo <> "item" this field should be omitted.
@@ -350,19 +334,8 @@ components:
           type: string
           minLength: 1
         dataType:
-          title: Requirement datatype
-          description: The data type in which the requirement response must be provided.
-          type: string
-          #codelist: dataType.csv
-          #openCodelist: false
-          enum:
-            - string
-            - date-time
-            - number
-            - integer
-            - boolean
-            - null
-
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/DataType'
         pattern:
           title: Response validation pattern
           description: A regular expression against which validate the requirement response.
