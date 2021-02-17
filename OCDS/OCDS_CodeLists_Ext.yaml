@@ -51,7 +51,7 @@ components:
         - sme
         - small
         - medium
-        - large",
+        - large
         - selfEmployed
         - null
         #"codelist": "partyScale.csv",
