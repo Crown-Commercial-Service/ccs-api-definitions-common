@@ -117,7 +117,7 @@ components:
       description: 'The identifier of the gazetteer. The `locationGazetteers.csv` codelist provides details of services, where available, that can resolve a gazetteer entry to provide location names.'
       nullable: true
       type: string
-      enum
+      enum:
         - NUTS
         - ISO2
         - GEONAMES
