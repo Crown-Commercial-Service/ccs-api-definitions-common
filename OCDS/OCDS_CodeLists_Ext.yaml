@@ -133,8 +133,8 @@ components:
       #codelist: country.csv
       #openCodelist: false
       enum:
-            - AD
-            - AE
+        - AD
+        - AE
             - AF
             - AG
             - AI
