@@ -782,6 +782,7 @@ components:
           description: "Is organisation active?"
           type: "boolean"
           example: "1" 
+          
     
           
 #           
@@ -817,15 +818,7 @@ components:
       allOf:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Classification'
         
-    Criterion:
-      allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Criterion'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Selection_Ext.yaml#/components/schemas/Criterion'
-    
-    Enquiry:
-      allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Enquiries_Ext.yaml#/components/schemas/Enquiry'
-
+        
 
          
     Identifier:
