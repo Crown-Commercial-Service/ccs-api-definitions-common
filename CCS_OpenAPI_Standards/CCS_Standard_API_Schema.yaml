@@ -140,7 +140,7 @@ components:
       allOf:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Pagination_Ext.yaml#/components/schemas/Links'
       type: object
-        properties:
+      properties:
         self:
           type: string
           format: uri
