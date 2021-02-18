@@ -86,24 +86,22 @@ components:
       #required: []
       properties:
         links:
-          type: object
-          properties:
-            next:
-              type: string
-              format: uri
-            prev:
-              type: string
-              format: uri
+          allOf:
+            - $ref: '#/components/schemas/Links'
               
     Release:
       #required: []
       properties:
         links:
-          type: object
-          properties:
-            next:
-              type: string
-              format: uri
-            prev:
-              type: string
-              format: uri
+          allOf:
+            - $ref: '#/components/schemas/Links'
+              
+    Links:
+      type: object
+      properties:
+        next:
+          type: string
+          format: uri
+        prev:
+          type: string
+          format: uri
