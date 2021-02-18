@@ -22,6 +22,8 @@ paths:
           $ref: '#/components/responses/201Success'
         '202':
           $ref: '#/components/responses/202Accepted'
+        '400':
+          $ref: '#/components/responses/401InvalidRequest'
         '401':
           $ref: '#/components/responses/401Unauthorized'
         '403':
@@ -124,6 +126,8 @@ components:
                 type: string
                 example: You are not authorized to access this page.
                 default: You are not authorized to access this page.
+                
+    
   
     404NotFound:
       description: Not found. Either the request method and path supplied do not specify a known action in the API, or the object specified by the request does not exist.
@@ -138,6 +142,20 @@ components:
                 type: string
                 example: The resource you were looking for could not be found.
                 default: The resource you were looking for could not be found.
+                
+    405MethodNotAllowed:
+      description: A request method is not supported for the requested resource; for example, a GET request on a form that requires data to be presented via POST, or a PUT request on a read-only resource.
+      content:
+        application/vnd.api+json:
+          schema:
+            allOf:
+              - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/Errors'
+            type: object
+            properties:
+              description:
+                type: string
+                example: Method Not Supported.
+                default: Method Not Supported.
                 
     409Conflict:
       description: Document update conflict. The request could not be completed due to a conflict with the current state of the target resource. Please repeat your request.
