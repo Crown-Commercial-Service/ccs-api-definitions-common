@@ -1,0 +1,3244 @@
+openapi: 3.0.1
+info:
+  title: Conclave
+  description: |
+    This is a conclave api. Insert description here...
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: "1.0.0"
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- url: https://virtserver.swaggerhub.com/conclave/conclave/1.0.0
+- url: http://virtserver.swaggerhub.com/conclave/conclave/1.0.0
+tags:
+- name: approval
+  description: Access to approvals.
+- name: document
+  description: Access to documents.
+- name: option
+  description: Access to options.
+- name: option_response
+  description: Access to option_responses.
+- name: option_translation
+  description: Access to option_translations.
+- name: question
+  description: Access to questions.
+- name: question_option
+  description: Access to question_options.
+- name: questionset
+  description: Access to questionsets.
+- name: questionset_approval
+  description: Access to questionset_approvals.
+- name: questionset_question
+  description: Access to questionset_questions.
+- name: questionset_translation
+  description: Access to questionset_translations.
+- name: response
+  description: Access to responses.
+- name: response_document
+  description: Access to response_documents.
+paths:
+  /approvals:
+    get:
+      tags:
+      - approval
+      summary: Get all approvals
+      operationId: getApprovals
+      parameters:
+      - name: sort
+        in: query
+        description: Column to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=approval_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resourse. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: Result returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/200ApiCode'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '405':
+          # description: Validation exception
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+        
+
+    post:
+      tags:
+      - approval
+      summary: Add a approval to db.
+      operationId: addApprovals
+      requestBody:
+        description: Approval object that needs to be added to the db
+        content:
+          application/json:
+            schema:
+              type: string
+              format: int64
+              example: "1"
+        required: true
+      responses:
+        "405":
+          description: Invalid input
+          content: {}
+  /approvals/{approval_id}:
+    get:
+      tags:
+      - approval
+      summary: Find approval by ID
+      description: Returns a single approval
+      operationId: getApprovalById
+      parameters:
+      - name: approval_id
+        in: path
+        description: ID of approval to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: sort
+        in: query
+        description: Column to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=approval_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resourse. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Approval'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        
+          
+        
+    put:
+      tags:
+      - approval
+      summary: Updates a approval in the db with form data
+      operationId: updateApprovalWithForm
+      parameters:
+      - name: approval_id
+        in: path
+        description: ID of approval to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: The approval to create.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Approval'
+        required: true
+      responses:
+        "201":
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/201ApiCode'
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+        '500':
+          # description: This is an unexpected server error
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'
+
+            
+    delete:
+      tags:
+      - approval
+      summary: Deletes a approval
+      operationId: deleteApproval
+      parameters:
+      - name: approval_id
+        in: path
+        description: Approval id to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Request success no content needed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/204ApiCode'                
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+               
+                
+                
+  /documents:
+    get:
+      tags:
+      - document
+      summary: Get all documents
+      operationId: getDocuments
+      parameters:
+      - name: sort
+        in: query
+        description: Column to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=document_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resourse. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: Result returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/200ApiCode'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '405':
+          # description: Validation exception
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+        
+          
+    post:
+      tags:
+      - document
+      summary: Add a document to db.
+      operationId: addDocuments
+      requestBody:
+        description: Document object that needs to be added to the db
+        content:
+          application/json:
+            schema:
+              type: string
+              format: int64
+              example: "1"
+        required: true
+      responses:
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+        
+          
+          
+  /documents/{document_id}:
+    get:
+      tags:
+      - document
+      summary: Find document by ID
+      description: Returns a single document
+      operationId: getDocumentById
+      parameters:
+      - name: document_id
+        in: path
+        description: ID of document to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: sort
+        in: query
+        description: Column to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=document_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resourse. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'                
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+
+    put:
+      tags:
+      - document
+      summary: Updates a document in the db with form data
+      operationId: updateDocumentWithForm
+      parameters:
+      - name: document_id
+        in: path
+        description: ID of document to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: The document to create.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      responses:
+        "201":
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/201ApiCode'               
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+        '500':
+          # description: This is an unexpected server error
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'
+        
+                
+    delete:
+      tags:
+      - document
+      summary: Deletes a document
+      operationId: deleteDocument
+      parameters:
+      - name: document_id
+        in: path
+        description: Document id to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Request success no content needed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/204ApiCode'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+       
+                
+  /options:
+    get:
+      tags:
+      - option
+      summary: Get all options
+      operationId: getOptions
+      parameters:
+      - name: sort
+        in: query
+        description: Column to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=option_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resourse. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: Result returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/200ApiCode'          
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '405':
+          # description: Validation exception
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+        
+          
+    post:
+      tags:
+      - option
+      summary: Add a option to db.
+      operationId: addOptions
+      requestBody:
+        description: Option object that needs to be added to the db
+        content:
+          application/json:
+            schema:
+              type: string
+              format: int64
+              example: "1"
+        required: true
+      responses:
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+        
+  /options/{option_id}:
+    get:
+      tags:
+      - option
+      summary: Find option by ID
+      description: Returns a single option
+      operationId: getOptionById
+      parameters:
+      - name: option_id
+        in: path
+        description: ID of option to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: sort
+        in: query
+        description: Column to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=option_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resourse. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Option'                
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+ 
+          
+                
+    put:
+      tags:
+      - option
+      summary: Updates a option in the db with form data
+      operationId: updateOptionWithForm
+      parameters:
+      - name: option_id
+        in: path
+        description: ID of option to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: The option to create.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Option'
+        required: true
+      responses:
+        "201":
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/201ApiCode'          
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+        '500':
+          # description: This is an unexpected server error
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'
+
+                
+                
+    delete:
+      tags:
+      - option
+      summary: Deletes a option
+      operationId: deleteOption
+      parameters:
+      - name: option_id
+        in: path
+        description: Option id to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Request success no content needed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/204ApiCode'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+ 
+  /options/{option_id}/responses:
+    get:
+      tags:
+      - option_response
+      summary: Find all responses in a option.
+      description: Returns all responses in option.
+      operationId: getOptionResponses
+      parameters:
+      - name: option_id
+        in: path
+        description: Option to get responses from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 5
+      - name: sort
+        in: query
+        description: Coloumn to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=response_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resource. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+ 
+        
+    post:
+      tags:
+      - option_response
+      summary: Add a response to a option.
+      operationId: addOptionResponse
+      parameters:
+      - name: option_id
+        in: path
+        description: Option to delete from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      requestBody:
+        description: The add response id to an option.
+        content:
+          application/json:
+            schema:
+              type: integer
+              format: int64
+              example: 3
+        required: true
+      responses:
+        "201":
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/201ApiCode'        
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+        
+        
+        
+
+  /options/{option_id}/responses/{response_id}:
+    delete:
+      tags:
+      - option_response
+      summary: Deletes a response from a option.
+      operationId: deleteOptionResponse
+      parameters:
+      - name: option_id
+        in: path
+        description: Option to delete from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      - name: response_id
+        in: path
+        description: Response id to delete from option.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      responses:
+        "204":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/204ApiCode'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+         
+                
+  /options/{option_id}/option_translations:
+    get:
+      tags:
+      - option_option_translation
+      summary: Find all option_translations in a option.
+      description: Returns all option_translations in option.
+      operationId: getOptionOption_translations
+      parameters:
+      - name: option_id
+        in: path
+        description: Option to get option_translations from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 5
+      - name: sort
+        in: query
+        description: Coloumn to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=option_translation_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resource. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Option_translation'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+ 
+                
+    post:
+      tags:
+      - option_option_translation
+      summary: Add a option_translation to a option.
+      operationId: addOptionOption_translation
+      parameters:
+      - name: option_id
+        in: path
+        description: Option to delete from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      requestBody:
+        description: The add option_translation id to an option.
+        content:
+          application/json:
+            schema:
+              type: integer
+              format: int64
+              example: 3
+        required: true
+      responses:
+        "201":
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/201ApiCode'        
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+        
+
+  /options/{option_id}/option_translations/{option_translation_id}:
+    delete:
+      tags:
+      - option_option_translation
+      summary: Deletes a option_translation from a option.
+      operationId: deleteOptionOption_translation
+      parameters:
+      - name: option_id
+        in: path
+        description: Option to delete from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      - name: option_translation_id
+        in: path
+        description: Option_translation id to delete from option.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      responses:
+        "204":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/204ApiCode'                
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+       
+                
+                
+  /questions:
+    get:
+      tags:
+      - question
+      summary: Get all questions
+      operationId: getQuestions
+      parameters:
+      - name: sort
+        in: query
+        description: Column to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=question_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resourse. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: Result returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/200ApiCode'        
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '405':
+          # description: Validation exception
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+        
+          
+    post:
+      tags:
+      - question
+      summary: Add a question to db.
+      operationId: addQuestions
+      requestBody:
+        description: Question object that needs to be added to the db
+        content:
+          application/json:
+            schema:
+              type: string
+              format: int64
+              example: "1"
+        required: true
+      responses:
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+          
+          
+  /questions/{question_id}:
+    get:
+      tags:
+      - question
+      summary: Find question by ID
+      description: Returns a single question
+      operationId: getQuestionById
+      parameters:
+      - name: question_id
+        in: path
+        description: ID of question to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: sort
+        in: query
+        description: Column to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=question_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resourse. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Question'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+  
+  
+    put:
+      tags:
+      - question
+      summary: Updates a question in the db with form data
+      operationId: updateQuestionWithForm
+      parameters:
+      - name: question_id
+        in: path
+        description: ID of question to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: The question to create.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Question'
+        required: true
+      responses:
+        "201":
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/201ApiCode'
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+        '500':
+          # description: This is an unexpected server error
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'
+
+
+    delete:
+      tags:
+      - question
+      summary: Deletes a question
+      operationId: deleteQuestion
+      parameters:
+      - name: question_id
+        in: path
+        description: Question id to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Request success no content needed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/204ApiCode'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+  
+                
+  /questions/{question_id}/options:
+    get:
+      tags:
+      - question_option
+      summary: Find all options in a question.
+      description: Returns all options in question.
+      operationId: getQuestionOptions
+      parameters:
+      - name: question_id
+        in: path
+        description: Question to get options from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 5
+      - name: sort
+        in: query
+        description: Coloumn to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=option_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resource. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Option'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+  
+                
+    post:
+      tags:
+      - question_option
+      summary: Add a option to a question.
+      operationId: addQuestionOption
+      parameters:
+      - name: question_id
+        in: path
+        description: Question to delete from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      requestBody:
+        description: The add option id to an option.
+        content:
+          application/json:
+            schema:
+              type: integer
+              format: int64
+              example: 3
+        required: true
+      responses:
+        "201":
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/201ApiCode'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '405':
+          # description: Validation exception
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+        
+ 
+
+  /questions/{question_id}/options/{option_id}:
+    delete:
+      tags:
+      - question_option
+      summary: Deletes a option from a question.
+      operationId: deleteQuestionOption
+      parameters:
+      - name: question_id
+        in: path
+        description: Question to delete from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      - name: option_id
+        in: path
+        description: Option id to delete from question.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      responses:
+        "204":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/204ApiCode'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+           
+                
+  /questionsets:
+    get:
+      tags:
+      - questionset
+      summary: Get all questionsets
+      operationId: getQuestionsets
+      parameters:
+      - name: sort
+        in: query
+        description: Column to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=questionset_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resourse. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: Result returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/200ApiCode'      
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '405':
+          # description: Validation exception
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+          
+          
+          
+    post:
+      tags:
+      - questionset
+      summary: Add a questionset to db.
+      operationId: addQuestionsets
+      requestBody:
+        description: Questionset object that needs to be added to the db
+        content:
+          application/json:
+            schema:
+              type: string
+              format: int64
+              example: "1"
+        required: true
+      responses:          
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+            
+          
+  /questionsets/{questionset_id}:
+    get:
+      tags:
+      - questionset
+      summary: Find questionset by ID
+      description: Returns a single questionset
+      operationId: getQuestionsetById
+      parameters:
+      - name: questionset_id
+        in: path
+        description: ID of questionset to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: sort
+        in: query
+        description: Column to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=questionset_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resourse. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Questionset'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+
+                
+    put:
+      tags:
+      - questionset
+      summary: Updates a questionset in the db with form data
+      operationId: updateQuestionsetWithForm
+      parameters:
+      - name: questionset_id
+        in: path
+        description: ID of questionset to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: The questionset to create.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Questionset'
+        required: true
+      responses:
+        "201":
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/201ApiCode'
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+        '500':
+          # description: This is an unexpected server error
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'
+
+    delete:
+      tags:
+      - questionset
+      summary: Deletes a questionset
+      operationId: deleteQuestionset
+      parameters:
+      - name: questionset_id
+        in: path
+        description: Questionset id to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Request success no content needed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/204ApiCode'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+
+                
+                
+  /questionsets/{questionset_id}/approvals:
+    get:
+      tags:
+      - questionset_approval
+      summary: Find all approvals in a questionset.
+      description: Returns all approvals in questionset.
+      operationId: getQuestionsetApprovals
+      parameters:
+      - name: questionset_id
+        in: path
+        description: Questionset to get approvals from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 5
+      - name: sort
+        in: query
+        description: Coloumn to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=approval_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resource. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Approval'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+      
+                
+    post:
+      tags:
+      - questionset_approval
+      summary: Add a approval to a questionset.
+      operationId: addQuestionsetApproval
+      parameters:
+      - name: questionset_id
+        in: path
+        description: Questionset to delete from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      requestBody:
+        description: The add approval id to an option.
+        content:
+          application/json:
+            schema:
+              type: integer
+              format: int64
+              example: 3
+        required: true
+      responses:
+        "201":
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/201ApiCode'          
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+          
+
+  /questionsets/{questionset_id}/approvals/{approval_id}:
+    delete:
+      tags:
+      - questionset_approval
+      summary: Deletes a approval from a questionset.
+      operationId: deleteQuestionsetApproval
+      parameters:
+      - name: questionset_id
+        in: path
+        description: Questionset to delete from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      - name: approval_id
+        in: path
+        description: Approval id to delete from questionset.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      responses:
+        "204":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/204ApiCode'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+             
+                
+  /questionsets/{questionset_id}/questions:
+    get:
+      tags:
+      - questionset_question
+      summary: Find all questions in a questionset.
+      description: Returns all questions in questionset.
+      operationId: getQuestionsetQuestions
+      parameters:
+      - name: questionset_id
+        in: path
+        description: Questionset to get questions from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 5
+      - name: sort
+        in: query
+        description: Coloumn to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=question_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resource. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Question'                
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+                    
+    post:
+      tags:
+      - questionset_question
+      summary: Add a question to a questionset.
+      operationId: addQuestionsetQuestion
+      parameters:
+      - name: questionset_id
+        in: path
+        description: Questionset to delete from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      requestBody:
+        description: The add question id to an option.
+        content:
+          application/json:
+            schema:
+              type: integer
+              format: int64
+              example: 3
+        required: true
+      responses:
+        "201":
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/201ApiCode'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+          
+
+  /questionsets/{questionset_id}/questions/{question_id}:
+    delete:
+      tags:
+      - questionset_question
+      summary: Deletes a question from a questionset.
+      operationId: deleteQuestionsetQuestion
+      parameters:
+      - name: questionset_id
+        in: path
+        description: Questionset to delete from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      - name: question_id
+        in: path
+        description: Question id to delete from questionset.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      responses:
+        "204":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/204ApiCode'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+  
+                
+                
+  /questionsets/{questionset_id}/questionset_translations:
+    get:
+      tags:
+      - questionset_questionset_translation
+      summary: Find all questionset_translations in a questionset.
+      description: Returns all questionset_translations in questionset.
+      operationId: getQuestionsetQuestionset_translations
+      parameters:
+      - name: questionset_id
+        in: path
+        description: Questionset to get questionset_translations from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 5
+      - name: sort
+        in: query
+        description: Coloumn to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=questionset_translation_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resource. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Questionset_translation'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+  
+    post:
+      tags:
+      - questionset_questionset_translation
+      summary: Add a questionset_translation to a questionset.
+      operationId: addQuestionsetQuestionset_translation
+      parameters:
+      - name: questionset_id
+        in: path
+        description: Questionset to delete from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      requestBody:
+        description: The add questionset_translation id to an option.
+        content:
+          application/json:
+            schema:
+              type: integer
+              format: int64
+              example: 3
+        required: true
+      responses:
+        "201":
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/201ApiCode'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+          
+
+  /questionsets/{questionset_id}/questionset_translations/{questionset_translation_id}:
+    delete:
+      tags:
+      - questionset_questionset_translation
+      summary: Deletes a questionset_translation from a questionset.
+      operationId: deleteQuestionsetQuestionset_translation
+      parameters:
+      - name: questionset_id
+        in: path
+        description: Questionset to delete from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      - name: questionset_translation_id
+        in: path
+        description: Questionset_translation id to delete from questionset.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      responses:
+        "204":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/204ApiCode'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+  
+  /responses:
+    get:
+      tags:
+      - response
+      summary: Get all responses
+      operationId: getResponses
+      parameters:
+      - name: sort
+        in: query
+        description: Column to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=response_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resourse. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: Result returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/200ApiCode'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '405':
+          # description: Validation exception
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+          
+    post:
+      tags:
+      - response
+      summary: Add a response to db.
+      operationId: addResponses
+      requestBody:
+        description: Response object that needs to be added to the db
+        content:
+          application/json:
+            schema:
+              type: string
+              format: int64
+              example: "1"
+        required: true
+      responses:
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+          
+          
+  /responses/{response_id}:
+    get:
+      tags:
+      - response
+      summary: Find response by ID
+      description: Returns a single response
+      operationId: getResponseById
+      parameters:
+      - name: response_id
+        in: path
+        description: ID of response to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: sort
+        in: query
+        description: Column to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=response_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resourse. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+ 
+        
+    put:
+      tags:
+      - response
+      summary: Updates a response in the db with form data
+      operationId: updateResponseWithForm
+      parameters:
+      - name: response_id
+        in: path
+        description: ID of response to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: The response to create.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Response'
+        required: true
+      responses:
+        "201":
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/201ApiCode'
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+        '500':
+          # description: This is an unexpected server error
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'
+
+    delete:
+      tags:
+      - response
+      summary: Deletes a response
+      operationId: deleteResponse
+      parameters:
+      - name: response_id
+        in: path
+        description: Response id to delete
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Request success no content needed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/204ApiCode'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+ 
+                
+  /responses/{response_id}/documents:
+    get:
+      tags:
+      - response_document
+      summary: Find all documents in a response.
+      description: Returns all documents in response.
+      operationId: getResponseDocuments
+      parameters:
+      - name: response_id
+        in: path
+        description: Response to get documents from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 5
+      - name: sort
+        in: query
+        description: Coloumn to sort results by.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sort=user_id OR sort=validity:DESC
+          default: sort=document_id
+      - name: search
+        in: query
+        description: Term to search for in all columns of a resource. Search terms
+          should be comma separated.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: search=insurance,amount
+      - name: where
+        in: query
+        description: Return specific column that matches the where clause.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: user_id=99 OR status=DRAFT
+      - name: limit
+        in: query
+        description: Maximum number of items to return.
+        required: false
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          format: int32
+          default: 20
+      - name: offset
+        in: query
+        description: Number of items to skip before returning the results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          minimum: 0
+          type: integer
+          format: int32
+          default: 0
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+ 
+    post:
+      tags:
+      - response_document
+      summary: Add a document to a response.
+      operationId: addResponseDocument
+      parameters:
+      - name: response_id
+        in: path
+        description: Response to delete from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      requestBody:
+        description: The add document id to an option.
+        content:
+          application/json:
+            schema:
+              type: integer
+              format: int64
+              example: 3
+        required: true
+      responses:
+        "201":
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/201ApiCode'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '405':
+          # description: Invalid input
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/405MethodNotAllowed'
+          
+
+  /responses/{response_id}/documents/{document_id}:
+    delete:
+      tags:
+      - response_document
+      summary: Deletes a document from a response.
+      operationId: deleteResponseDocument
+      parameters:
+      - name: response_id
+        in: path
+        description: Response to delete from.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      - name: document_id
+        in: path
+        description: Document id to delete from response.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+          example: 1
+      responses:
+        "204":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/204ApiCode'
+        '400':
+          # description: Invalid ID supplied
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/400InvalidRequest'
+        '404':
+          # description: Resource not found
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+ 
+components:
+  schemas:
+    Approval:
+      type: object
+      properties:
+        approval_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        review_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        user_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        approved_from:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+        approved_to:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+        inserted:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+        updated:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+
+
+
+
+
+
+
+    Document:
+      type: object
+      properties:
+        document_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        uri:
+          type: string 
+          format: string
+          #example: {resource_example}
+        inserted:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+        updated:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+
+
+
+
+    Option:
+      type: object
+      properties:
+        option_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        question_type:
+          type: string 
+          format: enum
+          #example: {resource_example}
+        response_validity:
+          type: string 
+          format: string
+          #example: {resource_example}
+        inserted:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+        updated:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+
+
+
+
+
+    Option_response:
+      type: object
+      properties:
+        option_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        response_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        inserted:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+        updated:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+
+
+
+
+    Option_translation:
+      type: object
+      properties:
+        option_translation_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        option_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        language_id:
+          type: string 
+          format: string
+          #example: {resource_example}
+        prompt:
+          type: string 
+          format: string
+          #example: {resource_example}
+        label:
+          type: string 
+          format: string
+          #example: {resource_example}
+        meta_data:
+          type: string 
+          format: string
+          #example: {resource_example}
+        guidance:
+          type: string 
+          format: string
+          #example: {resource_example}
+        inserted:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+        updated:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+
+
+
+
+
+
+
+
+
+    Question:
+      type: object
+      properties:
+        question_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        reference:
+          type: string 
+          format: string
+          #example: {resource_example}
+        label:
+          type: string 
+          format: string
+          #example: {resource_example}
+        previous_revision_question_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        inserted:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+        updated:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+
+
+
+
+
+
+    Question_option:
+      type: object
+      properties:
+        question_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        option_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        inserted:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+        updated:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+
+
+
+
+    Questionset:
+      type: object
+      properties:
+        questionset_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        reference:
+          type: string 
+          format: string
+          #example: {resource_example}
+        user_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        status:
+          type: string 
+          format: enum
+          #example: {resource_example}
+        visibility:
+          type: string 
+          format: enum
+          #example: {resource_example}
+        inserted:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+        updated:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+
+
+
+
+
+
+
+    Questionset_approval:
+      type: object
+      properties:
+        questionset_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        approval_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        inserted:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+        updated:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+
+
+
+
+    Questionset_question:
+      type: object
+      properties:
+        questionset_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        question_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        position:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        inserted:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+        updated:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+
+
+
+
+
+    Questionset_translation:
+      type: object
+      properties:
+        questionset_translation_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        questionset_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        language_id:
+          type: string 
+          format: string
+          #example: {resource_example}
+        title:
+          type: string 
+          format: string
+          #example: {resource_example}
+        description:
+          type: string 
+          format: string
+          #example: {resource_example}
+        inserted:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+        updated:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+
+
+
+
+
+
+
+    Response:
+      type: object
+      properties:
+        response_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        response_value:
+          type: string 
+          format: string
+          #example: {resource_example}
+        user_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        inserted:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+        updated:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+
+
+
+
+
+    Response_document:
+      type: object
+      properties:
+        response_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        document_id:
+          type: integer 
+          format: int64
+          #example: {resource_example}
+        inserted:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+        updated:
+          type: string 
+          format: date-time
+          #example: {resource_example}
+
+
+
+
+    inline_response_200:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          example: "200"
+        message:
+          type: string
+          example: Resource returned.
+    inline_response_201:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          example: "201"
+        message:
+          type: string
+          example: Resource created.
+    inline_response_204:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          example: "204"
+        message:
+          type: string
+          example: Changes were successfully made to resource no response needed.
+    inline_response_404:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          example: "404"
+        message:
+          type: string
+          example: Resource not found
+    inline_response_500:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          example: "500"
+        message:
+          type: string
+          example: Server error
+   
+  responses:
+    "200ApiCode":
+      description: Result returned.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_200'
+    "201ApiCode":
+      description: Resource created
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_201'
+    "204ApiCode":
+      description: Request success no content needed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_204'
+    "404ApiError":
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_404'
+    "500ApiError":
+      description: This is an unexpected server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_500'
+            
+  parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip before returning the results.
+      required: false
+      style: form
+      explode: true
+      schema:
+        minimum: 0
+        type: integer
+        format: int32
+        default: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      required: false
+      style: form
+      explode: true
+      schema:
+        maximum: 100
+        minimum: 1
+        type: integer
+        format: int32
+        default: 20
+    searchParam:
+      name: search
+      in: query
+      description: Term to search for in all columns of a resourse. Search terms should
+        be comma separated.
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+        example: search=insurance,amount
+    sortParam:
+      name: sort
+      in: query
+      description: Coloumn to sort results by.
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+        example: sort=user_id OR sort=validity:DESC
+    whereParam:
+      name: where
+      in: query
+      description: Return specific column that matches the where clause.
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+        example: user_id=99 OR status=DRAFT
+    fieldsParam:
+      name: fields
+      in: query
+      description: Result will only consist of the id fields and specified fields.
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+        example: fields=question_text,question_type,updated
