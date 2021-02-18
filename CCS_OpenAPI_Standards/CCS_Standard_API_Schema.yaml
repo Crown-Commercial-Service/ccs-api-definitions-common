@@ -136,5 +136,28 @@ components:
         detail:
           type: string
           
+    Links:
+      allOf:
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Pagination_Ext.yaml#/components/schemas/Links'
+      type: object
+        properties:
+        self:
+          type: string
+          format: uri
+          description: URL to the current page of the listing
+        next:
+          description: URL to the next page of the listing
+        prev:
+          description: URL to the previous page of the listing
+        last:
+          type: string
+          format: uri
+          description: URL to the last page of the listing
+        first:
+          type: string
+          format: uri
+          description: URL to the first page of the listing
+
+          
           
 
