@@ -126,6 +126,8 @@ paths:
 components:
   schemas:
 
+    NullObject:
+      description: Always is NULL in CCS
     
     ReleasePackage:
       type: object
@@ -270,10 +272,12 @@ components:
           items:
             oneOf:
               - $ref: '#/components/schemas/LinkedRelease' 
-              - $ref: '#/components/schemas/Release'    
+              #- $ref: '#/components/schemas/Release'    
         compiledRelease:
           allOf:
             - $ref: '#/components/schemas/Release'
+        versionedRelease:
+          $ref: '#/components/schemas/NullObject'
             
   
           
