@@ -259,7 +259,7 @@ components:
     Record:
       allOf:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Record'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Pagination_Ext.yaml#/components/schemas/Record'
+        #-  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Pagination_Ext.yaml#/components/schemas/Record'
       title: OCDS Record
       properties:
         ocid:
