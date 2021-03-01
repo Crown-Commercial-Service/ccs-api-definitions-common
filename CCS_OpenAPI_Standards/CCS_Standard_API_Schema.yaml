@@ -21,6 +21,13 @@ components:
       pattern: RM[1-9]{4}
       example: RM1234
       readOnly: true
+      
+      
+    AgreementVersions:
+      type: string
+      pattern: V[1-9]{4}
+      example: V1
+      readOnly: true
 
     LotID:
       type: string

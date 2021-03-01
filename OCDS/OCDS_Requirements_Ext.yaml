@@ -1,9 +1,9 @@
 openapi: 3.0.0
 
 info:
-  title: Sample API
-  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
-  version: 0.1.9
+  title: OCDS Requirements Extension API
+  description: Adds a criteria section to the tender object and responses sections to bids, awards and contracts. Based on the EU's Core Criterion and Core Evidence Vocabulary (CCCEV).
+  version: 0.0.2
 servers:
   - url: http://api.example.com/v1
     description: Optional server description, e.g. Main (production) server

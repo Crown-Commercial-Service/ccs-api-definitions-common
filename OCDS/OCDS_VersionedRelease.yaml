@@ -1,9 +1,9 @@
 openapi: 3.0.0
 
 info:
-  title: Sample API
-  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
-  version: 0.1.9
+  title: Vanilla Versioned Release API
+  description: OCDS Versioned Release definitions which are a copy of the objects with versioning added per fields. Extentions are excluded so this is Vanilla.
+  version: 0.0.2
 servers:
   - url: http://api.example.com/v1
     description: Optional server description, e.g. Main (production) server
