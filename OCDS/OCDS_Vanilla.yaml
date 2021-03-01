@@ -340,7 +340,7 @@ components:
       #description: Information to uniquely identify the release.
       
     LinkedRelease:
-      title: Embedded release
+      title: Linked release
       type: object
       required:
         - url
