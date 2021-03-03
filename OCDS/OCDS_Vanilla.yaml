@@ -360,8 +360,7 @@ components:
         tag:
           type: array
           items:
-            allOf:
-              - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ReleaseTag'
+            $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ReleaseTag'
             description: The tags of the release. It should match the value of the `tag` field of the release. This provides additional context when reviewing a record to see what types of releases are included for this ocid.
                     
     EmbeddedRelease:
