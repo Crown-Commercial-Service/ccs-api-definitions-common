@@ -258,12 +258,10 @@ components:
         releases:
           type: array
           items:
-            oneOf:
-              - $ref: '#/components/schemas/LinkedRelease' 
+            $ref: '#/components/schemas/LinkedRelease' 
               #- $ref: '#/components/schemas/Release'    
         compiledRelease:
-          allOf:
-            - $ref: '#/components/schemas/Release'
+          $ref: '#/components/schemas/Release'
         versionedRelease:
           $ref: '#/components/schemas/NullObject'
             
@@ -295,14 +293,11 @@ components:
           items:
             $ref: '#/components/schemas/Organization'
         buyer:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationReference'
+          $ref: '#/components/schemas/OrganizationReference'
         planning:
-          allOf:
-            - $ref: '#/components/schemas/Planning'
+          $ref: '#/components/schemas/Planning'
         tender:
-          allOf:
-            - $ref: '#/components/schemas/Tender'
+          $ref: '#/components/schemas/Tender'
         awards:
           items:
             $ref: '#/components/schemas/Award'
@@ -322,8 +317,7 @@ components:
       type: object
       properties:  
         budget:
-          allOf:
-            - $ref: '#/components/schemas/Budget'
+          $ref: '#/components/schemas/Budget'
         documents:
           items:
             $ref: '#/components/schemas/Document'
@@ -404,18 +398,15 @@ components:
       type: object
       properties:  
         procuringEntity:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationReference'
+          $ref: '#/components/schemas/OrganizationReference'
         items:
           items:
             $ref: '#/components/schemas/Item'
           uniqueItems: true
         value:
-          allOf:
-            - $ref: '#/components/schemas/Value'
+          $ref: '#/components/schemas/Value'
         minValue:
-          allOf:
-            - $ref: '#/components/schemas/Value'
+          $ref: '#/components/schemas/Value'
         awardCriteria:
           description: |-
             The award criteria for the procurement, using the open
@@ -428,17 +419,13 @@ components:
             - bestValueToGovernment  
             - singleBidOnly
         tenderPeriod:
-          allOf:
-            - $ref: '#/components/schemas/Period'
+          $ref: '#/components/schemas/Period'
         enquiryPeriod:
-          allOf:
-            - $ref: '#/components/schemas/Period'
+          $ref: '#/components/schemas/Period'
         awardPeriod:
-          allOf:
-            - $ref: '#/components/schemas/Period'
+          $ref: '#/components/schemas/Period'
         contractPeriod:
-          allOf:
-            - $ref: '#/components/schemas/Period'
+          $ref: '#/components/schemas/Period'
         tenderers:
           items:
             $ref: '#/components/schemas/OrganizationReference'
@@ -453,8 +440,7 @@ components:
           items:
             $ref: '#/components/schemas/Amendment'
         amendment:
-          allOf:
-            - $ref: '#/components/schemas/Amendment'
+          $ref: '#/components/schemas/Amendment'
           description: >-
               The use of individual amendment objects has been deprecated. From OCDS
               1.1 information should be provided in the amendments array.
@@ -501,8 +487,7 @@ components:
       type: object
       properties: 
         value:
-         allOf:
-            - $ref: '#/components/schemas/Value'
+          $ref: '#/components/schemas/Value'
         suppliers:
           items:
             $ref: '#/components/schemas/OrganizationReference'
@@ -510,8 +495,7 @@ components:
           items:
             $ref: '#/components/schemas/Item'
         contractPeriod:
-          allOf:
-            - $ref: '#/components/schemas/Period'
+          $ref: '#/components/schemas/Period'
         documents:
           items:
             $ref: '#/components/schemas/Document'
@@ -519,8 +503,7 @@ components:
           items:
             $ref: '#/components/schemas/Amendment'
         amendment:
-          allOf:
-            - $ref: '#/components/schemas/Amendment'
+          $ref: '#/components/schemas/Amendment'
    
           
         
@@ -540,11 +523,9 @@ components:
       type: object
       properties:
         period:
-          allOf:
-            - $ref: '#/components/schemas/Period'
+          $ref: '#/components/schemas/Period'
         value:
-          allOf:
-            - $ref: '#/components/schemas/Value'
+          $ref: '#/components/schemas/Value'
         items:
           items:
             $ref: '#/components/schemas/Item'
@@ -564,8 +545,7 @@ components:
           items:
             $ref: '#/components/schemas/Amendment'
         amendment:
-          allOf:
-            - $ref: '#/components/schemas/Amendment'
+          $ref: '#/components/schemas/Amendment'
        
 
        
@@ -634,8 +614,7 @@ components:
       type: object
       properties:   
         amount:
-          allOf:
-            - $ref: '#/components/schemas/Value'
+          $ref: '#/components/schemas/Value'
        # patternProperties:
        #   '^(source_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
        #     type: string
@@ -654,23 +633,17 @@ components:
       type: object
       properties: 
         value:
-          allOf:
-            - $ref: '#/components/schemas/Value'
+          $ref: '#/components/schemas/Value'
         payer:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationReference'
+          $ref: '#/components/schemas/OrganizationReference'
         payee:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationReference'
+          $ref: '#/components/schemas/OrganizationReference'
         amount:
-          allOf:
-            - $ref: '#/components/schemas/Value'
+          $ref: '#/components/schemas/Value'
         providerOrganization:
-          allOf:
-            - $ref: '#/components/schemas/Identifier'
+          $ref: '#/components/schemas/Identifier'
         receiverOrganization:
-          allOf:
-            - $ref: '#/components/schemas/Identifier'
+          $ref: '#/components/schemas/Identifier'
           
             
     OrganizationReference:
@@ -679,17 +652,14 @@ components:
       type: object
       properties:  
         identifier:
-          allOf:
-            - $ref: '#/components/schemas/Identifier'
+          $ref: '#/components/schemas/Identifier'
         address:
-          allOf:
-            - $ref: '#/components/schemas/Address'
+          $ref: '#/components/schemas/Address'
         additionalIdentifiers:
           items:
             $ref: '#/components/schemas/Identifier'
         contactPoint:
-          allOf:
-            - $ref: '#/components/schemas/ContactPoint'
+          $ref: '#/components/schemas/ContactPoint'
         
         
         
@@ -700,17 +670,14 @@ components:
       type: object
       properties:
         identifier:
-          allOf:
-            - $ref: '#/components/schemas/Identifier'
+          $ref: '#/components/schemas/Identifier'
         additionalIdentifiers:
           items:
             $ref: '#/components/schemas/Identifier'
         address:
-          allOf:
-            - $ref: '#/components/schemas/Address'
+          $ref: '#/components/schemas/Address'
         contactPoint:
-          allOf:
-            - $ref: '#/components/schemas/ContactPoint'
+          $ref: '#/components/schemas/ContactPoint'
         details:
           type: object
           nullable: true
@@ -719,8 +686,7 @@ components:
               using partyDetail extensions that define particular properties and
               classification schemes.
           title: Details
-          allOf:
-            - $ref: '#/components/schemas/OrganizationDetail'
+          $ref: '#/components/schemas/OrganizationDetail'
        # patternProperties:
        #   '^(name_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
        #     type: string
@@ -735,11 +701,13 @@ components:
       - creationDate
       - countryCode
       - companyType
-      - is_sme
+      - scale
       - is_vcse
       - status
       - active
       properties:
+        scale:
+          description: The size or scale of the organization. (isSME = is(Scale=sme))
         creationDate:
           description: "Date of organisation creation"
           type: "string"
@@ -751,13 +719,9 @@ components:
         companyType:
           description: "Type of company"
           type: "string"
-          example: "Type of company"
-        is_sme:
-          description: "Is company SME (Small Medium Enterprise)?"
-          type: "boolean"
-          example: "1"          
+          example: "Type of company"        
         is_vcse:
-          description: "IS VCSE?"
+          description: "Is organisation a Voluntary, Community and Social Enterprise"
           type: "boolean"
           example: "1" 
         status:
@@ -780,8 +744,7 @@ components:
       type: object
       properties:
         classification:
-          allOf:
-            - $ref: '#/components/schemas/Classification'
+          $ref: '#/components/schemas/Classification'
         additionalClassifications:
           items:
             $ref: '#/components/schemas/Classification'
@@ -883,15 +846,14 @@ components:
     Value:
       allOf:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Value'
+      type: object
       properties:
         currency:
           $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OCDS_Standards/CCS-OCDS_CodeLists.yaml#/components/schemas/Currency'
 
     Period:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Value'
-
-
+        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Period'
             
     RelatedProcess:
       allOf:
@@ -907,19 +869,13 @@ components:
     Criterion:
       allOf:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Criterion'
-        #- $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_SelectionCriteria_Ext.yaml#/components/schemas/Criterion'
       properties:
         relatesTo:
-          title: Related schema element
           description: >-
-            'The schema element that the criterion judges, evaluates or assesses. For example criterion may be defined against items or against bidders.'
+            The schema element that the criterion judges, evaluates or assesses. For example criterion may be defined against items or against bidders.
           
-            * Tenderer - The criterion evaluates or assesses a tenderer
-            * Item - The criterion evaluates or assesses an item
-        relatedItem:
-          title: Related item
-          description: Where relatesTo = "item" this field must be populated with the id of the item in this tender section which the criterion relates to. Where relatesTo <> "item" this field should be omitted.
-          nullable: true
+              * Tenderer - The criterion evaluates or assesses a tenderer
+              * Item - The criterion evaluates or assesses an item
         requirementGroups:
           items:
             $ref: '#/components/schemas/RequirementGroup'
@@ -938,9 +894,14 @@ components:
       allOf:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Requirement'
       properties:
+        expectedValue:
+          $ref: '#/components/schemas/Value'
+        minValue:
+          $ref: '#/components/schemas/Value'
+        maxValue:
+          $ref: '#/components/schemas/Value'
         period:
-          allOf:
-            - $ref: '#/components/schemas/Period'
+          $ref: '#/components/schemas/Period'
       minProperties: 1
       
       
@@ -948,15 +909,14 @@ components:
       allOf:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/RequirementResponse'
       properties:
+        value:
+          $ref: '#/components/schemas/Value'
         period:
-          allOf:
-            - $ref: '#/components/schemas/Period'
+          $ref: '#/components/schemas/Period'
         requirement:
-          allOf:
-            - $ref: '#/components/schemas/RequirementReference'
+          $ref: '#/components/schemas/RequirementReference'
         relatedTenderer:
-          allOf:
-            - $ref: '#/components/schemas/OrganizationReference'
+          $ref: '#/components/schemas/OrganizationReference'
       minProperties: 1
       
     RequirementReference:
@@ -969,8 +929,7 @@ components:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Bid'
       properties:
         requirementResponses:
-          allOf:
-            - $ref: '#/components/schemas/RequirementResponse'
+          $ref: '#/components/schemas/RequirementResponse'
             
             
 # -----------------------End Of Requirements Extension -------------- 
@@ -985,8 +944,7 @@ components:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Enquiries_Ext.yaml#/components/schemas/Enquiry'
       properties:
         author:
-          allOf:
-              - $ref: '#/components/schemas/OrganizationReference'
+          $ref: '#/components/schemas/OrganizationReference'
               
 # ----------------------- End Of Enquiries Extension -------------- 
 
@@ -1012,19 +970,16 @@ components:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/Lot'
       properties:
         value:
-          allOf:
-            - $ref: '#/components/schemas/Value'
+          $ref: '#/components/schemas/Value'
         contractPeriod:
-          allOf:
-            - $ref: '#/components/schemas/Period'
+          $ref: '#/components/schemas/Period'
             
     LotGroup:
       allOf:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/LotGroup'
       properties:
         maximumValue:
-          allOf:
-            - $ref: '#/components/schemas/Value'
+          $ref: '#/components/schemas/Value'
             
             
                     
@@ -1066,14 +1021,11 @@ components:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/Techniques'
       properties:
         frameworkAgreement:
-          allOf:
-            - $ref: '#/components/schemas/FrameworkAgreement'
+          $ref: '#/components/schemas/FrameworkAgreement'
         dynamicPurchasingSystem:
-          allOf:
-            - $ref: '#/components/schemas/DynamicPurchasingSystem'
+          $ref: '#/components/schemas/DynamicPurchasingSystem'
         electronicAuction:
-          allOf:
-            - $ref: '#/components/schemas/ElectronicAuction'
+          $ref: '#/components/schemas/ElectronicAuction'
             
             
     FrameworkAgreement:
@@ -1081,11 +1033,9 @@ components:
         -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/FrameworkAgreement'      
       properties:
         value:
-          allOf:
-            - $ref: '#/components/schemas/Value'
+          $ref: '#/components/schemas/Value'
         period:
-          allOf:
-            - $ref: '#/components/schemas/Period'
+          $ref: '#/components/schemas/Period'
 
 
     DynamicPurchasingSystem:
