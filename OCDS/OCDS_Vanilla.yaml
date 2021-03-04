@@ -360,8 +360,9 @@ components:
         tag:
           type: array
           items:
-            $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ReleaseTag'
-            description: The tags of the release. It should match the value of the `tag` field of the release. This provides additional context when reviewing a record to see what types of releases are included for this ocid.
+            allOf:
+             - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ReleaseTag'
+          description: 'One or more values from the closed [releaseTag](https://standard.open-contracting.org/latest/en/schema/codelists/#release-tag) codelist. Tags can be used to filter releases and to understand the kind of information that releases might contain.'
                     
     EmbeddedRelease:
       title: Embedded release
