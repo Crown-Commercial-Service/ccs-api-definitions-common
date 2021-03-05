@@ -69,7 +69,6 @@ components:
         - consultingServices
         
     InitiationType:
-      title: Initiation type
       description: 'The type of initiation process used for this contract, from the closed [initiationType](https://standard.open-contracting.org/latest/en/schema/codelists/#initiation-type) codelist.'   
       type: string
       enum:
@@ -171,6 +170,7 @@ components:
         - cancellationDetails
           #codelist: documentType.csv
           #openCodelist: true
+          
           
     ReleaseTag:
       title: Release Tag

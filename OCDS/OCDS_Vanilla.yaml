@@ -358,11 +358,7 @@ components:
           type: string
           format: date-time
         tag:
-          type: array
-          items:
-            allOf:
-             - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ReleaseTag'
-          description: 'One or more values from the closed [releaseTag](https://standard.open-contracting.org/latest/en/schema/codelists/#release-tag) codelist. Tags can be used to filter releases and to understand the kind of information that releases might contain.'
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ReleaseTag'
                     
     EmbeddedRelease:
       title: Embedded release
@@ -415,11 +411,10 @@ components:
           format: date-time
           #omitWhenMerged: true
         tag:
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ReleaseTag'
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ReleaseTag'
         initiationType:
           allOf:
-              - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/InitiationType'
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/InitiationType'
         parties:
           title: Parties
           description: 'Information on the parties (organizations, economic operators and other participants) who are involved in the contracting process and their roles, e.g. buyer, procuring entity, supplier etc. Organization references elsewhere in the schema are used to refer back to this entries in this list.'
