@@ -258,8 +258,8 @@ components:
         releases:
           type: array
           items:
-            $ref: '#/components/schemas/LinkedRelease' 
-              #- $ref: '#/components/schemas/Release'    
+            oneOf:
+              - $ref: '#/components/schemas/LinkedRelease'
         compiledRelease:
           $ref: '#/components/schemas/Release'
         versionedRelease:
