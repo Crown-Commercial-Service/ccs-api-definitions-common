@@ -1262,6 +1262,7 @@ components:
             - $ref: '#/components/schemas/ContactPoint'
         roles:
           type: array
+          items:
             $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/PartyRoles'
         details:
           nullable: true
