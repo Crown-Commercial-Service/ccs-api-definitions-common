@@ -459,12 +459,14 @@ components:
           type: string
           default: en
         relatedProcesses:
+          title: Related processes
           uniqueItems: true
+          type: array
           items:
             $ref: '#/components/schemas/RelatedProcess'
           description: 'The details of related processes: for example, if this process follows on from one or more other processes, represented under a separate open contracting identifier (ocid). This is commonly used to relate mini-competitions to their parent frameworks or individual tenders to a broader planning process.'
-          title: Related processes
-          type: array
+          
+          
 
     Planning:
       title: Planning
@@ -587,7 +589,9 @@ components:
           type: string
           nullable: true
         submissionMethod:
-          allOf: 
+          type: array
+          items:
+            allOf: 
             - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/SubmissionMethod'
         submissionMethodDetails:
           title: Submission method details
@@ -1257,8 +1261,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/ContactPoint'
         roles:
-          allOf: 
-            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/PartyRoles'
+          type: array
+            $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/PartyRoles'
         details:
           nullable: true
           type: object

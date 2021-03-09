@@ -58,11 +58,11 @@ components:
       description: >-
         Any additional categories describing the objects of this contracting process, using the open 
         [extendedProcurementCategory](https://standard.open-contracting.org/latest/en/schema/codelists/#extended-procurement-category) codelist.'
-      type: array
-      nullable: true
-      items:
-        type: string
-        enum:
+      #type: array
+      #nullable: true
+      #items:
+      type: string
+      enum:
         - goods
         - works
         - services
@@ -175,26 +175,26 @@ components:
     ReleaseTag:
       title: Release Tag
       description: 'One or more values from the closed [releaseTag](https://standard.open-contracting.org/latest/en/schema/codelists/#release-tag) codelist. Tags can be used to filter releases and to understand the kind of information that releases might contain.'
-      type: array
-      items:
-        type: string
-        enum:
-          - planning
-          - planningUpdate
-          - tender
-          - tenderAmendment
-          - tenderUpdate
-          - tenderCancellation
-          - award
-          - awardUpdate
-          - awardCancellation
-          - contract
-          - contractUpdate
-          - contractAmendment
-          - implementation
-          - implementationUpdate
-          - contractTermination
-          - compiled
+      #type: array
+      #items:
+      type: string
+      enum:
+        - planning
+        - planningUpdate
+        - tender
+        - tenderAmendment
+        - tenderUpdate
+        - tenderCancellation
+        - award
+        - awardUpdate
+        - awardCancellation
+        - contract
+        - contractUpdate
+        - contractAmendment
+        - implementation
+        - implementationUpdate
+        - contractTermination
+        - compiled
       #codelist: releaseTag.csv
       #openCodelist: false
       minItems: 1
@@ -236,15 +236,15 @@ components:
       description: >-
         The methods by which bids are submitted, using the open [
         submissionMethod](https://standard.open-contracting.org/latest/en/schema/codelists/#submission-method) codelist.'
-      type: array
-      nullable: true
-      items:
-        type: string
-        enum:
-          - electronicSubmission
-          - electronicAuction
-          - written
-          - inPerson    
+      #type: array
+      #nullable: true
+      #items:
+      type: string
+      enum:
+        - electronicSubmission
+        - electronicAuction
+        - written
+        - inPerson    
 
     
     ProcessStage:
@@ -291,20 +291,20 @@ components:
       title: Party roles
       description: 'The party''s role(s) in the contracting process, using the open [partyRole](https://standard.open-contracting.org/latest/en/schema/codelists/#party-role) codelist.'
       nullable: true
-      type: array
-      items:
-        type: string
-        enum:
-          - buyer
-          - procuringEntity
-          - supplier
-          - tenderer
-          - funder
-          - enquirer
-          - payer
-          - payee
-          - reviewBody
-          - interestedParty
+      #type: array
+      #items:
+      type: string
+      enum:
+        - buyer
+        - procuringEntity
+        - supplier
+        - tenderer
+        - funder
+        - enquirer
+        - payer
+        - payee
+        - reviewBody
+        - interestedParty
           # codelist: partyRole.csv
           # openCodelist: true
           
@@ -375,18 +375,18 @@ components:
     RelatedProcess:
       title: Relationship
       description: 'The type of relationship, using the open [relatedProcess](https://standard.open-contracting.org/latest/en/schema/codelists/#related-process) codelist.'
-      type: array
-      items:
-        type: string
-        enum:
-          - framework
-          - planning
-          - parent
-          - prior
-          - unsuccessfullProcess
-          - subContract
-          - replacementProcess
-          - renewalProcess
+      #type: array
+      #items:
+      type: string
+      enum:
+        - framework
+        - planning
+        - parent
+        - prior
+        - unsuccessfullProcess
+        - subContract
+        - replacementProcess
+        - renewalProcess
           #codelist: relatedProcess.csv
           #openCodelist: true
             
