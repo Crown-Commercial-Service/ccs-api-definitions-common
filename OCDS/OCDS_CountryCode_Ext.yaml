@@ -56,7 +56,7 @@ components:
       properties:
         countryCode:
           allOf:
-                - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists_Ext.yaml#/components/schemas/CountryCode'
+             - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists_Ext.yaml#/components/schemas/CountryCode'
           #codelist: country.csv
           #openCodelist: false
           

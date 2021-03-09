@@ -167,7 +167,7 @@ components:
           #openCodelist: false
         financeCategory:
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists_Ext.yaml#/components/schemas/FinanceType'
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists_Ext.yaml#/components/schemas/FinanceCategory'
           #codelist: financeCategory.csv
           #openCodelist: false
 
