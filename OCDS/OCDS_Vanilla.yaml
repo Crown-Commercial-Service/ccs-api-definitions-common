@@ -1262,6 +1262,7 @@ components:
             - $ref: '#/components/schemas/ContactPoint'
         roles:
           type: array
+          items:
             $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/PartyRoles'
         details:
           nullable: true
@@ -1454,6 +1455,15 @@ components:
           allOf: 
             - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/OrganizationScheme'
           #versionID: true
+        id:
+          title: ID
+          description: The identifier of the organization in the selected scheme.
+          oneOf:
+            - type: string
+            - type: integer
+          example: abc12345
+          nullable: true
+            #versionId: true
         legalName:
           title: Legal Name
           description: The legally registered name of the organization.
@@ -1606,7 +1616,7 @@ components:
           nullable: true
         scheme:
           allOf: 
-            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/RelatedProcess'
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/RelatedProcessScheme'
         identifier:
           description: 'The identifier of the related process. If the scheme is ''ocid'', this must be an Open Contracting ID (ocid).'
           title: Identifier

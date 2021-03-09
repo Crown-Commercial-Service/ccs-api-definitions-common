@@ -1,35 +1,29 @@
 openapi: 3.0.0
-
 info:
   title: CCS OCDS API Defintion
-  description: Standard definition for OCDS objects within CCS. Includes the chosen extentsion from the Vanilla OCDS definition and extensions held in 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/'
+  description: 'Standard definition for OCDS objects within CCS. Includes the chosen extentsion from the Vanilla OCDS definition and extensions held in ''https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/'''
   version: 0.0.2
 servers:
-  - url: http://api.example.com/v1
-    description: Optional server description, e.g. Main (production) server
-  - url: http://staging-api.example.com
-    description: Optional server description, e.g. Internal staging server for testing
-
+  - url: 'http://api.example.com/v1'
+    description: 'Optional server description, e.g. Main (production) server'
+  - url: 'http://staging-api.example.com'
+    description: 'Optional server description, e.g. Internal staging server for testing'
 paths:
-
-#id: 'https://standard.open-contracting.org/schema/1__1__5/record-package-schema.json'
-#$schema: 'http://json-schema.org/draft-04/schema#'
-
   /ocds/RecordPackage:
     get:
-      summary: "Returns the requested release with supplied OCID"
-      operationId: OCDS.RecordPackage   
+      summary: Returns the requested release with supplied OCID
+      operationId: OCDS.RecordPackage
       parameters:
-      - in: query
-        name: "OCID"
-        schema:
-          type: string
-        example: "dd/mm/yy:hh:mm:ss"
-        required: true
-        description: "OCID of the required release"
+        - in: query
+          name: OCID
+          schema:
+            type: string
+          example: 'dd/mm/yy:hh:mm:ss'
+          required: true
+          description: OCID of the required release
       responses:
         '200':
-          description: "Returns a release schema"
+          description: Returns a release schema
           content:
             application/vnd.api+json:
               schema:
@@ -40,19 +34,13 @@ paths:
           $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
         '500':
           $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'
-
-
-
-# id: 'https://standard.open-contracting.org/schema/1__1__5/release-package-schema.json'
-# $schema: 'http://json-schema.org/draft-04/schema#'
-
   /ocds/ReleasePackage:
     get:
-      summary: "Returns a package of releases"
-      operationId: OCDS.ReleasePackage   
+      summary: Returns a package of releases
+      operationId: OCDS.ReleasePackage
       responses:
         '200':
-          description: "Returns a release schema"
+          description: Returns a release schema
           content:
             application/vnd.api+json:
               schema:
@@ -62,26 +50,22 @@ paths:
         '404':
           $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
         '500':
-          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'  
- 
-# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
-# $schema: 'http://json-schema.org/draft-04/schema#'
-         
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'
   /ocds/Record:
     get:
-      summary: "Returns the requested record with supplied OCID"
+      summary: Returns the requested record with supplied OCID
       operationId: OCDS.Record
       parameters:
-      - in: query
-        name: "OCID"
-        schema:
-          type: string
-        example: "dd/mm/yy:hh:mm:ss"
-        required: true
-        description: "OCID of the required release"
+        - in: query
+          name: OCID
+          schema:
+            type: string
+          example: 'dd/mm/yy:hh:mm:ss'
+          required: true
+          description: OCID of the required release
       responses:
         '200':
-          description: "Returns a release schema"
+          description: Returns a release schema
           content:
             application/vnd.api+json:
               schema:
@@ -91,26 +75,22 @@ paths:
         '404':
           $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
         '500':
-          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
-
-# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
-# $schema: 'http://json-schema.org/draft-04/schema#'
-         
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'
   /ocds/Release:
     get:
-      summary: "Returns the requested release with supplied OCID"
-      operationId: OCDS.Release   
+      summary: Returns the requested release with supplied OCID
+      operationId: OCDS.Release
       parameters:
-      - in: query
-        name: "OCID"
-        schema:
-          type: string
-        example: "dd/mm/yy:hh:mm:ss"
-        required: true
-        description: "OCID of the required release"
+        - in: query
+          name: OCID
+          schema:
+            type: string
+          example: 'dd/mm/yy:hh:mm:ss'
+          required: true
+          description: OCID of the required release
       responses:
         '200':
-          description: "Returns a release schema"
+          description: Returns a release schema
           content:
             application/vnd.api+json:
               schema:
@@ -120,15 +100,12 @@ paths:
         '404':
           $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
         '500':
-          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
-
-
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'
 components:
   schemas:
-
     NullObject:
       description: Always is NULL in CCS
-    
+      
     ReleasePackage:
       type: object
       required:
@@ -143,13 +120,13 @@ components:
           description: 'The URI of this package that identifies it uniquely in the world. Recommended practice is to use a dereferenceable URI, where a persistent copy of this package is available.'
           type: string
           format: uri
-          example: "https://www.crowncommercial.gov.uk/agreements/RM3733"
+          example: 'https://www.crowncommercial.gov.uk/agreements/RM3733'
         version:
           title: OCDS schema version
           description: 'The version of the OCDS schema used in this package, expressed as major.minor For example: 1.0 or 1.1'
           type: string
           pattern: ^(\d+\.)(\d+)$
-          example: "1.0"
+          example: '1.0'
         extensions:
           title: OCDS extensions
           description: 'An array of OCDS extensions used in this package, in which each array item is the URL of an extension.json file.'
@@ -162,7 +139,7 @@ components:
           description: 'The date that this package was published. If this package is generated ''on demand'', this date should reflect the date of the last change to the underlying contents of the package.'
           type: string
           format: date-time
-          example: "01/01/2020"
+          example: 01/01/2020
         releases:
           title: Releases
           description: An array of one or more OCDS releases.
@@ -176,39 +153,39 @@ components:
           description: Information to uniquely identify the publisher of this package.
           type: object
           required:
-              - name
+            - name
           properties:
             name:
               title: Name
               description: The name of the organization or department responsible for publishing this data.
               type: string
-              example: "Crown Commercial Services"
+              example: Crown Commercial Services
             scheme:
               title: Scheme
               description: The scheme that holds the unique identifiers used to identify the item being identified.
               type: string
               nullable: true
-              example: "XX-CCS"
+              example: XX-CCS
             uid:
               title: uid
               description: The unique ID for this entity under the given ID scheme.
               type: string
               nullable: true
-              example: "123456789"
+              example: '123456789'
             uri:
               title: URI
               description: A URI to identify the publisher.
               type: string
               nullable: true
               format: uri
-              example: "https://www.crowncommercial.gov.uk/"
+              example: 'https://www.crowncommercial.gov.uk/'
         license:
           title: License
           description: 'A link to the license that applies to the data in this package. A Public Domain Dedication or [Open Definition Conformant](http://opendefinition.org/licenses/) license is recommended. The canonical URI of the license should be used. Documents linked from this file may be under other license conditions.'
           type: string
           nullable: true
           format: uri
-          example: "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+          example: 'https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/'
         publicationPolicy:
           title: Publication policy
           description: 'A link to a document describing the publishers [publication policy](https://standard.open-contracting.org/latest/en/implementation/publication_policy/).'
@@ -218,41 +195,38 @@ components:
           
     RecordPackage:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/RecordPackage'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/RecordPackage'
       type: object
       properties:
         uri:
-          example: "https://www.crowncommercial.gov.uk/package"
+          example: 'https://www.crowncommercial.gov.uk/package'
         version:
-          example: "1.0"
+          example: '1.0'
         publisher:
           type: object
           required:
-              - name
+            - name
           properties:
             name:
-              example: "Crown Commercial Services"
+              example: Crown Commercial Services
             scheme:
-              example: "XX-CCS"
+              example: XX-CCS
             uid:
-              example: "123456789"
+              example: '123456789'
             uri:
-              example: "https://www.crowncommercial.gov.uk/"
+              example: 'https://www.crowncommercial.gov.uk/'
         publicationPolicy:
-          example: "https://www.crowncommercial.gov.uk/agreements/publicationPolicy"
+          example: 'https://www.crowncommercial.gov.uk/agreements/publicationPolicy'
         publishedDate:
-          example: "01/01/2021"
+          example: 01/01/2021
         records:
           type: array
           items:
             $ref: '#/components/schemas/Record'
             
-
-
     Record:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Record'
-        #-  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Pagination_Ext.yaml#/components/schemas/Record'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Record'
       title: OCDS Record
       properties:
         releases:
@@ -264,30 +238,26 @@ components:
           $ref: '#/components/schemas/Release'
         versionedRelease:
           $ref: '#/components/schemas/NullObject'
-            
-  
           
     LinkedRelease:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/LinkedRelease'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/LinkedRelease'
       type: object
       required:
         - url
         - date
       properties:
         url:
-          example: "https://www.crowncommercial.gov.uk/package/record/release"
+          example: 'https://www.crowncommercial.gov.uk/package/record/release'
         date:
-          example: "01/01/2020"
-           
-  
+          example: 01/01/2020
+          
     Release:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Release'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Pagination_Ext.yaml#/components/schemas/Release'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Release'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Pagination_Ext.yaml#/components/schemas/Release'
       title: OCDS Release
       type: object
-
       properties:
         parties:
           items:
@@ -307,15 +277,12 @@ components:
         relatedProcesses:
           items:
             $ref: '#/components/schemas/RelatedProcess'
-
-
-      
-
+            
     Planning:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Planning'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Planning'
       type: object
-      properties:  
+      properties:
         budget:
           $ref: '#/components/schemas/Budget'
         documents:
@@ -324,79 +291,54 @@ components:
         milestones:
           items:
             $ref: '#/components/schemas/Milestone'
-         
-         
- 
             
     TenderRelease:
       title: Tender Release
-      description: >-
-        Data that must be supplied to publish a draft tender.
+      description: Data that must be supplied to publish a draft tender.
       type: object
       required:
         - id
-      properties:  
+      properties:
         procurementMethod:
           title: Procurement method
-          description: >-
-            The procurement method, from the closed
-            [method](https://standard.open-contracting.org/1.1/en/schema/codelists/#method)
-            codelist.
+          description: 'The procurement method, from the closed [method](https://standard.open-contracting.org/1.1/en/schema/codelists/#method) codelist.'
           type: string
           nullable: true
-          #codelist: method.csv
-          #openCodelist: false
           allOf:
             - $ref: '#/components/schemas/ProcurementMethod'
         procurementMethodDetails:
           title: Procurement method details
-          description: >-
-            Additional detail on the procurement method used. This field can be
-            used to provide the local name of the particular procurement method
-            used.
+          description: Additional detail on the procurement method used. This field can be used to provide the local name of the particular procurement method used.
           type: string
           nullable: true
         procurementMethodRationale:
           title: Procurement method rationale
-          description: >-
-            Rationale for the chosen procurement method. This is especially
-            important to provide a justification in the case of limited tenders or
-            direct awards.
+          description: Rationale for the chosen procurement method. This is especially important to provide a justification in the case of limited tenders or direct awards.
           type: string
           nullable: true
         tenderPeriod:
           title: Tender period
-          description: >-
-              The period when the tender is open for submissions. The end date is
-              the closing date for tender submissions.
+          description: The period when the tender is open for submissions. The end date is the closing date for tender submissions.
           allOf:
             - $ref: '#/components/schemas/Period'
-          
         enquiryPeriod:
-            title: Enquiry period
-            description: >-
-              The period during which potential bidders may submit questions and
-              requests for clarification to the entity managing procurement. Details
-              of how to submit enquiries should be provided in attached notices, or
-              in submissionMethodDetails. Structured dates for when responses to
-              questions will be made can be provided using tender milestones.
-            allOf:
+          title: Enquiry period
+          description: 'The period during which potential bidders may submit questions and requests for clarification to the entity managing procurement. Details of how to submit enquiries should be provided in attached notices, or in submissionMethodDetails. Structured dates for when responses to questions will be made can be provided using tender milestones.'
+          allOf:
             - $ref: '#/components/schemas/Period'
             
-
-    
     Tender:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Tender'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Competitive_Ext.yaml#/components/schemas/Tender'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Tender'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Enquiries_Ext.yaml#/components/schemas/Tender'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Tender'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_SelectionCriteria_Ext.yaml#/components/schemas/Tender'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/Tender'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Tender'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Competitive_Ext.yaml#/components/schemas/Tender'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Tender'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Enquiries_Ext.yaml#/components/schemas/Tender'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Tender'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_SelectionCriteria_Ext.yaml#/components/schemas/Tender'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/Tender'
       title: Tender
       type: object
-      properties:  
+      properties:
         procuringEntity:
           $ref: '#/components/schemas/OrganizationReference'
         items:
@@ -412,7 +354,7 @@ components:
             The award criteria for the procurement, using the open
             [awardCriteria](https://standard.open-contracting.org/1.1/en/schema/codelists/#award-criteria)
             codelist.
-            
+
             Deprecated Criteria -
             - lowestCost
             - bestProposal
@@ -429,7 +371,6 @@ components:
         tenderers:
           items:
             $ref: '#/components/schemas/OrganizationReference'
-          #uniqueItems: true
         documents:
           items:
             $ref: '#/components/schemas/Document'
@@ -441,51 +382,14 @@ components:
             $ref: '#/components/schemas/Amendment'
         amendment:
           $ref: '#/components/schemas/Amendment'
-          description: >-
-              The use of individual amendment objects has been deprecated. From OCDS
-              1.1 information should be provided in the amendments array.
-              The single amendment object has been deprecated in favour of
-              including amendments in an amendments (plural) array.            
-        #patternProperties:
-        #  '^(title_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-        #    type: string
-        #    default: null
-        #  '^(description_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-        #    type: string
-        #    default: null
-        #  '^(procurementMethodRationale_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-        #    type: string
-        #    default: null
-        #  '^(awardCriteriaDetails_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-        #    type: string
-        #    default: null
-        #  '^(submissionMethodDetails_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-        #    type: string
-        #    default: null
-        #  '^(eligibilityCriteria_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-        #    type: string
-        #    default: null
-        
-        
-
- 
-        
-        
-  
+          description: 'The use of individual amendment objects has been deprecated. From OCDS 1.1 information should be provided in the amendments array. The single amendment object has been deprecated in favour of including amendments in an amendments (plural) array.            '
     Award:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Award'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Award'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Award'
-        #patternProperties:
-        #  '^(title_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-        #    type: string
-        #    default: null
-        #  '^(description_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-        #    type: string
-        #    default: null
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Award'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Award'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Award'
       type: object
-      properties: 
+      properties:
         value:
           $ref: '#/components/schemas/Value'
         suppliers:
@@ -504,22 +408,12 @@ components:
             $ref: '#/components/schemas/Amendment'
         amendment:
           $ref: '#/components/schemas/Amendment'
-   
           
-        
-        
     Contract:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Contract'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Finance_Ext.yaml#/components/schemas/Contract'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Contract'
-       # patternProperties:
-       #   '^(title_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-       #     type: string
-       #     default: null
-       #   '^(description_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-       #     type: string
-       #     default: null
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Contract'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Finance_Ext.yaml#/components/schemas/Contract'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Contract'
       type: object
       properties:
         period:
@@ -546,12 +440,10 @@ components:
             $ref: '#/components/schemas/Amendment'
         amendment:
           $ref: '#/components/schemas/Amendment'
-       
-
-       
+          
     Implementation:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Implementation'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Implementation'
       type: object
       properties:
         transactions:
@@ -562,76 +454,45 @@ components:
             $ref: '#/components/schemas/Milestone'
         documents:
           items:
-            $ref: '#/components/schemas/Document'  
- 
+            $ref: '#/components/schemas/Document'
             
     Milestone:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Milestone'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Milestone' 
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Milestone'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Milestone'
       type: object
       properties:
         documents:
           items:
             $ref: '#/components/schemas/Document'
-       # patternProperties:
-       #   '^(title_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-      #      type: string
-       #     default: null
-       #   '^(description_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-       #     type: string
-       #     default: null
-       
-
-
-       
+            
     Document:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Document'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Document' 
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Document'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Document'
       type: object
       properties:
-        # this field is added for CCS. Need to check if it is in an Extension
         fileName:
           type: string
           format: binary
           writeOnly: true
-
-       # patternProperties:
-       #   '^(title_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-       #     type: string
-       #     default: null
-       #   '^(description_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-       #     type: string
-       #     default: null
-       
-       
-       
+          
     Budget:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Budget'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Finance_Ext.yaml#/components/schemas/Budget' 
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Budget'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Finance_Ext.yaml#/components/schemas/Budget'
       type: object
-      properties:   
+      properties:
         amount:
           $ref: '#/components/schemas/Value'
-       # patternProperties:
-       #   '^(source_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-       #     type: string
-       #     default: null
-       #   '^(description_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-      #      type: string
-      #      default: null
-      #    '^(project_(((([A-Za-z]{2,3}(-([A-Zaopenapi: 3.0.0
-
-
-
-       
+        finance:
+          $ref: '#/components/schemas/Finance'
+          
     Transaction:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Transaction'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Transaction'
       type: object
-      properties: 
+      properties:
         value:
           $ref: '#/components/schemas/Value'
         payer:
@@ -645,12 +506,11 @@ components:
         receiverOrganization:
           $ref: '#/components/schemas/Identifier'
           
-            
     OrganizationReference:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/OrganizationReference'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/OrganizationReference'
       type: object
-      properties:  
+      properties:
         identifier:
           $ref: '#/components/schemas/Identifier'
         address:
@@ -660,13 +520,11 @@ components:
             $ref: '#/components/schemas/Identifier'
         contactPoint:
           $ref: '#/components/schemas/ContactPoint'
-        
-        
-        
+          
     Organization:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Organization'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Scale_Ext.yaml#/components/schemas/Organization'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Organization'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Scale_Ext.yaml#/components/schemas/Organization'
       type: object
       properties:
         identifier:
@@ -679,68 +537,52 @@ components:
         contactPoint:
           $ref: '#/components/schemas/ContactPoint'
         details:
-          type: object
-          nullable: true
-          description: >-
-              Additional classification information about parties can be provided
-              using partyDetail extensions that define particular properties and
-              classification schemes.
-          title: Details
           $ref: '#/components/schemas/OrganizationDetail'
-       # patternProperties:
-       #   '^(name_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-       #     type: string
-       #     default: null
-        
-       
-#
+            
     OrganizationDetail:
       type: object
-      description: "Additional attributes for the Organization object required for CCS Organization Service"
+      description: Additional attributes for the Organization object required for CCS Organization Service
       required:
-      - creationDate
-      - countryCode
-      - companyType
-      - scale
-      - is_vcse
-      - status
-      - active
+        - creationDate
+        - countryCode
+        - companyType
+        - scale
+        - is_vcse
+        - status
+        - active
       properties:
         scale:
           description: The size or scale of the organization. (isSME = is(Scale=sme))
         creationDate:
-          description: "Date of organisation creation"
-          type: "string"
-          example: "DD/MM/YY" 
+          description: Date of organisation creation
+          type: string
+          example: DD/MM/YY
         countryCode:
-          description: "Country code of incorporation"
-          type: "string"
-          example: "UK" 
+          description: Country code of incorporation
+          type: string
+          example: UK
         companyType:
-          description: "Type of company"
-          type: "string"
-          example: "Type of company"        
+          description: Type of company
+          type: string
+          example: Type of company
         is_vcse:
-          description: "Is organisation a Voluntary, Community and Social Enterprise"
-          type: "boolean"
-          example: "1" 
+          description: 'Is organisation a Voluntary, Community and Social Enterprise'
+          type: boolean
+          example: '1'
         status:
-          description: "Organisation Status"
-          type: "string"
-          example: "Organisation status" 
+          description: Organisation Status
+          type: string
+          example: Organisation status
         active:
-          description: "Is organisation active?"
-          type: "boolean"
-          example: "1" 
+          description: Is organisation active?
+          type: boolean
+          example: '1'
           
-    
-          
-#           
     Item:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Item'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Item'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Location_Ext.yaml#/components/schemas/Item'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Item'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Item'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Location_Ext.yaml#/components/schemas/Item'
       type: object
       properties:
         classification:
@@ -752,78 +594,49 @@ components:
           type: object
           properties:
             value:
-              title: Value
-              description: The monetary value of a single unit.
-              allOf:
-                - $ref: '#/components/schemas/Value'
-
-         
+              $ref: '#/components/schemas/Value'
+                
     Amendment:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Amendment'
-
-        
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Amendment'
+    
     Classification:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Classification'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Classification'
         
-        
-
-         
     Identifier:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Identifier'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Identifier'
       title: Identifier
       description: A unique identifier for a party (organization).
       type: object
       properties:
         scheme:
-          allOf: 
+          allOf:
             - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/OrganizationScheme'
           title: Scheme
-          description: >-
-            Organization identifiers should be taken from an existing organization
-            identifier list. The scheme field is used to indicate the list or
-            register from which the identifier is taken. This value should be
-            taken from the [Organization Identifier
-            Scheme](https://standard.open-contracting.org/1.1/en/schema/codelists/#organization-identifier-scheme)
-            codelist.
+          description: 'Organization identifiers should be taken from an existing organization identifier list. The scheme field is used to indicate the list or register from which the identifier is taken. This value should be taken from the [Organization Identifier Scheme](https://standard.open-contracting.org/1.1/en/schema/codelists/#organization-identifier-scheme) codelist.'
           type: string
-          #limit to UK CCS Schemes
           enum:
-            -  GB-COH
-            -  GB-MPR
-            -  GB-NIC
-            -  GB-CHC
-            -  GB-SC
-            -  GB-WALEDU
-            -  GB-SCOTEDU
-            -  GB-GOR
-            -  GB-LANI
-            -  GB-NHS
+            - GB-COH
+            - GB-MPR
+            - GB-NIC
+            - GB-CHC
+            - GB-SC
+            - GB-WALEDU
+            - GB-SCOTEDU
+            - GB-GOR
+            - GB-LANI
+            - GB-NHS
           example: GB-COH
           nullable: true
-          #ID seems to be missing from Vanilla, seems strange!
         id:
-          title: ID
-          description: The identifier of the organization in the selected scheme.
-          oneOf:
-            - type: string
-            - type: integer
-          example: abc12345
-          nullable: true
-            #versionId: true
-        #patternProperties:
-        #  '^(legalName_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
-         #   type: string
-         #   default: null
-         
-         
-         
+          example: abc1234
+          
     Address:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Address'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CountryCode_Ext.yaml#/components/schemas/Address'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Address'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CountryCode_Ext.yaml#/components/schemas/Address'
       type: object
       properties:
         streetAddress:
@@ -836,63 +649,52 @@ components:
           description: 'The postal code. For example, 94043.'
         countryName:
           description: 'The country name. For example, United States.'
-            
-         
+          
     ContactPoint:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/ContactPoint'
-    
-       
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/ContactPoint'
+        
     Value:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Value'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Value'
       type: object
       properties:
         currency:
           $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OCDS_Standards/CCS-OCDS_CodeLists.yaml#/components/schemas/Currency'
-
+          
     Period:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Period'
-            
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Period'
+        
     RelatedProcess:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/RelatedProcess'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/RelatedProcess'
         
-        
-# ----------------------- End Of Vanilla -------------------------------
-
-  
-            
-# ----------------------- Start Of Requirements Extension -------------- 
-
     Criterion:
       allOf:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Criterion'
       properties:
         relatesTo:
-          description: >-
+          description: |-
             The schema element that the criterion judges, evaluates or assesses. For example criterion may be defined against items or against bidders.
-          
+
               * Tenderer - The criterion evaluates or assesses a tenderer
               * Item - The criterion evaluates or assesses an item
         requirementGroups:
           items:
             $ref: '#/components/schemas/RequirementGroup'
-
-      
+            
     RequirementGroup:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/RequirementGroup' 
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/RequirementGroup'
       properties:
         requirements:
           items:
             $ref: '#/components/schemas/Requirement'
-
-      
+            
     Requirement:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Requirement'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Requirement'
       properties:
         expectedValue:
           $ref: '#/components/schemas/Value'
@@ -904,10 +706,9 @@ components:
           $ref: '#/components/schemas/Period'
       minProperties: 1
       
-      
     RequirementResponse:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/RequirementResponse'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/RequirementResponse'
       properties:
         value:
           $ref: '#/components/schemas/Value'
@@ -921,104 +722,78 @@ components:
       
     RequirementReference:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/RequirementReference'
-      
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/RequirementReference'
+        
     Bid:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Bid'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Bid'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Bid'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Bid'
       properties:
         requirementResponses:
-          $ref: '#/components/schemas/RequirementResponse'
-            
-            
-# -----------------------End Of Requirements Extension -------------- 
-
-# ----------------------- Start Of Enquiries Extension -------------- 
-
+          type: array
+          items:
+            $ref: '#/components/schemas/RequirementResponse'
           
-      
-      
     Enquiry:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Enquiries_Ext.yaml#/components/schemas/Enquiry'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Enquiries_Ext.yaml#/components/schemas/Enquiry'
       properties:
         author:
           $ref: '#/components/schemas/OrganizationReference'
-              
-# ----------------------- End Of Enquiries Extension -------------- 
-
-# ----------------------- Start Of Location Extension -------------- 
-
           
-      
-      
     Location:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Location_Ext.yaml#/components/schemas/Location'
-
-              
-# ----------------------- End Of Location Extension -------------- 
-
-# ----------------------- Start Of Lot Extension -------------- 
- 
-            
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Location_Ext.yaml#/components/schemas/Location'
+        
+    
+        
     Lot:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Lot'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_SelectionCriteria_Ext.yaml#/components/schemas/Lot'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/Lot'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Lot'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_SelectionCriteria_Ext.yaml#/components/schemas/Lot'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/Lot'
       properties:
         value:
           $ref: '#/components/schemas/Value'
         contractPeriod:
           $ref: '#/components/schemas/Period'
-            
+          
     LotGroup:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/LotGroup'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/LotGroup'
       properties:
+        #relatedLots:
+        #  $ref: '#/components/schemas/ReleatedLots'
         maximumValue:
           $ref: '#/components/schemas/Value'
-            
-            
-                    
-# ----------------------- End Of Lot Extension -------------- 
-
-# ----------------------- Start Of Finance Selection Crieria --------------     
-            
-            
+          
     Finance:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Finance_Ext.yaml#/components/schemas/Finance'
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Finance'
-        
-# ----------------------- End OfFinance Extension -------------- 
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Finance_Ext.yaml#/components/schemas/Finance'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Finance'
+      properties:
+        financingParty:
+          title: Financing party
+          description: The party providing this financing arrangement.
+          allOf:
+            - $ref: '#/components/schemas/OrganizationReference'
+      
 
-# ----------------------- Start Of Lot Selection Crieria --------------     
-  
-          
     SelectionCriteria:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_SelectionCriteria_Ext.yaml#/components/schemas/SelectionCriteria'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_SelectionCriteria_Ext.yaml#/components/schemas/SelectionCriteria'
       properties:
         criteria:
           items:
             $ref: '#/components/schemas/SelectionCriterion'
-
-      
+            
     SelectionCriterion:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_SelectionCriteria_Ext.yaml#/components/schemas/SelectionCriteria'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_SelectionCriteria_Ext.yaml#/components/schemas/SelectionCriterion'
         
-        
-# ----------------------- End Of Lot Extension -------------- 
-
-# ----------------------- Start Of Techniques  Extension --------------  
-
     Techniques:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/Techniques'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/Techniques'
       properties:
         frameworkAgreement:
           $ref: '#/components/schemas/FrameworkAgreement'
@@ -1026,66 +801,43 @@ components:
           $ref: '#/components/schemas/DynamicPurchasingSystem'
         electronicAuction:
           $ref: '#/components/schemas/ElectronicAuction'
-            
-            
+          
     FrameworkAgreement:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/FrameworkAgreement'      
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/FrameworkAgreement'
       properties:
         value:
           $ref: '#/components/schemas/Value'
         period:
           $ref: '#/components/schemas/Period'
-
-
+          
     DynamicPurchasingSystem:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/DynamicPurchasingSystem' 
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/DynamicPurchasingSystem'
         
     ElectronicAuction:
       allOf:
-        -  $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/DynamicPurchasingSystem'      
-
-# ----------------------- End Of Techniques  Extension -------------- 
-
-
-
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/ElectronicAuction'
         
-
-        
-
-
-# Reusable Enums    
-
-
     ProcurementMethod:
       allOf:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ProcurementMethod'
-      description: >-
+      description: |-
         Different options for procurement. There are several types-
 
           * open
           * selective
           * limited
           * direct
-       
-
-    
+          
     ProcessStage:
       allOf:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ProcessStage'
-
-          
-    TenderStatus:
-       allOf:
-        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ProcessStage'
         
-            
-    #Language:
-    #  allOf:
-    #    - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/Language'
-              
-              
+    TenderStatus:
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/TenderStatus'
+        
     FileFormat:
       allOf:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/FileFormat'
