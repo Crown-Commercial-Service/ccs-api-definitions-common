@@ -60,7 +60,6 @@ components:
         details: 
           properties:
             scale: 
-              allOf:
-                - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists_Ext.yaml#/components/schemas/PartyScale'
+              $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists_Ext.yaml#/components/schemas/PartyScale'
               #"codelist": "partyScale.csv",
               #"openCodelist": false
