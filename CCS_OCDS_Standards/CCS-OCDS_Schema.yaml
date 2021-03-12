@@ -406,8 +406,26 @@ components:
         amendments:
           items:
             $ref: '#/components/schemas/Amendment'
-        amendment:
-          $ref: '#/components/schemas/Amendment'
+        lots:
+          items:
+            $ref: '#/components/schemas/Lot'
+        lotDetails:
+          $ref: '#/components/schemas/LotDetail'
+        lotGroups:
+          items:
+            $ref: '#/components/schemas/LotGroup'
+        enquiries:
+          items:
+            $ref: '#/components/schemas/Enquiry'
+        criteria:
+          items:
+            $ref: '#/components/schemas/Criterion'
+        selectionCriteria:
+          items:
+            $ref: '#/components/schemas/SelectionCriteria'
+        technioues:
+          items:
+            $ref: '#/components/schemas/Techniques'
           
     Contract:
       allOf:
