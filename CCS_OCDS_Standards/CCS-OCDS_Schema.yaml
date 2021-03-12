@@ -639,6 +639,10 @@ components:
           properties:
             value:
               $ref: '#/components/schemas/Value'
+        deliveryLocation:
+          $ref: '#/components/schemas/Location' 
+        deliveryAddress:
+          $ref: '#/components/schemas/Address'
                 
     Amendment:
       allOf:
@@ -788,7 +792,7 @@ components:
     Location:
       allOf:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Location_Ext.yaml#/components/schemas/Location'
-        
+     # Assuming the loction will always be the vanilla format   
     
         
     Lot:
@@ -801,6 +805,10 @@ components:
           $ref: '#/components/schemas/Value'
         contractPeriod:
           $ref: '#/components/schemas/Period'
+        selectionCriteria:
+          $ref: '#/components/schemas/SelectionCriteria'
+        techniques:
+          $ref: '#/components/schemas/Techniques'
           
     LotGroup:
       allOf:
@@ -821,6 +829,14 @@ components:
           description: The party providing this financing arrangement.
           allOf:
             - $ref: '#/components/schemas/OrganizationReference'
+        value:
+          $ref: '#/components/schemas/Value'
+        period:
+          $ref: '#/components/schemas/Period'
+        #interestRate:
+          # interest rate is an object hard coded into Finance
+        #relatedLots:
+        #  $ref: '#/components/schemas/ReleatedLots'
       
 
     SelectionCriteria:
