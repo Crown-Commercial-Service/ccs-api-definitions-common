@@ -382,7 +382,7 @@ components:
             $ref: '#/components/schemas/Amendment'
         amendment:
           $ref: '#/components/schemas/Amendment'
-          description: 'The use of individual amendment objects has been deprecated. From OCDS 1.1 information should be provided in the amendments array. The single amendment object has been deprecated in favour of including amendments in an amendments (plural) array.            '
+   
     Award:
       allOf:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Award'
@@ -406,9 +406,34 @@ components:
         amendments:
           items:
             $ref: '#/components/schemas/Amendment'
-        amendment:
-          $ref: '#/components/schemas/Amendment'
-          
+        #amendment:
+          # This is deprecated and no reason why CCS should use this
+        #relatedLots:
+          #$ref: '#/components/schemas/RelatedLot'
+        requirementReaponses:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequirementResponse'
+        lots:
+          items:
+            $ref: '#/components/schemas/Lot'
+        #lotDetails:
+            # This is inherited from the Lot Extension and is not separate object. Its just an array of strings
+        lotGroups:
+          items:
+            $ref: '#/components/schemas/LotGroup'
+        enquiries:
+          items:
+            $ref: '#/components/schemas/Enquiry'
+        criteria:
+          items:
+            $ref: '#/components/schemas/Criterion'
+        selectionCriteria:
+          items:
+            $ref: '#/components/schemas/SelectionCriteria'
+        technioues:
+          items:
+            $ref: '#/components/schemas/Techniques'
     Contract:
       allOf:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Contract'
@@ -465,6 +490,8 @@ components:
         documents:
           items:
             $ref: '#/components/schemas/Document'
+        #relatedLots:
+          #Just an array of Strings so should not change
             
     Document:
       allOf:
@@ -476,6 +503,8 @@ components:
           type: string
           format: binary
           writeOnly: true
+        #relatedLots:
+          #Just an array of Strings so should not change
           
     Budget:
       allOf:
@@ -485,6 +514,8 @@ components:
       properties:
         amount:
           $ref: '#/components/schemas/Value'
+        #projectID:
+          #Just an array of Strings or Integers so should not change for CCS as a whole but on a case by case basis.
         finance:
           $ref: '#/components/schemas/Finance'
           
@@ -493,6 +524,8 @@ components:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Transaction'
       type: object
       properties:
+        #id:
+          # Just an array of Strings or Integers so should not change for CCS as a whole but on a case by case basis.
         value:
           $ref: '#/components/schemas/Value'
         payer:
@@ -511,6 +544,12 @@ components:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/OrganizationReference'
       type: object
       properties:
+        id:
+          # Just an array of Strings or Integers for CCS as a whole this will be an external scheme identifier
+          oneOf:
+            - type: string
+          example: GB-COH-123456
+          pattern: '[A-Z]{2}-[A-Z]{3}-[A-Z,1-9]+'
         identifier:
           $ref: '#/components/schemas/Identifier'
         address:
@@ -528,7 +567,12 @@ components:
       type: object
       properties:
         identifier:
-          $ref: '#/components/schemas/Identifier'
+          allOf:
+            - $ref: '#/components/schemas/Identifier'
+        id:
+          # Just an array of Strings or Integers so should not change for CCS as a whole but on a case by case basis.
+          example: GB-COH-123456
+          pattern: '[A-Z]{2}-[A-Z]{3}-[A-Z,1-9]+'
         additionalIdentifiers:
           items:
             $ref: '#/components/schemas/Identifier'
