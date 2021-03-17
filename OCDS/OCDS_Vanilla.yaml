@@ -563,7 +563,7 @@ components:
             - $ref: '#/components/schemas/Value'
         procurementMethod:
           allOf: 
-            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ProcurementCategory'
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/ProcurementMethod'
         procurementMethodDetails:
           title: Procurement method details
           description: Additional detail on the procurement method used. This field can be used to provide the local name of the particular procurement method used.
