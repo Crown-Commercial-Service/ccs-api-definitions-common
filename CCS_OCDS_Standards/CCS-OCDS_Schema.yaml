@@ -567,8 +567,7 @@ components:
       type: object
       properties:
         identifier:
-          allOf:
-            - $ref: '#/components/schemas/Identifier'
+          $ref: '#/components/schemas/Identifier'
         id:
           # Just an array of Strings or Integers so should not change for CCS as a whole but on a case by case basis.
           example: GB-COH-123456
