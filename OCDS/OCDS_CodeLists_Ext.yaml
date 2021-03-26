@@ -69,7 +69,6 @@ components:
         - number
         - integer
         - boolean
-        - null
         
     ResponseSource:
       title: Source
