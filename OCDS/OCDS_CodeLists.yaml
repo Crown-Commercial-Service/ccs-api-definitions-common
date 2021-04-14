@@ -2534,5 +2534,3 @@ components:
                 - image/vnd.xiff
                 - image/vnd.zbrush.pcx
                 - image/wmf
-                - image/emf
-                - image/wmf

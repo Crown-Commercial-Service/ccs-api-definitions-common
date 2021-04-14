@@ -339,6 +339,8 @@ components:
       title: Tender
       type: object
       properties:
+        id:
+          readOnly: true
         procuringEntity:
           $ref: '#/components/schemas/OrganizationReference'
         items:
