@@ -313,10 +313,10 @@ components:
           items:
             $ref: '#/components/schemas/Amendment'
         amendment:
-          $ref: '#/components/schemas/Amendment'
-          deprecated:
-            description: The single amendment object has been deprecated in favour of including amendments in an amendments (plural) array.
-            #deprecatedVersion: '1.1'
+          allOf: 
+            - $ref: '#/components/schemas/Amendment'
+          deprecated: true
+          description: The single amendment object has been deprecated in favour of including amendments in an amendments (plural) array. Deprecated in version '1.1'
       #patternProperties:
       #  '^(title_(((([A-Za-z]{2,3}(-([A-Za-z]{3}(-[A-Za-z]{3}){0,2}))?)|[A-Za-z]{4}|[A-Za-z]{5,8})(-([A-Za-z]{4}))?(-([A-Za-z]{2}|[0-9]{3}))?(-([A-Za-z0-9]{5,8}|[0-9][A-Za-z0-9]{3}))*(-([0-9A-WY-Za-wy-z](-[A-Za-z0-9]{2,8})+))*(-(x(-[A-Za-z0-9]{1,8})+))?)|(x(-[A-Za-z0-9]{1,8})+)))$':
       #    type:
@@ -727,20 +727,22 @@ components:
         uri:
           $ref: '#/components/schemas/StringNullUriVersioned'
         amount:
-          $ref: '#/components/schemas/Value'
+          allOf:
+            - $ref: '#/components/schemas/Value'
           deprecated: true
-          description: This field has been replaced by the `transaction.value` field for consistency with the use of value and amount elsewhere in the standard.
-            #deprecatedVersion: '1.1'
+          description: This field has been replaced by the `transaction.value` field for consistency with the use of value and amount elsewhere in the standard. Deprecated in version '1.1'
         providerOrganization:
-          $ref: '#/components/schemas/Identifier'
+          allOf:
+            - $ref: '#/components/schemas/Identifier'
           deprecated: true
           description: This field has been replaced by the `transaction.payer` field to resolve ambiguity arising from 'provider' being interpreted as relating to the goods or services procured rather than the flow of funds between the parties.
-            #deprecatedVersion: '1.1'
+            deprecated in Version '1.1'
         receiverOrganization:
-          $ref: '#/components/schemas/Identifier'
+          allOf:
+            - $ref: '#/components/schemas/Identifier'
           deprecated: true
           description: This field has been replaced by the `transaction.payee` field to resolve ambiguity arising from 'receiver' being interpreted as relating to the goods or services procured rather than the flow of funds between the parties.
-            #deprecatedVersion: '1.1'
+            deprecatedin version '1.1'
             
     OrganizationReference:
       properties:
@@ -761,15 +763,17 @@ components:
             - type: string
             - type: integer
         identifier:
+          allOf:
+            - $ref: '#/components/schemas/Identifier'
           deprecated: true
-            #deprecatedVersion: '1.1'
           description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and detailed legal identifier information should only be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
-          $ref: '#/components/schemas/Identifier'
         address:
+          allOf:
+            - $ref: '#/components/schemas/Address'
           deprecated: true
             #deprecatedVersion: '1.1'
           description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and address information should only be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
-          $ref: '#/components/schemas/Address'
+          
         additionalIdentifiers:
           allOf:
             - $ref: '#/components/schemas/VersionFields'
@@ -790,11 +794,12 @@ components:
                 items:
                   type: string
         contactPoint:
-          deprecated:
-            #deprecatedVersion: '1.1'
-            description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and contact point information for an organization should be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
-          $ref: '#/components/schemas/ContactPoint'
-      type: object
+          allOf:
+            - $ref: '#/components/schemas/ContactPoint'
+          deprecated: true
+          description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and contact point information for an organization should be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
+          
+          
     Organization:
       type: object
       properties:
@@ -1292,10 +1297,10 @@ components:
           description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and detailed legal identifier information should only be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
           $ref: '#/components/schemas/Identifier'
         address:
+          allOf:
+            - $ref: '#/components/schemas/Address'
           deprecated: true
-            #deprecatedVersion: '1.1'
           description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and address information should only be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
-          $ref: '#/components/schemas/Address'
         additionalIdentifiers:
           allOf:
             - $ref: '#/components/schemas/VersionFields'
@@ -1313,11 +1318,12 @@ components:
                 uniqueItems: true
               
         contactPoint:
+          allOf:
+            - $ref: '#/components/schemas/ContactPoint'
           deprecated: true
             #deprecatedVersion: '1.1'
           description: 'From version 1.1, organizations should be referenced by their identifier and name in a document, and contact point information for an organization should be provided in the relevant cross-referenced entry in the parties section at the top level of a release.'
-          $ref: '#/components/schemas/ContactPoint'
-      type: object
+          
     ClassificationUnversioned:
       type: object
       properties:
