@@ -115,7 +115,7 @@ components:
               #codelist: geometryType.csv
               #openCodelist: false
               nullable: true
-             coordinates:
+            coordinates:
               title: Coordinates
               description: 'The relevant array of points, e.g. [longitude, latitude] or [longitude, latitude, elevation], or a nested array of points, for the GeoJSON geometry being described. The longitude and latitude must be expressed in decimal degrees in the WGS84 (EPSG:4326) projection.'
               nullable: true
@@ -125,11 +125,11 @@ components:
                   - type: number
                   - type: array
                     items:
-                      oneOF:
+                      oneOf:
                         - type: number
                         - type: array
-                            items:
-                              type: number
+                          items:
+                            type: number
                       
                   #- type: array (Assuming that this assuming this is a single point or an array of points defining an area)
         gazetteer:
