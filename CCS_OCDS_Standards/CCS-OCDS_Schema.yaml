@@ -661,24 +661,7 @@ components:
       type: object
       properties:
         scheme:
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/OrganizationScheme'
-          title: Scheme
-          description: 'Organization identifiers should be taken from an existing organization identifier list. The scheme field is used to indicate the list or register from which the identifier is taken. This value should be taken from the [Organization Identifier Scheme](https://standard.open-contracting.org/1.1/en/schema/codelists/#organization-identifier-scheme) codelist.'
-          type: string
-          enum:
-            - GB-COH
-            - GB-MPR
-            - GB-NIC
-            - GB-CHC
-            - GB-SC
-            - GB-WALEDU
-            - GB-SCOTEDU
-            - GB-GOR
-            - GB-LANI
-            - GB-NHS
-          example: GB-COH
-          nullable: true
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OCDS_Standards/CCS-OCDS_CodeLists.yaml#/components/schemas/OrganizationScheme'
         id:
           example: abc1234
           

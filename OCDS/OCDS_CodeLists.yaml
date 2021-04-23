@@ -350,6 +350,19 @@ components:
       title: Organisation Scheme
       description: 'Organization identifiers should be taken from an existing organization identifier list. The scheme field is used to indicate the list or register from which the identifier is taken. This value should be taken from the [Organization Identifier Scheme](https://standard.open-contracting.org/latest/en/schema/codelists/#organization-identifier-scheme) codelist.'
       type: string
+      # Many more to add http://org-id.guide/results?structure=all&coverage=all&sector=all
+      enum:
+        - GB-COH
+        - GB-MPR
+        - GB-NIC
+        - GB-CHC
+        - GB-SC
+        - GB-WALEDU
+        - GB-SCOTEDU
+        - GB-GOR
+        - GB-LANI
+        - GB-NHS
+      example: GB-COH
       nullable: true
     
     ItemClassification:
