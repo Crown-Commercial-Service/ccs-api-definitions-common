@@ -273,7 +273,7 @@ components:
       title: Tender status
       description: >-
             The current status of the tender, from the closed
-        [tenderStatus](https://standard.open-contracting.org/1.1/en/schema/codelists/#tender-status)
+            [tenderStatus](https://standard.open-contracting.org/1.1/en/schema/codelists/#tender-status)
             codelist.
       type: string
           #codelist: tenderStatus.csv
