@@ -356,16 +356,20 @@ components:
           title: Minimum value
           description: Used to state the lower bound of the requirement when the response must be within a certain range.
           nullable: true
-          oneOf:
-            - type: integer
-            - type: number
+          type: number
+          #implied from below:
+          #oneOf:
+          #  - type: integer
+          #  - type: number
         maxValue:
           title: Maximum value
           description: Used to state the upper bound of the requirement when the response must be within a certain range.
           nullable: true
-          oneOf:
-            - type: integer
-            - type: number
+          type: number
+          #implied from below:
+          #oneOf:
+          #  - type: integer
+          #  - type: number
         period:
           title: Period
           description: 'Used to specify a particular period the requirement applies to, for example the bidder''s turnover in a given year.'

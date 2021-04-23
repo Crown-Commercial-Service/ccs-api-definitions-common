@@ -548,8 +548,7 @@ components:
       properties:
         id:
           # Just an array of Strings or Integers for CCS as a whole this will be an external scheme identifier
-          oneOf:
-            - type: string
+          type: string
           example: GB-COH-123456
           pattern: '[A-Z]{2}-[A-Z]{3}-[A-Z,1-9]+'
         identifier:
