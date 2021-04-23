@@ -273,7 +273,7 @@ components:
       title: Tender status
       description: >-
             The current status of the tender, from the closed
-            [tenderStatus](https://standard.open-contracting.org/1.1/en/schema/codelists/#tender-status)
+        [tenderStatus](https://standard.open-contracting.org/1.1/en/schema/codelists/#tender-status)
             codelist.
       type: string
           #codelist: tenderStatus.csv
@@ -285,7 +285,7 @@ components:
         - cancelled
         - unsuccessful
         - complete
-        - withdrawn
+        - withdrawn    
             
     PartyRoles:
       title: Party roles
@@ -347,9 +347,24 @@ components:
         - UnefactID2
           
     OrganizationScheme:
+      # Use to see full list of organisation schemes
+      #allOf:
+      #  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/OrganizationScheme'
       title: Organisation Scheme
-      description: 'Organization identifiers should be taken from an existing organization identifier list. The scheme field is used to indicate the list or register from which the identifier is taken. This value should be taken from the [Organization Identifier Scheme](https://standard.open-contracting.org/latest/en/schema/codelists/#organization-identifier-scheme) codelist.'
+      description: 'Organization identifiers should be taken from an existing organization identifier list. The scheme field is used to indicate the list or register from which the identifier is taken. This value should be taken from the [Organization Identifier Scheme](https://standard.open-contracting.org/1.1/en/schema/codelists/#organization-identifier-scheme) codelist.'
       type: string
+      enum:
+        - GB-COH
+        - GB-MPR
+        - GB-NIC
+        - GB-CHC
+        - GB-SC
+        - GB-WALEDU
+        - GB-SCOTEDU
+        - GB-GOR
+        - GB-LANI
+        - GB-NHS
+      example: GB-COH
       nullable: true
     
     ItemClassification:

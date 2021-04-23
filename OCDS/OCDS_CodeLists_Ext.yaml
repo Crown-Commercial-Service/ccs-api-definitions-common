@@ -53,7 +53,6 @@ components:
         - medium
         - large
         - selfEmployed
-        - null
         #"codelist": "partyScale.csv",
         #"openCodelist": false
         
@@ -81,7 +80,6 @@ components:
         - tenderer
         - buyer
         - procuringEntity
-        - null
         
     RelatesTo:
       title: Related schema element
@@ -93,7 +91,6 @@ components:
       enum:
         - tenderer
         - item
-        - null
         
     GeometryType:
       title: Type
@@ -107,7 +104,6 @@ components:
         - MultiLineString
         - Polygon
         - MultiPolygon
-        - null
         #codelist: geometryType.csv
         #openCodelist: false
         
@@ -400,7 +396,7 @@ components:
         - publicBondIssue
         - supplierCredit
         - other
-        - null
+
         
     FinanceCategory:    
       title: Finance category
@@ -416,7 +412,7 @@ components:
         - grant
         - guarantee
         - other
-        - null
+
     
     FrameworkAgreementMethod:    
       title: Method
@@ -429,7 +425,7 @@ components:
         - withReopeningCompetition
         - withoutReopeningCompetition
         - withAndWithoutReopeningCompetition
-        - null
+
         
         
     DynamicPurchasingSystemType:
@@ -442,7 +438,7 @@ components:
       enum:
         - open
         - closed
-        - null
+
         
     DynamicPurchasingSystemStatus:   
       title: Status
@@ -456,6 +452,6 @@ components:
         - active
         - cancelled
         - terminated
-        - null
+
 
             

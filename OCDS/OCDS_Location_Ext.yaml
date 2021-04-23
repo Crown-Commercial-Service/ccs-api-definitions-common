@@ -114,7 +114,8 @@ components:
                 - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists_Ext.yaml#/components/schemas/GeometryType'
               #codelist: geometryType.csv
               #openCodelist: false
-            coordinates:
+              nullable: true
+             coordinates:
               title: Coordinates
               description: 'The relevant array of points, e.g. [longitude, latitude] or [longitude, latitude, elevation], or a nested array of points, for the GeoJSON geometry being described. The longitude and latitude must be expressed in decimal degrees in the WGS84 (EPSG:4326) projection.'
               nullable: true
@@ -122,7 +123,15 @@ components:
               items:
                 oneOf:
                   - type: number
-                  #- type: array (Need to understand how this array is meant to fit in)
+                  - type: array
+                    items:
+                      oneOF:
+                        - type: number
+                        - type: array
+                            items:
+                              type: number
+                      
+                  #- type: array (Assuming that this assuming this is a single point or an array of points defining an area)
         gazetteer:
           type: object
           title: Gazetteer
