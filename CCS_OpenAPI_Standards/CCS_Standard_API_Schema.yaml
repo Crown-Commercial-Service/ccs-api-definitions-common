@@ -36,25 +36,44 @@ components:
 
     AgreementOCID:
       type: string
-      pattern: ocds-RM[1-9]{4}
+      pattern: ocds-b5fd17-RM[1-9]{4}
       example: ocds-b5fd17-RM1234
       readOnly: true
       
-    ProcurementID:
-      type: number
-      format: string
-      example: 12345
+    ProcurementProjectID:
+      type: integer
+      example: 123456
+      readOnly: true
+      
+    ProcurementProjectURI:
+      type: string
+      format: uri
+      example: api.crowncommercial.org.uk/tenders/projects/123456
+      format: api.crowncommercial.org.uk/tenders/projects/[1-9]+
       readOnly: true  
       
     ProcurementIDList:
       type: array
       items:
-        $ref: '#/components/schemas/ProcurementID' 
+        $ref: '#/components/schemas/ProcurementEventID' 
       
-    ProcurementOCID:
-      type: number
-      format: string
-      example: ocds-b5fd17-12345
+    ProcurementEventID:
+      type: string
+      example: 123456
+      example: ocds-b5fd17-123456
+      pattern: ocds-b5fd17-[1-9]+
+      readOnly: true
+      
+    ProcurementEventOCID:
+      type: string
+      example: ocds-b5fd17-123456
+      pattern: ocds-b5fd17-[1-9]+
+      readOnly: true
+      
+    ProcurementEventReleaseID:
+      type: string
+      example: ocds-b5fd17-123456-2020-02-16T07:14:54.617Z
+      pattern: ocds-b5fd17-[1-9]+-[1-9]{4}-[1-9]{2}-[1-9]{2}T[1-9]{2}:[1-9]{2}:[1-9]{2}.[1-9]{4}
       readOnly: true
       
     Timestamp:
