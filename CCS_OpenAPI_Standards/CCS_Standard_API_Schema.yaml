@@ -47,7 +47,6 @@ components:
       
     ProcurementProjectURI:
       type: string
-      format: uri
       example: api.crowncommercial.org.uk/tenders/projects/123456
       format: api.crowncommercial.org.uk/tenders/projects/[1-9]+
       readOnly: true  
@@ -58,13 +57,6 @@ components:
         $ref: '#/components/schemas/ProcurementEventID' 
       
     ProcurementEventID:
-      type: string
-      example: 123456
-      example: ocds-b5fd17-123456
-      pattern: ocds-b5fd17-[1-9]+
-      readOnly: true
-      
-    ProcurementEventOCID:
       type: string
       example: ocds-b5fd17-123456
       pattern: ocds-b5fd17-[1-9]+
