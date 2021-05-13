@@ -9,7 +9,7 @@ components:
         $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/UserID'
         
     OrgParam:
-      name: orgID
+      name: org-id
       in: path
       required: true
       description: Organisation ID
@@ -17,7 +17,7 @@ components:
         $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/OrgID'
         
     UserParam:
-      name: userID
+      name: user-id
       in: path
       required: true
       description: User ID
@@ -49,7 +49,7 @@ components:
         $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/LotID'
         
     SupplierParam:
-      name: supplierID
+      name: supplier-id
       in: path
       required: true
       description: Supplier ID
