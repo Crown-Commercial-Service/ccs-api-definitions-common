@@ -1,0 +1,77 @@
+openapi: 3.0.0
+
+info:
+  title: OCDS Party Scale Extension API
+  description: For classifying organizations as micro, sme or large.
+  version: 0.0.2
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+
+paths:
+
+#id: 'https://standard.open-contracting.org/schema/1__1__5/record-package-schema.json'
+#$schema: 'http://json-schema.org/draft-04/schema#'
+
+  /ocds/Tender:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.Item  
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Tender'
+                  - $ref: '#/components/schemas/Tender'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
+          
+          
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+  
+
+components:
+  schemas:
+    Tender:
+      properties:
+        communication:
+          title: Communication
+          description: Modalities of communication about key events.
+          type: object
+          properties:
+            atypicalToolUrl:
+              title: Atypical tool URL
+              description: Electronic communication with the procuring entity requires the use of tools and devices that are not generally available. These tools are accessible via this URL.
+              type: string
+              nullable: true
+              format: uri
+            futureNoticeDate:
+              title: Future notice date
+              description: The estimated date of publication of the next sequential notice.
+              type: string
+              nullable: true
+              format: date-time
+            documentAvailabilityPeriod:
+              title: Document availability period
+              description: 'The period during which documents can be accessed, or during which requests for access to documents can be submitted.'
+              allOf:
+                - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Period'
+          minProperties: 1

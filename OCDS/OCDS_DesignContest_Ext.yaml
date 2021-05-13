@@ -1,0 +1,178 @@
+openapi: 3.0.0
+
+info:
+  title: OCDS Design Contest API
+  description: For classifying organizations as micro, sme or large.
+  version: 0.0.2
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+
+paths:
+
+#id: 'https://standard.open-contracting.org/schema/1__1__5/record-package-schema.json'
+#$schema: 'http://json-schema.org/draft-04/schema#'
+
+  /ocds/Tender:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.Organization  
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Tender'
+                  - $ref: '#/components/schemas/Tender'
+
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
+          
+  /ocds/DesignContest:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.DesignContest 
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/DesignContest'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError' 
+          
+  /ocds/JuryMember:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.JuryMember 
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/JuryMember'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError' 
+          
+          
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+  
+
+components:
+  schemas:
+    Tender:
+      properties:
+        designContest:
+          $ref: '#/components/schemas/DesignContest'
+          
+    DesignContest:
+      title: Design contest
+      description: Information about the organization of a design contest.
+      type: object
+      properties:
+        selectedParticipants:
+          title: Selected participants
+          description: The parties that have already been selected to participate to the design contest.
+          type: array
+          items:
+            $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/OrganizationReference'
+          uniqueItems: true
+          minItems: 1
+        hasPrizes:
+          title: Has prizes
+          description: Whether prizes will be awarded in the design contest.
+          type: boolean
+          nullable: true
+        prizes:
+          title: Prizes
+          description: Information about the prizes awarded in the design contest.
+          type: object
+          properties:
+            description:
+              title: Description
+              description: The description of the prizes.
+              type: string
+              nullable: true
+              minLength: 1
+          minProperties: 1
+        rewardsDetails:
+          title: Rewards details
+          description: The details and conditions of the payments to be made to the participants.
+          type: string
+          nullable: true
+          minLength: 1
+        followUpContracts:
+          title: Follow-up contracts
+          description: Whether any contracts following the design contest will be awarded to the winner or winners of the design contest.
+          type: boolean
+          nullable: true
+        bindingJuryDecision:
+          title: Binding jury decision
+          description: Whether the jury’s decision is binding on the procuring entity.
+          type: boolean
+          nullable: true
+        juryMembers:
+          title: Jury members
+          description: The members of the jury.
+          type: array
+          items:
+            $ref: '#/components/schemas/JuryMember'
+          #wholeListMerge: true
+          uniqueItems: true
+          minItems: 1
+      minProperties: 1
+    JuryMember:
+      title: Jury member
+      description: Member of the jury.
+      type: object
+      properties:
+        name:
+          title: Name
+          description: The name of the jury member.
+          type: string
+          nullable: true
+          minLength: 1
+      minProperties: 1

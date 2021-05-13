@@ -23,7 +23,7 @@ components:
       readOnly: true
       
       
-    AgreementVersions:
+    AgreementVersion:
       type: string
       pattern: V[1-9]{4}
       example: V1
