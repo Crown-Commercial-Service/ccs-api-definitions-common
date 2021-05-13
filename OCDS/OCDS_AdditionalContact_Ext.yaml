@@ -1,0 +1,106 @@
+openapi: 3.0.0
+
+info:
+  title: OCDS Additional Contact Points Extension API
+  description: For classifying organizations as micro, sme or large.
+  version: 0.0.2
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+
+paths:
+
+#id: 'https://standard.open-contracting.org/schema/1__1__5/record-package-schema.json'
+#$schema: 'http://json-schema.org/draft-04/schema#'
+
+  /ocds/Organization:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.Organization  
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Organization'
+                  - $ref: '#/components/schemas/Organization'
+                #type: object
+                properties:
+                  additionalContactPoints:
+                    type: array
+                    items:
+                      allOf:
+                        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/ContactPoint'
+                        - $ref: '#/components/schemas/ContactPoint'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
+          
+  /ocds/ContactPoint:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.ContactPoint 
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/ContactPoint'
+                  - $ref: '#/components/schemas/ContactPoint'
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError' 
+          
+          
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+  
+
+components:
+  schemas:
+    Organization:
+      properties:
+        additionalContactPoints:
+          title: Additional contact points
+          description: 'An array of additional contact points that may be consulted for information. Additional contact points should each list the languages they operate in their name, and as structured data in the availableLanguage field.'
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactPoint'
+          #wholeListMerge: true
+          uniqueItems: true
+          minItems: 1
+    ContactPoint:
+      properties:
+        availableLanguage:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/Language'
+          uniqueItems: true
+          minItems: 1

@@ -1,0 +1,154 @@
+openapi: 3.0.0
+
+info:
+  title: OCDS Shareholder API
+  description: For classifying organizations as micro, sme or large.
+  version: 0.0.2
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+
+paths:
+
+#id: 'https://standard.open-contracting.org/schema/1__1__5/record-package-schema.json'
+#$schema: 'http://json-schema.org/draft-04/schema#'
+
+  /ocds/Organization:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.Organization  
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Organization'
+                  - $ref: '#/components/schemas/Organization'
+
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
+          
+  /ocds/Shareholder:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.Shareholder  
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/Shareholder'
+
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'  
+          
+          
+          
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+  
+
+components:
+  schemas:
+    Shareholder:
+      type: object
+      title: Shareholder
+      description: A shareholder in an organization.
+      required:
+        - id
+      properties:
+        id:
+          title: Shareholder ID
+          description: 'A local identifier for this shareholder, unique within this block. This field is used to keep track of multiple revisions of a shareholder through the compilation from release to record mechanism.'
+          type: string
+          minLength: 1
+        shareholder:
+          title: Shareholder organization reference.
+          description: An organization reference pointing the entry in the parties section for the shareholding organization.
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/OrganizationReference'
+        shareholding:
+          title: Shareholding
+          description: 'The percentage of shares held by the shareholder, expressed as a decimal value between 0 and 1.'
+          type: number
+          nullable: true
+          minimum: 0
+          maximum: 1
+        votingRights:
+          title: Shareholder voting rights
+          description: The type of voting rights associated with the shares held by the shareholder.
+          type: string
+          nullable: true
+          #codelist: votingRights.csv
+          #openCodelist: false
+          enum:
+            - ordinary
+            - none
+            - restricted
+            - additional
+            - enhanced
+            - null
+        votingRightsDetails:
+          title: Shareholder voting rights details
+          description: 'Detailed information about the shareholder''s voting rights. This field should be completed when the shareholder voting rights are restricted, additional or enhanced.'
+          type: string
+          nullable: true
+          minLength: 1
+        notes:
+          title: Shareholder notes
+          description: 'Additional notes on this shareholder. This field should be used to provide details on any caps on equity transfer, or lock-in arrangements, applicable to this shareholder.'
+          type: string
+          nullable: true
+          minLength: 1
+      minProperties: 1
+    Organization:
+      properties:
+        shareholders:
+          title: Organization shareholders
+          description: 'A list of shareholders in the organization: used to provide company ownership information for firms, primarily in the case of large and complex contracts, or Public Private Partnerships, that require disclosure of this information for certain bidders or awarded parties.'
+          type: array
+          items:
+            $ref: '#/components/schemas/Shareholder'
+          uniqueItems: true
+          minItems: 1
+        beneficialOwnership:
+          type: object
+          title: Beneficial ownership
+          description: 'This section can be used to record information concerning individuals or organizations with a beneficial ownership or control interests in this party. Where structured data is available, this section may be extended by embedding or linking to information modelled using the [Beneficial Ownership Data Standard (BODS)](https://github.com/openownership/data-standard).'
+          properties:
+            description:
+              title: Description
+              description: A free text description of beneficial ownership or control arrangements.
+              type: string
+              nullable: true
+              minLength: 1
+          minProperties: 1
