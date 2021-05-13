@@ -25,7 +25,7 @@ components:
         $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/UserID'
         
     AgreementParam:
-      name: agreementID
+      name: agreement-id
       in: path
       required: true
       description: Agreement
@@ -41,7 +41,7 @@ components:
         $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/AgreementVersion'
         
     LotParam:
-      name: lotID
+      name: lot-id
       in: path
       required: true
       description: Lot
