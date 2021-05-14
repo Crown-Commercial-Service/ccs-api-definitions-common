@@ -181,6 +181,10 @@ components:
           nullable: true
           #codelist: awardCriterionType.csv
           #openCodelist: true
+          enum:
+            - price 
+            - cost
+            - quality
           minLength: 1
         name:
           title: Name
