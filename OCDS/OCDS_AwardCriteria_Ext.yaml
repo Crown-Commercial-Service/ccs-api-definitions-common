@@ -1,0 +1,253 @@
+openapi: 3.0.0
+
+info:
+  title: OCDS Award Criteria API
+  description: For classifying organizations as micro, sme or large.
+  version: 0.0.2
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+
+paths:
+
+#id: 'https://standard.open-contracting.org/schema/1__1__5/record-package-schema.json'
+#$schema: 'http://json-schema.org/draft-04/schema#'
+
+  /ocds/Lot:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.Organization  
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Lot'
+                  - $ref: '#/components/schemas/Lot'
+
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
+          
+  /ocds/AwardCriteria:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.AwardCriteria  
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/AwardCriteria'
+
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
+          
+  /ocds/AwardCriterion:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.AwardCriterion  
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/AwardCriterion'
+
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError' 
+          
+  /ocds/AwardCriterionNumber:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.AwardCriterionNumber  
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/vnd.api+json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/AwardCriterionNumber'
+
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'   
+          
+          
+# id: 'https://standard.open-contracting.org/schema/1__1__5/release-schema.json'
+# $schema: 'http://json-schema.org/draft-04/schema#'
+  
+
+components:
+  schemas:
+    Lot:
+      properties:
+        awardCriteria:
+          title: Award criteria
+          description: Information about the award criteria for the lot.
+          allOf:
+            - $ref: '#/components/schemas/AwardCriteria'
+    AwardCriteria:
+      title: Award criteria
+      description: Information about the award criteria.
+      type: object
+      properties:
+        weightingDescription:
+          title: Complicated weighting description
+          description: 'When the weighting cannot be expressed per criterion, the mathematical equation (or other description) that expresses the complicated (e.g. non-linear) weighting.'
+          type: string
+          nullable: true
+          minLength: 1
+        orderRationale:
+          title: Justification for order of importance
+          description: 'The justification for only indicating the award criteria''s order of importance, not their weighting.'
+          type: string
+          nullable: true
+          minLength: 1
+        criteria:
+          title: Award criteria
+          description: The award criteria.
+          type: array
+          items:
+            $ref: '#/components/schemas/AwardCriterion'
+          #wholeListMerge: true
+          uniqueItems: true
+          minItems: 1
+      minProperties: 1
+    AwardCriterion:
+      title: Award criterion
+      description: Information about the award criterion.
+      type: object
+      properties:
+        type:
+          title: Type
+          description: The aspect of the bid that the criterion concerns.
+          type: string
+          nullable: true
+          #codelist: awardCriterionType.csv
+          #openCodelist: true
+          minLength: 1
+        name:
+          title: Name
+          description: The name of the criterion.
+          type: string
+          nullable: true
+          minLength: 1
+        description:
+          title: Description
+          description: The description of the criterion.
+          type: string
+          nullable: true
+          minLength: 1
+        numbers:
+          title: Numbers
+          description: Numbers linked to the criterion.
+          type: array
+          items:
+            allOf:
+              - $ref: '#/components/schemas/AwardCriterionNumber'
+          #wholeListMerge: true
+          uniqueItems: true
+          minItems: 1
+          minProperties: 1
+    AwardCriterionNumber:
+      title: Award criterion number
+      description: Information about a number linked to an award criterion.
+      type: object
+      properties:
+        number:
+          title: Number
+          description: The number.
+          type: number
+          nullable: true
+        weight:
+          title: Weight
+          description: Whether the number is a type of weight.
+          type: string
+          nullable: true
+          #codelist: criterionWeight.csv
+          #openCodelist: false
+          enum:
+            - percentageExact
+            - percentageRangeMiddle
+            - decimalExact
+            - decimalRangeMiddle
+            - pointsExact
+            - pointsRangeMiddle
+            - order
+        fixed:
+          title: Fixed
+          description: Whether the number is a fixed value.
+          type: string
+          nullable: true
+          #codelist: awardCriterionFixed.csv
+          #openCodelist: false
+          enum:
+            - total
+            - unit
+        threshold:
+          title: Threshold
+          description: Whether the number is a type of threshold.
+          type: string
+          nullable: true
+          #codelist: criterionThreshold.csv
+          #openCodelist: false
+          enum:
+            - minimumScore
+            - maximumBids
+      minProperties: 1
