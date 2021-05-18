@@ -1,22 +1,22 @@
 components:
   schemas:
-    GenericID:
+    GenericId:
       type: number
       format: integer
       example: 1234
       readOnly: true
       
-    OrgID:
+    OrgId:
       type: string
       example: GB-COH-05684804
       readOnly: true
       
-    UserID:
+    UserId:
       type: string
       example: 12345
       readOnly: true
       
-    AgreementID:
+    AgreementId:
       type: string
       pattern: RM[1-9]{4}
       example: RM1234
@@ -29,40 +29,40 @@ components:
       example: V1
       readOnly: true
 
-    LotID:
+    LotId:
       type: string
       example: 1a
       readOnly: true
 
-    AgreementOCID:
+    AgreementOcid:
       type: string
       pattern: ocds-b5fd17-RM[1-9]{4}
       example: ocds-b5fd17-RM1234
       readOnly: true
       
-    ProcurementProjectID:
+    ProcurementProjectId:
       type: integer
       example: 123456
       readOnly: true
       
-    ProcurementProjectURI:
+    ProcurementProjectUri:
       type: string
       example: api.crowncommercial.org.uk/tenders/projects/123456
       format: api.crowncommercial.org.uk/tenders/projects/[1-9]+
       readOnly: true  
       
-    ProcurementIDList:
+    ProcurementIdList:
       type: array
       items:
         $ref: '#/components/schemas/ProcurementEventID' 
       
-    ProcurementEventID:
+    ProcurementEventId:
       type: string
       example: ocds-b5fd17-123456
       pattern: ocds-b5fd17-[1-9]+
       readOnly: true
       
-    ProcurementEventReleaseID:
+    ProcurementEventReleaseId:
       type: string
       example: ocds-b5fd17-123456-2020-02-16T07:14:54.617Z
       pattern: ocds-b5fd17-[1-9]+-[1-9]{4}-[1-9]{2}-[1-9]{2}T[1-9]{2}:[1-9]{2}:[1-9]{2}.[1-9]{4}
@@ -89,7 +89,7 @@ components:
       items:
         $ref: '#/components/schemas/Term'
         
-    TermID:
+    TermId:
       type: string 
       format: uri
       example: 'http://agreementservice.crowncommercial.gov.uk/agreements/1234/term/1'
