@@ -98,7 +98,7 @@ components:
       type: object
       properties:
         id:
-          $ref: '#/components/schemas/TermID'
+          $ref: '#/components/schemas/TermId'
         name:
           type: string
           description: Short name of the term or condition
