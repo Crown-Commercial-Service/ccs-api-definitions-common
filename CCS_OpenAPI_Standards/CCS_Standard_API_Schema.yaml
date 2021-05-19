@@ -177,6 +177,12 @@ components:
           type: string
           format: uri
           description: URL to the first page of the listing
+          
+    LanguageID:
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OCDS_Standards/CCS-OCDS_CodeLists.yaml#/components/schemas/Language'
+
+          
 
           
           

@@ -107,3 +107,12 @@ components:
         type: boolean
         default: true
         
+    LanguageParam:
+      name: language-id
+      in: path
+      required: true
+      description: Language ID
+      schema:
+        $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/LanguageID'
+        
+        
