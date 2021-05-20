@@ -17,6 +17,20 @@ components:
       description: Organisation ID
       schema:
         $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/OrgId'
+    
+    OrgSiteParam:
+      name: site-id
+      in: path
+      required: true
+      schema:
+        $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/OrgSiteId'
+        
+    ContactParam:
+      name: contact-id
+      in: path
+      required: true
+      schema:
+        $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/ContactId'
         
     UserParam:
       name: user-id

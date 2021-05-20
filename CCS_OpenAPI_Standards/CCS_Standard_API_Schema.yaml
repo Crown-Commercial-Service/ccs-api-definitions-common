@@ -13,6 +13,16 @@ components:
       example: GB-COH-05684804
       readOnly: true
       
+    ContactId:
+      type: integer
+      format: int32
+      readOnly: true
+      
+    OrgSiteId:
+      type: integer
+      format: int32
+      readOnly: true
+      
     UserId:
       type: string
       example: 12345
