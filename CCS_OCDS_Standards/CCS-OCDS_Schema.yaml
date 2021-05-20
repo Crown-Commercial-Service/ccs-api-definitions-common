@@ -620,6 +620,16 @@ components:
           description: Is organisation active?
           type: boolean
           example: '1'
+        # CCS specified details that may need to remove
+        organisationId:
+          type: string
+          nullable: true
+        isSme:
+          type: boolean
+        rightToBuy:
+          type: boolean
+ 
+        
           
     Item:
       allOf:

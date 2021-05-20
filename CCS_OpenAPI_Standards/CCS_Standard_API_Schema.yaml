@@ -25,7 +25,6 @@ components:
       
     UserId:
       type: string
-      example: 12345
       readOnly: true
       
     AgreementId:
