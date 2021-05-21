@@ -307,6 +307,8 @@ components:
           - interestedParty
           # codelist: partyRole.csv
           # openCodelist: true
+          # CCS specific roles below this
+          - frameworkOwner
           
     UnitClassificationScheme:
       title: Unit Classification Scheme
