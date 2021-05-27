@@ -287,26 +287,15 @@ components:
         - complete
         - withdrawn    
             
-    PartyRoles:
-      title: Party roles
-      description: 'The party''s role(s) in the contracting process, using the open [partyRole](https://standard.open-contracting.org/latest/en/schema/codelists/#party-role) codelist.'
-      nullable: true
-      type: array
-      items:
-        type: string
-        enum:
-          - buyer
-          - procuringEntity
-          - supplier
-          - tenderer
-          - funder
-          - enquirer
-          - payer
-          - payee
-          - reviewBody
-          - interestedParty
+    PartyRole:
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/PartyRole'  
+      type: string
+      enum:
           # codelist: partyRole.csv
           # openCodelist: true
+          # CCS specific roles below this
+          - frameworkOwner
           
     UnitClassificationScheme:
       title: Unit Classification Scheme
