@@ -841,7 +841,7 @@ components:
                 description: ''
                 nullable: true
                 allOf:
-                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/PartyRoles'
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/PartyRole'
                 #codelist: partyRole.csv
                 #openCodelist: true
 
