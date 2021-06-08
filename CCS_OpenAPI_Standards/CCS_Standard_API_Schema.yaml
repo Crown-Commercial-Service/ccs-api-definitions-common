@@ -36,8 +36,8 @@ components:
       
     AgreementVersion:
       type: string
-      pattern: V[0-9]{1,4}
-      example: V1
+      pattern: ^(\d+)(\.\d+)*
+      example: 1.03.5
       readOnly: true
 
     LotId:
