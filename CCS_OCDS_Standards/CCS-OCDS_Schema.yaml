@@ -549,7 +549,7 @@ components:
           # Just an array of Strings or Integers for CCS as a whole this will be an external scheme identifier
           type: string
           example: GB-COH-123456
-          pattern: '[A-Z]{2}-[A-Z]{3}-[A-Z,1-9]+'
+          pattern: '[A-Z]{2}-[A-Z]{3}-[A-Z,0-9]+'
         identifier:
           $ref: '#/components/schemas/Identifier'
         address:
@@ -571,7 +571,7 @@ components:
         id:
           # Just an array of Strings or Integers so should not change for CCS as a whole but on a case by case basis.
           example: GB-COH-123456
-          pattern: '[A-Z]{2}-[A-Z]{3}-[A-Z,1-9]+'
+          pattern: '[A-Z]{2}-[A-Z]{3}-[A-Z,0-9]+'
         additionalIdentifiers:
           items:
             $ref: '#/components/schemas/Identifier'
