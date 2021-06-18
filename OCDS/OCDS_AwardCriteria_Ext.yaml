@@ -31,7 +31,7 @@ paths:
         '200':
           description: "Returns a release schema"
           content:
-            application/vnd.api+json:
+            application/json:
               schema:
                 allOf:
                   - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Lot'
@@ -60,7 +60,7 @@ paths:
         '200':
           description: "Returns a release schema"
           content:
-            application/vnd.api+json:
+            application/json:
               schema:
                 allOf:
                   - $ref: '#/components/schemas/AwardCriteria'
@@ -88,7 +88,7 @@ paths:
         '200':
           description: "Returns a release schema"
           content:
-            application/vnd.api+json:
+            application/json:
               schema:
                 allOf:
                   - $ref: '#/components/schemas/AwardCriterion'
@@ -116,7 +116,7 @@ paths:
         '200':
           description: "Returns a release schema"
           content:
-            application/vnd.api+json:
+            application/json:
               schema:
                 allOf:
                   - $ref: '#/components/schemas/AwardCriterionNumber'

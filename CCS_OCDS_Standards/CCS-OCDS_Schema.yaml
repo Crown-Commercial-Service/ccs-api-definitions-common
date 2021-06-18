@@ -25,7 +25,7 @@ paths:
         '200':
           description: Returns a release schema
           content:
-            application/vnd.api+json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/RecordPackage'
         '403':
@@ -42,7 +42,7 @@ paths:
         '200':
           description: Returns a release schema
           content:
-            application/vnd.api+json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/ReleasePackage'
         '403':
@@ -67,7 +67,7 @@ paths:
         '200':
           description: Returns a release schema
           content:
-            application/vnd.api+json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Record'
         '403':
@@ -92,7 +92,7 @@ paths:
         '200':
           description: Returns a release schema
           content:
-            application/vnd.api+json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/Release'
         '403':
