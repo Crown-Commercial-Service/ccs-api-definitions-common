@@ -31,7 +31,7 @@ paths:
         '200':
           description: "Returns a release schema"
           content:
-            application/vnd.api+json:
+            application/json:
               schema:
                 allOf:
                   - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Tender'
@@ -56,7 +56,7 @@ paths:
         '200':
           description: "Returns a release schema"
           content:
-            application/vnd.api+json:
+            application/json:
               schema:
                 allOf:
                   - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Lot'
