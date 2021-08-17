@@ -389,6 +389,7 @@ components:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Award'
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Award'
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Award'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_BidStatisticDetails_Ext.yaml#/components/schemas/Award'
       type: object
       properties:
         value:
@@ -770,6 +771,7 @@ components:
         
     Bid:
       allOf:
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_BidStatisticsDetails.yaml#/components/schemas/Bid'
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Bid'
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Bid'
       properties:
@@ -796,7 +798,6 @@ components:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Lot'
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_SelectionCriteria_Ext.yaml#/components/schemas/Lot'
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/Lot'
-        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_AwardCriteria_Ext.yaml#/components/schemas/Lot'
       properties:
         value:
           $ref: '#/components/schemas/Value'
@@ -806,34 +807,6 @@ components:
           $ref: '#/components/schemas/SelectionCriteria'
         techniques:
           $ref: '#/components/schemas/Techniques'
-        awardCriteria:
-          $ref: '#/components/schemas/AwardCriteria'
-
-          
-    AwardCriteria:
-      allOf:
-        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_AwardCriteria_Ext.yaml#/components/schemas/AwardCriteria'
-      properties:
-        criteria:
-          type: array
-          items:
-            $ref: '#/components/schemas/AwardCriterion'
-          
-    AwardCriterion:
-      allOf:
-        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_AwardCriteria_Ext.yaml#/components/schemas/AwardCriterion'
-      properties:
-        numbers:
-          type: array
-          items:
-            $ref: '#/components/schemas/AwardCriterionNumber'
-    
-    AwardCriterionNumber:
-      allOf:
-        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_AwardCriteria_Ext.yaml#/components/schemas/AwardCriterionNumber'
-      properties:
-        numbers:
-          $ref: '#/components/schemas/AwardCriterionNumber'
           
     LotGroup:
       allOf:
