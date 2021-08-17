@@ -796,7 +796,6 @@ components:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Lot'
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_SelectionCriteria_Ext.yaml#/components/schemas/Lot'
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/Lot'
-        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_AwardCriteria_Ext.yaml#/components/schemas/Lot'
       properties:
         value:
           $ref: '#/components/schemas/Value'
@@ -806,34 +805,6 @@ components:
           $ref: '#/components/schemas/SelectionCriteria'
         techniques:
           $ref: '#/components/schemas/Techniques'
-        awardCriteria:
-          $ref: '#/components/schemas/AwardCriteria'
-
-          
-    AwardCriteria:
-      allOf:
-        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_AwardCriteria_Ext.yaml#/components/schemas/AwardCriteria'
-      properties:
-        criteria:
-          type: array
-          items:
-            $ref: '#/components/schemas/AwardCriterion'
-          
-    AwardCriterion:
-      allOf:
-        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_AwardCriteria_Ext.yaml#/components/schemas/AwardCriterion'
-      properties:
-        numbers:
-          type: array
-          items:
-            $ref: '#/components/schemas/AwardCriterionNumber'
-    
-    AwardCriterionNumber:
-      allOf:
-        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_AwardCriteria_Ext.yaml#/components/schemas/AwardCriterionNumber'
-      properties:
-        numbers:
-          $ref: '#/components/schemas/AwardCriterionNumber'
           
     LotGroup:
       allOf:
