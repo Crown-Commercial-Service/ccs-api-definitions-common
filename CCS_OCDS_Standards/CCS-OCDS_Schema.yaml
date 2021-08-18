@@ -385,38 +385,6 @@ components:
                 $ref: '#/components/schemas/Amendment'
             amendment:
               $ref: '#/components/schemas/Amendment'
-   
-    Award:
-      allOf:
-        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Award'
-        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Award'
-        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Award'
-        - type: object
-          properties:
-            value:
-              $ref: '#/components/schemas/Value'
-            suppliers:
-              items:
-                $ref: '#/components/schemas/OrganizationReference'
-            items:
-              items:
-                $ref: '#/components/schemas/Item'
-            contractPeriod:
-              $ref: '#/components/schemas/Period'
-            documents:
-             items:
-                $ref: '#/components/schemas/Document'
-            amendments:
-              items:
-                $ref: '#/components/schemas/Amendment'
-            #amendment:
-             # This is deprecated and no reason why CCS should use this
-             #relatedLots:
-             #$ref: '#/components/schemas/RelatedLot'
-            requirementReaponses:
-              type: array
-              items:
-                $ref: '#/components/schemas/RequirementResponse'
             lots:
               items:
                 $ref: '#/components/schemas/Lot'
@@ -434,9 +402,43 @@ components:
             selectionCriteria:
               items:
                 $ref: '#/components/schemas/SelectionCriteria'
-            technioues:
+            techniques:
               items:
-                $ref: '#/components/schemas/Techniques'
+                $ref: '#/components/schemas/Techniques'              
+
+   
+    Award:
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Award'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Award'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Award'
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/Value'
+        suppliers:
+          items:
+            $ref: '#/components/schemas/OrganizationReference'
+        items:
+          items:
+            $ref: '#/components/schemas/Item'
+        contractPeriod:
+            $ref: '#/components/schemas/Period'
+        documents:
+         items:
+            $ref: '#/components/schemas/Document'
+        amendments:
+          items:
+            $ref: '#/components/schemas/Amendment'
+            #amendment:
+             # This is deprecated and no reason why CCS should use this
+             #relatedLots:
+             #$ref: '#/components/schemas/RelatedLot'
+        requirementResponses:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequirementResponse'
+
                 
     Contract:
       allOf:
@@ -805,6 +807,7 @@ components:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Lot'
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_SelectionCriteria_Ext.yaml#/components/schemas/Lot'
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Techniques_Ext.yaml#/components/schemas/Lot'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_AwardCriteria_Ext.yaml#/components/schemas/Lot'
         - type: object
           properties:
             value:
@@ -815,6 +818,35 @@ components:
               $ref: '#/components/schemas/SelectionCriteria'
             techniques:
               $ref: '#/components/schemas/Techniques'
+            awardCriteria:
+              $ref: '#/components/schemas/AwardCriteria'
+
+
+    AwardCriteria:
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_AwardCriteria_Ext.yaml#/components/schemas/AwardCriteria'
+      properties:
+        criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/AwardCriterion'
+
+    AwardCriterion:
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_AwardCriteria_Ext.yaml#/components/schemas/AwardCriterion'
+      properties:
+        numbers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AwardCriterionNumber'
+
+    AwardCriterionNumber:
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_AwardCriteria_Ext.yaml#/components/schemas/AwardCriterionNumber'
+      properties:
+        numbers:
+          $ref: '#/components/schemas/AwardCriterionNumber'
+          
           
     LotGroup:
       allOf:
