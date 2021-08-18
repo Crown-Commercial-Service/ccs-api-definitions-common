@@ -310,7 +310,7 @@ components:
             type: string
             
     Lot:
-      title: Lots
+      title: Lot
       description: A lot is a grouping of items within a tender that can be bid on or awarded together.
       type: object
       properties:
