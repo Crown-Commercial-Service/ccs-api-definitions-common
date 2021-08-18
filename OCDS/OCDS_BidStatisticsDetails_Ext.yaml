@@ -15,6 +15,35 @@ paths:
 #id: 'https://standard.open-contracting.org/schema/1__1__5/record-package-schema.json'
 #$schema: 'http://json-schema.org/draft-04/schema#'
 
+  /ocds/Realease:
+    get:
+      summary: "Returns the requested release with supplied OCID"
+      operationId: OCDS.Release  
+      parameters:
+      - in: query
+        name: "OCID"
+        schema:
+          type: string
+        example: "dd/mm/yy:hh:mm:ss"
+        required: true
+        description: "OCID of the required release"
+      responses:
+        '200':
+          description: "Returns a release schema"
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Release'
+                  - $ref: '#/components/schemas/Release'
+    
+        '403':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/403Forbidden'
+        '404':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/404NotFound'
+        '500':
+          $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Responses.yaml#/components/responses/500InternalServerError'  
+
 
   /ocds/Award:
     get:
@@ -136,6 +165,11 @@ paths:
 
 components:
   schemas:
+  
+    Release:
+      properties:
+        bids:
+          $ref: "#/components/schemas/Bids"
 
     Award:
       properties:
