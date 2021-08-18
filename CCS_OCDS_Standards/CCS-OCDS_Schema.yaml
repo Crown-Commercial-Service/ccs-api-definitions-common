@@ -391,6 +391,7 @@ components:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/Award'
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Award'
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Award'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_BidStatisticDetails_Ext.yaml#/components/schemas/Award'
         - type: object
           properties:
             value:
@@ -779,6 +780,7 @@ components:
       allOf:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Requirements_Ext.yaml#/components/schemas/Bid'
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Lot_Ext.yaml#/components/schemas/Bid'
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_BidStatisticsDetails.yaml#/components/schemas/Bid'
         - type: object
           properties:
             requirementResponses:
