@@ -815,7 +815,28 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/RequirementResponse'
-          
+                
+    Bids:
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_BidStatisticsDetails_Ext.yaml#/components/schemas/Bid'
+        - type: object
+          properties:
+            type: object
+            properties:
+              statistics:
+                type: array
+                  items:
+                    $ref: '#/components/schemas/BidsStatistic'
+                details:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Bid'
+                    
+    BidsStatistic:
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_BidStatisticsDetails_Ext.yaml#/components/schemas/Bid'
+        
+            
     Enquiry:
       allOf:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Enquiries_Ext.yaml#/components/schemas/Enquiry'
