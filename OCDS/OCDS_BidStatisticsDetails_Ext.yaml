@@ -243,7 +243,7 @@ components:
           description: Summary statistics on the number and nature of bids received. Where information is provided on individual bids, these statistics should match those that can be calculated from the bid details array.
           type: array
           items:
-            $ref: '#/components/schemas/BidsStatistic'
+            $ref: '#/components/schemas/BidStatistic'
         details:
           title: Bid details
           description: An array of bids, providing information on the bidders, and where applicable, bid status, bid values and related documents. The extent to which this information can be disclosed varies from jurisdiction to jurisdiction.
