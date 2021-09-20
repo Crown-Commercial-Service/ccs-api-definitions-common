@@ -463,9 +463,6 @@ components:
     AwardCriterionNumber:
       allOf:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_AwardCriteria_Ext.yaml#/components/schemas/AwardCriterionNumber'
-      properties:
-        numbers:
-          $ref: '#/components/schemas/AwardCriterionNumber'
                 
     Contract:
       allOf:
