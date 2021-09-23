@@ -458,6 +458,7 @@ components:
       description: The status of any bid from a supplier or group of suppliers
       #codelist: bidStatus.csv
       #openCodelist: false
+      type: string
       enum:
         - invited
         - pending
@@ -466,13 +467,14 @@ components:
         - withdrawn
 
     BidStatistics:
-      title: Bid Status
+      title: Bid Statistics
       description: >-
         The bidStatistics.csv codelist is an open codelist. Publishers can add their own codes to this list. When doing so, publishers are encouraged to engage with the open contracting community to agree upon definitions of each code.
         For example, publishers may wish to add statistics on minority or women-owned businesses, or bids that meet certain environmental standards and targets.
         The codelist's Category column indicates whether the statistic applies to bids or bidders or whether it is specified or required by a particular regulatory context (e.g. EU
       #codelist: bidStatus.csv
       #openCodelist: true
+      type: string
       enum:   
         - requests
         - bids
