@@ -85,6 +85,12 @@ components:
       example: '2020-02-16T07:14:54.617Z'
       readOnly: true
       
+    Duration:
+      type: string
+      format: iso8601
+      example: 'P1Y2M10DT2H30M'
+      readOnly: true
+      
     Email:
       type: string
       format: email
