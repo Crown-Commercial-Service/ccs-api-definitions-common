@@ -436,7 +436,7 @@ components:
              # This is deprecated and no reason why CCS should use this
              #relatedLots:
              #$ref: '#/components/schemas/RelatedLot'
-            requirementReponses:
+            requirementResponses:
               type: array
               items:
                 $ref: '#/components/schemas/RequirementResponse'
