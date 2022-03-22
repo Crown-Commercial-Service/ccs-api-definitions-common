@@ -11,6 +11,7 @@ components:
     OrgId:
       type: string
       example: GB-COH-05684804
+      pattern: '[A-Z]{2}-[A-Z]+-[A-Z,0-9]+'
       readOnly: true
       
     ContactId:
