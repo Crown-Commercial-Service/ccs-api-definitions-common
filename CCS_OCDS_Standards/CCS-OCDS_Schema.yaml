@@ -570,7 +570,7 @@ components:
               $ref: '#/components/schemas/Identifier'
           
     OrgId:
-      $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OCDS_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/OrgId'      
+      $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OpenAPI_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/OrgId'      
           
     OrganizationReference:
       allOf:
