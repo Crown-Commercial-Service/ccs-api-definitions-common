@@ -569,6 +569,9 @@ components:
             receiverOrganization:
               $ref: '#/components/schemas/Identifier'
           
+    OrgId:
+      $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OCDS_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/OrgId'      
+          
     OrganizationReference:
       allOf:
         - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_Vanilla.yaml#/components/schemas/OrganizationReference'
@@ -576,7 +579,7 @@ components:
           properties:
             id:
               # Just an array of Strings or Integers for CCS as a whole this will be an external scheme identifier
-              $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OCDS_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/OrgId'
+              $ref: '#/components/schemas/OrgId'
             identifier:
               $ref: '#/components/schemas/Identifier'
             address:
