@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: CCS OCDS API Defintion
   description: 'Standard definition for OCDS objects within CCS. Includes the chosen extentsion from the Vanilla OCDS definition and extensions held in ''https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/'''
-  version: 0.0.2
+  version: 0.0.3
 servers:
   - url: 'http://api.example.com/v1'
     description: 'Optional server description, e.g. Main (production) server'
@@ -576,9 +576,7 @@ components:
           properties:
             id:
               # Just an array of Strings or Integers for CCS as a whole this will be an external scheme identifier
-              type: string
-              example: GB-COH-123456
-              pattern: '[A-Z]{2}-[A-Z]{3}-[A-Z,0-9]+'
+              $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/CCS_OCDS_Standards/CCS_Standard_API_Schema.yaml#/components/schemas/OrgId'
             identifier:
               $ref: '#/components/schemas/Identifier'
             address:
@@ -599,8 +597,7 @@ components:
               $ref: '#/components/schemas/Identifier'
             id:
               # Just an array of Strings or Integers so should not change for CCS as a whole but on a case by case basis.
-              example: GB-COH-123456
-              pattern: '[A-Z]{2}-[A-Z]{3}-[A-Z,0-9]+'
+              $ref: '#/components/schemas/OrgId'
             additionalIdentifiers:
               items:
                 $ref: '#/components/schemas/Identifier'
