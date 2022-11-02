@@ -660,9 +660,13 @@ components:
           nullable: true
         isSme:
           type: boolean
+          description: Indicates if the organisation qualifies a Small to Medium Enterprise
         rightToBuy:
           type: boolean
- 
+        tradingName:
+          type: string
+          nullable: true
+          description: Common name used for commercial purposes
         
           
     Item:
