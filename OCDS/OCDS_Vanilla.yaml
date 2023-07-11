@@ -711,7 +711,7 @@ components:
           nullable: true
         status:
           allOf: 
-            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/AwardCriteria'
+            - $ref: 'https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/OCDS_CodeLists.yaml#/components/schemas/AwardStatus'
         date:
           title: Award date
           description: The date of the contract award. This is usually the date on which a decision to award was made.
