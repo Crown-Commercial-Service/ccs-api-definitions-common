@@ -59,8 +59,8 @@ components:
       
     ProcurementProjectUri:
       type: string
-      example: api.crowncommercial.org.uk/tenders/projects/123456
-      format: api.crowncommercial.org.uk/tenders/projects/[0-9]+
+      example: api.gca.org.uk/tenders/projects/123456
+      format: api.gca.org.uk/tenders/projects/[0-9]+
       readOnly: true  
       
     ProcurementIdList:
@@ -95,7 +95,7 @@ components:
     Email:
       type: string
       format: email
-      example: support@crowncommercial.org.uk
+      example: support@gca.gov.uk
 
     DetailFlag:
       type: string
@@ -110,7 +110,7 @@ components:
     TermId:
       type: string 
       format: uri
-      example: 'http://agreementservice.crowncommercial.gov.uk/agreements/1234/term/1'
+      example: 'http://agreementservice.gca.gov.uk/agreements/1234/term/1'
   
     Term:
       type: object
