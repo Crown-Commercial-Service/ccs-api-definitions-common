@@ -1,7 +1,7 @@
 openapi: 3.0.0
 
 info:
-  title: CCS Standard Responses
+  title: GCA Standard Responses
   description: Defines the standard HTTP responses expected within CCS.
   version: 0.0.2
 servers:
