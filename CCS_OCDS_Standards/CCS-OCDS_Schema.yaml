@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: CCS OCDS API Defintion
-  description: 'Standard definition for OCDS objects within CCS. Includes the chosen extentsion from the Vanilla OCDS definition and extensions held in ''https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/'''
+  title: GCA OCDS API Defintion
+  description: 'Standard definition for OCDS objects within GCA. Includes the chosen extentsion from the Vanilla OCDS definition and extensions held in ''https://raw.githubusercontent.com/Crown-Commercial-Service/ccs-api-definitions-common/main/OCDS/'''
   version: 0.0.3
 servers:
   - url: 'http://api.example.com/v1'
@@ -104,7 +104,7 @@ paths:
 components:
   schemas:
     NullObject:
-      description: Always is NULL in CCS
+      description: Always is NULL in GCA
       
     ReleasePackage:
       type: object
@@ -165,7 +165,7 @@ components:
               description: The scheme that holds the unique identifiers used to identify the item being identified.
               type: string
               nullable: true
-              example: XX-CCS
+              example: XX-GCA
             uid:
               title: uid
               description: The unique ID for this entity under the given ID scheme.
@@ -210,7 +210,7 @@ components:
                 name:
                   example: Government Commercial Agency
                 scheme:
-                  example: XX-CCS
+                  example: XX-GCA
                 uid:
                   example: '123456789'
                 uri:
@@ -433,7 +433,7 @@ components:
               items:
                 $ref: '#/components/schemas/Amendment'
             #amendment:
-             # This is deprecated and no reason why CCS should use this
+             # This is deprecated and no reason why GCA should use this
              #relatedLots:
              #$ref: '#/components/schemas/RelatedLot'
             requirementResponses:
@@ -545,7 +545,7 @@ components:
             amount:
               $ref: '#/components/schemas/Value'
             #projectID:
-              #Just an array of Strings or Integers so should not change for CCS as a whole but on a case by case basis.
+              #Just an array of Strings or Integers so should not change for GCA as a whole but on a case by case basis.
             finance:
               $ref: '#/components/schemas/Finance'
           
@@ -555,7 +555,7 @@ components:
         - type: object
           properties:
             #id:
-               # Just an array of Strings or Integers so should not change for CCS as a whole but on a case by case basis.
+               # Just an array of Strings or Integers so should not change for GCA as a whole but on a case by case basis.
             value:
               $ref: '#/components/schemas/Value'
             payer:
@@ -579,7 +579,7 @@ components:
         - type: object
           properties:
             id:
-              # Just an array of Strings or Integers for CCS as a whole this will be an external scheme identifier
+              # Just an array of Strings or Integers for GCA as a whole this will be an external scheme identifier
               $ref: '#/components/schemas/OrgId'
             identifier:
               $ref: '#/components/schemas/Identifier'
@@ -600,7 +600,7 @@ components:
             identifier:
               $ref: '#/components/schemas/Identifier'
             id:
-              # Just an array of Strings or Integers so should not change for CCS as a whole but on a case by case basis.
+              # Just an array of Strings or Integers so should not change for GCA as a whole but on a case by case basis.
               $ref: '#/components/schemas/OrgId'
             additionalIdentifiers:
               items:
@@ -618,7 +618,7 @@ components:
             
     OrganizationDetail:
       type: object
-      description: Additional attributes for the Organization object required for CCS Organization Service
+      description: Additional attributes for the Organization object required for GCA Organization Service
       required:
         - creationDate
         - countryCode
@@ -654,7 +654,7 @@ components:
           description: Is organisation active?
           type: boolean
           example: '1'
-        # CCS specified details that may need to remove
+        # GCA specified details that may need to remove
         organisationId:
           type: string
           nullable: true

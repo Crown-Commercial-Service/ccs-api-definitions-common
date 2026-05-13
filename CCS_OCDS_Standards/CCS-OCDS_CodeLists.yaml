@@ -1,8 +1,8 @@
 openapi: 3.0.0
 
 info:
-  title: CCS OCDS Codelists
-  description: OCDS codelist for use within CCS
+  title: GCA OCDS Codelists
+  description: OCDS codelist for use within GCA
   version: 0.0.3
 servers:
   - url: http://api.example.com/v1
@@ -294,7 +294,7 @@ components:
       enum:
         # codelist: partyRole.csv
         # openCodelist: true
-        # CCS specific roles below this
+        # GCA specific roles below this
         - frameworkOwner
           
     UnitClassificationScheme:
@@ -417,7 +417,7 @@ components:
         use of lowercase two-letter codes from
         [ISO639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) is
         recommended unless there is a clear user need for distinguishing the
-        language subtype. CCS procurements will only be written in UK languages and generally English.
+        language subtype. GCA procurements will only be written in UK languages and generally English.
       type: string
       # en=English, cy= Welsh, ga=Irish, gd=Scottish
       enum:
@@ -430,7 +430,7 @@ components:
     Currency:
       title: Currency
       description: >-
-        CCS currency code is always GBP representing the UK from the Currency code [currency](https://standard.open-contracting.org/1.1/en/schema/codelists/#currency)
+        GCA currency code is always GBP representing the UK from the Currency code [currency](https://standard.open-contracting.org/1.1/en/schema/codelists/#currency)
               codelist.
       type: string
       enum:
